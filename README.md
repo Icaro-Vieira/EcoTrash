@@ -9,3 +9,10 @@
 <p align="center">
   <img alt="Projeto EcoTrash em construção" src=".github/preview.png" width="100%">
 </p>
+
+<h2 align="center">Branches e suas funções</h2>
+
+- ```master```: Branch com o código revisado e finalizado!;
+
+- ```Development```: Branch responsável pelos códigos que ainda estão sendo desenvolvidos;
+- ```Hotfix```: Branch com códigos para realizar os testes, corrigir eventuais erros e por fim passar para a _master_;
