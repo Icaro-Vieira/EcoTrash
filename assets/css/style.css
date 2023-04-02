@@ -1,6 +1,7 @@
+/* -=-=-=-=-=-=-=-=-=-=- IMPORTATION OF FONTS GOOGLE -=-=-=-=-=-=-=-=-=-=- */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@900&family=Open+Sans:wght@400;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@900&family=Open+Sans:wght@400;600&display=swap');
-
+/* -=-=-=- VARIABLES OF PROJECT -=-=-=- */
 :root {
   /* COLORS */
   --dark-green-color: #00281E;
@@ -10,19 +11,20 @@
   --gray-input-color: #F3F4F6;
   --gray-input-border-color: #E1E1E3;
   --white-color: #FFFFFF;
-  
+
   /* FONTS */
   --mulish-font: 'Mulish', sans-serif;
   --opnsans-font: 'Open Sans', sans-serif;
-  
+
   /* WEIGH FONTS */
   --mulish-weight-black: 900;
   --opnsans-weight-regular: 400;
   --opnsans-weight-semibold: 600;
+  --opnsans-weight-bold: 700;
 }
 
+/* -=-=-=-=-=-=-=-=-=-=- FORM USER -=-=-=-=-=-=-=-=-=-=- */
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
