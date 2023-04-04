@@ -26,76 +26,76 @@
             <form action="" method="">
                 <article class="form-column">
                     <label for="">
-                        <input type="text" name="nome" id="" placeholder="Nome">
+                        <input type="text" name="nome" id="" placeholder="Nome" required>
                     </label>
 
                     <label for="">
-                        <input type="text" name="sobrenome" id="" placeholder="Sobrenome">
+                        <input type="text" name="sobrenome" id="" placeholder="Sobrenome" required>
                     </label>
 
                     <label for="">
-                        <input type="email" name="email" id="" placeholder="Email">
+                        <input type="email" name="email" id="" placeholder="Email" required>
                     </label>
 
                     <article class="two-inputs">
                         <label for="">
-                            <input type="text" name="cpf" class="medium-input" placeholder="CPF">
+                            <input type="text" name="cpf" class="medium-input" placeholder="CPF" required>
                         </label>
 
                         <label for="">
-                            <input type="text" name="dana-nasc" class="little-input" placeholder="Data N.">
+                            <input type="text" name="dana-nasc" class="little-input" placeholder="Data N." required>
                         </label>
                     </article>
 
                     <label for="">
-                        <input type="number" name="cep" id="" placeholder="CEP">
+                        <input type="text" name="cep" id="cep" placeholder="CEP" required>
                     </label>
 
                     <label for="">
-                        <input type="tel" name="telefone" id="" placeholder="Telefone">
+                        <input type="tel" name="telefone" id="" placeholder="Telefone" required>
                     </label>
 
 
                     <label for="">
-                        <input type="text" name="complemento" id="" placeholder="Complemento" disabled>
+                        <input type="text" name="complemento" placeholder="Complemento">
                     </label>
 
                     <article class="two-inputs">
                         <label for="">
-                            <input type="text" name="logradouro" class="medium-input" placeholder="Logradouro">
+                            <input type="text" name="logradouro" id="logradouro" class="medium-input" placeholder="Logradouro" required>
                         </label>
 
                         <label for="">
-                            <input type="text" name="numero" class="little-input" placeholder="Número">
+                            <input type="number" name="numero" class="little-input" placeholder="Número" required>
                         </label>
                     </article>
 
                     <label for="">
-                        <input type="text" name="bairro" id="" placeholder="Bairro" disabled>
+                        <input type="text" name="bairro" id="bairro" placeholder="Bairro">
                     </label>
 
                     <article class="two-inputs">
                         <label for="">
-                            <input type="text" name="cidade" class="medium-input" placeholder="Cidade">
+                            <input type="text" name="cidade" id="cidade" class="medium-input" placeholder="Cidade">
                         </label>
 
                         <label for="">
-                            <input type="text" name="estado" class="little-input" placeholder="Estado">
+                            <input type="text" name="estado" id="estado" class="little-input" placeholder="Estado">
                         </label>
                     </article>
 
                     <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->
                     <label for="">
-                        <input type="password" name="senha" id="" placeholder="Senha">
+                        <input type="password" name="senha" id="" placeholder="Senha" required>
                     </label>
 
                     <label for="">
-                        <input type="password" name="" id="" placeholder="Confirmar Senha">
+                        <input type="password" name="" id="" placeholder="Confirmar Senha" required>
                     </label>
 
                     <article class="center-terms-submit">
                         <article class="terms-of-use">
-                            <input type="checkbox" name="termos-aceito" id="">
+                            <input type="checkbox" name="termos-aceito" id="" required>
                             <label for="">Declaro que li e aceito os <span><a href="#">termos de uso</a></span></label>
                         </article>
                         <input type="submit" value="Cadastrar">
@@ -110,6 +110,8 @@
             <p class="footer-copy">⠀⠀⠀⠀⠀⠀</p>
         </div>
     </footer>
+
+    <script type="module" src="assets/js/script.js"></script>
 </body>
 
 </html>
