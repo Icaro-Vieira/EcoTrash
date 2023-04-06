@@ -233,3 +233,33 @@ input[type="submit"]:hover {
   grid-column: 1/-1;
   margin-top: 40px;
 }
+
+/* -=-=-=-=-=-=- INPUT PASSWORD WITH EYE -=-=-=-=-=-=- */
+.icon-pass {
+  position: relative;
+}
+
+
+.icon-pass input[type="password"] {
+  background: url('img/eye-visibility.svg'); /* Define a imagem como background */
+  background-position: right center;
+  background-color: var(--gray-input-color);
+}
+
+.icon-pass .imagem-icon {
+  position: absolute;
+  width: 32px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.icon-pass .imagem-icon2 {
+  position: absolute;
+  width: 32px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
