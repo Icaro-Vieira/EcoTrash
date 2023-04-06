@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/form-user-style.css">
+
+    <!-- CDN font-awesomw icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <title>Cadastro Pessoa Fisica</title>
 </head>
 
@@ -84,13 +87,15 @@
                         </label>
                     </article>
 
-                    <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->
-                    <label for="">
-                        <input type="password" name="senha" id="" placeholder="Senha" required>
+                    <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->                    
+                    <label for="" class="icon-pass">
+                        <input type="password" name="senha" id="senha" placeholder="Senha" required>                   
+                        <img class="imagem-icon" src="img/eye-visibility.svg" alt="mostrar senha">
                     </label>
-
-                    <label for="">
-                        <input type="password" name="" id="" placeholder="Confirmar Senha" required>
+                    
+                    <label for="" class="icon-pass">
+                        <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar Senha" required>
+                        <img class="imagem-icon2" src="img/eye-visibility.svg" alt="mostrar senha">
                     </label>
 
                     <article class="center-terms-submit">
