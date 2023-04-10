@@ -21,18 +21,19 @@
     </nav>
     <article class="header-writings">
         <h1>Faça o cadastro da sua empresa.</h1>
-        <p>Para cadastrar um endereço de ponto de coleta de resíduos eletrônicos, preencha os </br> campos abaixo corretamente.</p>
+        <p>Para cadastrar um endereço de ponto de coleta de resíduos eletrônicos, preencha os </br> campos abaixo
+            corretamente.</p>
     </article>
     <main>
-        <article class="form-bg"> 
+        <article class="form-bg">
             <form action="" method="">
                 <article class="form-column">
                     <label for="">
-                        <input type="text" name="cnpj" id="cnpj" placeholder="CNPJ" required>
+                        <input type="text" name="cnpj" id="cnpj" placeholder="CNPJ" maxlength="18" autocomplete="off" required>
                     </label>
 
                     <label for="">
-                        <input type="text" name="nome-empresa" id="nome-empresa" placeholder="Nome da Empresa" required>
+                        <input type="text" name="nome-empresa" id="nome-empresa" placeholder="Nome da Empresa" required disabled>
                     </label>
 
                     <label for="">
@@ -44,11 +45,11 @@
                     </label>
 
                     <label for="">
-                        <input type="text" name="cep" id="cep" placeholder="CEP" required>
+                        <input type="text" name="cep" id="cep" placeholder="CEP" required disabled>
                     </label>
 
                     <label for="">
-                        <input type="text" name="segmento-empresa" id="segmento-empresa" placeholder="Segmento da empresa" required>
+                        <input type="text" name="segmento-empresa" id="segmento-empresa" placeholder="Segmento da empresa" required disabled>
                     </label>
 
                     <label for="">
@@ -57,36 +58,37 @@
 
                     <article class="two-inputs">
                         <label for="">
-                            <input type="text" name="logradouro" id="logradouro" class="medium-input" placeholder="Logradouro" required>
+                            <input type="text" name="logradouro" id="logradouro" class="medium-input" placeholder="Logradouro" required disabled>
                         </label>
 
                         <label for="">
-                            <input type="number" name="numero" id="numero" class="little-input" placeholder="Número" required>
+                            <input type="number" name="numero" id="numero" class="little-input" placeholder="Número" required disabled>
                         </label>
                     </article>
 
                     <label for="">
-                        <input type="text" name="bairro" id="bairro" placeholder="Bairro">
+                        <input type="text" name="bairro" id="bairro" placeholder="Bairro" disabled>
                     </label>
 
                     <article class="two-inputs">
                         <label for="">
-                            <input type="text" name="cidade" id="cidade" class="medium-input" placeholder="Cidade">
+                            <input type="text" name="cidade" id="cidade" class="medium-input" placeholder="Cidade" disabled>
                         </label>
 
                         <label for="">
-                            <input type="text" name="estado" id="estado" class="little-input" placeholder="Estado">
+                            <input type="text" name="estado" id="estado" class="little-input" placeholder="Estado" disabled>
                         </label>
                     </article>
 
-                    <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->                    
+                    <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->
                     <label for="" class="icon-pass">
-                        <input type="password" name="senha" id="senha" placeholder="Senha" required>                   
+                        <input type="password" name="senha" id="senha" placeholder="Senha" required>
                         <img class="imagem-icon" src="img/eye-visibility.svg" alt="mostrar senha">
                     </label>
-                    
+
                     <label for="" class="icon-pass">
-                        <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar Senha" required>
+                        <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar Senha"
+                            required>
                         <img class="imagem-icon2" src="img/eye-visibility.svg" alt="mostrar senha">
                     </label>
 
