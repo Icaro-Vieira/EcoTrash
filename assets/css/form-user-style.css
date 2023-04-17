@@ -241,7 +241,8 @@ input[type="submit"]:hover {
 
 
 .icon-pass input[type="password"] {
-  background: url('img/eye-visibility.svg'); /* Define a imagem como background */
+  background: url('img/eye-visibility.svg');
+  /* Define a imagem como background */
   background-position: right center;
   background-color: var(--gray-input-color);
 }

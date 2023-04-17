@@ -1,12 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escolha o tipo de Cadastro</title>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="assets/css/registration-type.css">
+    <title>EcoTrash - Tipo de Cadastro</title>
 </head>
-<body>
-    
+
+<body id="register">
+    <nav class="navigation">
+        <ul>
+            <li><a href="index.html">Voltar</a></li>
+        </ul>
+    </nav>
+    <article class="header-writings">
+        <h1>Escolha o tipo de cadastro.</h1>
+        <p>Crie sua conta como Pessoa Juridica ou Pessoa Fisica</p>
+    </article>
+    <main>
+        <article class="card-business">
+            <img src="img/icon-business.svg" alt="icone de uma empresa">
+            <h2>Cadastro de Empresa</h2>
+            <div class="box-text">
+                <p>Cadastrar ponto de coleta</p>
+                <p>Disponibilizar horários de atendimento</p>
+                <p>Tipos de lixo eletrônico que coleta</p>
+                <p>Informar rotas</p>
+            </div>
+
+            <a href="businessRegistration.html"><button>Cadastro Empresa</button></a>
+        </article>
+
+        <article class="card-user">
+            <img src="img/icon-user.svg" alt="icone de duas pessoas">
+            <h2>Cadastro de Pessoa Fisica</h2>
+            <div class="box-text">
+                <p>Cadastrar seu endereço</p>
+                <p>Informar pontos de coleta não cadastrados</p>
+                <p>Visualizar pontos de coleta e rotas</p>
+                <p>⠀⠀⠀⠀⠀⠀</p>
+            </div>
+
+            <a href="userRegistration.html"><button id="button-user">Cadastro Pessoa Fisica</button></a>
+        </article>
+    </main>
+    <!-- NÃO REMOVER ESSA PARTE! -->
+    <footer class="footer-bg">
+        <div class="footer container">
+            <p class="footer-copy">⠀⠀⠀⠀⠀⠀</p>
+        </div>
+    </footer>
 </body>
+
 </html>
