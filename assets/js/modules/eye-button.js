@@ -7,20 +7,20 @@ export default function eyeButton() {
     showButton.onclick = () => {
         if (inputPassword.type === "password") {
             inputPassword.type = "text";
-            showButton.setAttribute('src', 'img/eye-visibility-off.svg');
+            showButton.setAttribute('src', 'img/eye-visibility.svg');
         } else {
             inputPassword.type = "password";
-            showButton.setAttribute('src', 'img/eye-visibility.svg');
+            showButton.setAttribute('src', 'img/eye-visibility-off.svg');
         }
     };
-    
+
     showButton2.onclick = () => {
         if (inputPassword2.type === "password") {
             inputPassword2.type = "text";
-            showButton2.setAttribute('src', 'img/eye-visibility-off.svg');
+            showButton2.setAttribute('src', 'img/eye-visibility.svg');
         } else {
             inputPassword2.type = "password";
-            showButton2.setAttribute('src', 'img/eye-visibility.svg');
+            showButton2.setAttribute('src', 'img/eye-visibility-off.svg');
         }
     };
 }
