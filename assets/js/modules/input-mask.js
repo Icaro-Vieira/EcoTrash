@@ -1,4 +1,4 @@
-export default function inputMasks() {
+function inputMasks() {
   const cpf = document.querySelector("#cpf");
   const data = document.querySelector("#data-nasc");
 
@@ -30,3 +30,5 @@ export default function inputMasks() {
     }
   })
 }
+
+inputMasks();
