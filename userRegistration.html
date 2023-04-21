@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/form-user-style.css">
-
-    <!-- CDN font-awesomw icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <title>Cadastro Pessoa Fisica</title>
 </head>
 
@@ -37,27 +34,26 @@
                     </label>
 
                     <label for="">
-                        <input type="email" name="email" id="email" placeholder="Email" required>
+                        <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" required>
                     </label>
 
                     <article class="two-inputs">
                         <label for="">
-                            <input type="text" name="cpf" id="cpf" class="medium-input" placeholder="CPF" maxlength="14" required>
+                            <input type="text" name="cpf" id="cpf" class="medium-input" placeholder="CPF" autocomplete="off" maxlength="14" required>
                         </label>
 
                         <label for="">
-                            <input type="text" name="dana-nasc" id="data-nasc" class="little-input" placeholder="Data N." maxlength="10" required>
+                            <input type="text" name="dana-nasc" id="data-nasc" class="little-input" placeholder="Data N." autocomplete="off" maxlength="10" required>
                         </label>
                     </article>
 
                     <label for="">
-                        <input type="text" name="cep" id="cep" placeholder="CEP" maxlength="9" required>
+                        <input type="text" name="cep" id="cep" placeholder="CEP" autocomplete="off" maxlength="9" required>
                     </label>
 
                     <label for="">
                         <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required>
                     </label>
-
 
                     <label for="">
                         <input type="text" name="complemento" placeholder="Complemento">
@@ -70,7 +66,7 @@
                         </label>
 
                         <label for="">
-                            <input type="number" name="numero" class="little-input" placeholder="Número" maxlength="15"
+                            <input type="number" name="numero" class="little-input" placeholder="Número" maxlength="15" min="0" autocomplete="off"
                                 required>
                         </label>
                     </article>
@@ -91,12 +87,12 @@
 
                     <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->
                     <label for="" class="icon-pass">
-                        <input type="password" name="senha" id="senha" placeholder="Senha" required>
+                        <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="8" required>
                         <img class="imagem-icon" src="img/eye-visibility-off.svg" alt="mostrar senha">
                     </label>
 
                     <label for="" class="icon-pass">
-                        <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar Senha"
+                        <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar Senha" maxlength="8"
                             required>
                         <img class="imagem-icon2" src="img/eye-visibility-off.svg" alt="mostrar senha">
                     </label>
@@ -120,6 +116,8 @@
     </footer>
 
     <script type="module" src="assets/js/script.js"></script>
+    <script src="assets/js/modules/api-cep.js"></script>
+    <script src="assets/js/modules/input-mask.js"></script>
 </body>
 
 </html>

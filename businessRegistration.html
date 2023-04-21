@@ -86,13 +86,12 @@
 
                     <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->
                     <label for="" class="icon-pass">
-                        <input type="password" name="senha" id="senha" placeholder="Senha" required>
+                        <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="8" required>
                         <img class="imagem-icon" src="img/eye-visibility-off.svg" alt="mostrar senha">
                     </label>
 
                     <label for="" class="icon-pass">
-                        <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar Senha"
-                            required>
+                        <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar Senha" maxlength="8" required>
                         <img class="imagem-icon2" src="img/eye-visibility-off.svg" alt="mostrar senha">
                     </label>
 
@@ -116,6 +115,7 @@
     </footer>
 
     <script type="module" src="assets/js/script.js"></script>
+    <script src="assets/js/modules/api-cnpj.js"></script>
 </body>
 
 </html>

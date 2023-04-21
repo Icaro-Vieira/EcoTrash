@@ -1,9 +1,10 @@
-export default function apiCnpj() {
+function apiCnpj() {
   // campo onde o usuário insere o CNPJ
   const inputCnpj = document.querySelector("#cnpj");
 
   inputCnpj.addEventListener("change", (event) => {
-    console.log(event.target.value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "$1.$2.$3/$4-$5"));
+    // Console para ver se a mascara está funcionando: "44270442000123".replace(Código regex)
+    // console.log(event.target.value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "$1.$2.$3/$4-$5"));
     inputCnpj.value = inputCnpj.value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "$1.$2.$3/$4-$5");
   });
 
@@ -24,12 +25,10 @@ export default function apiCnpj() {
     return inputCnpj.replace(/[^\d]+/g, "");
   }
 
-  removeMask(inputCnpj)
-
   // Quando o usuário preencher o campo de CNPJ e mudar de foco, ele vai fazer a consulta na API
   inputCnpj.addEventListener("blur", function (event) {
     let cnpj = event.target.value;
-    removeMask(cnpj)
+    cnpj = removeMask(cnpj) // Aplicando a máscara de remoção do CNPJ
 
     fetch(`https://api-publica.speedio.com.br/buscarcnpj?cnpj=${cnpj}`)
       .then((response) => response.json())
@@ -49,3 +48,5 @@ export default function apiCnpj() {
       });
   });
 }
+
+apiCnpj()
