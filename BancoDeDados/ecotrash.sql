@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25-Mar-2023 às 04:40
+-- Tempo de geração: 01-Maio-2023 às 18:01
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -97,6 +97,22 @@ ALTER TABLE `endereco`
 ALTER TABLE `pontos_coleta`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `ID_ENDERECO` (`ID_ENDERECO`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `cadastro`
+--
+ALTER TABLE `cadastro`
+  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `endereco`
+--
+ALTER TABLE `endereco`
+  MODIFY `ID` int(6) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
