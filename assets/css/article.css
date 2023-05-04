@@ -9,6 +9,14 @@ body {
   margin: 0 5rem;
 }
 
+.container img {
+  margin-top: 30px;
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
 
 .navigation {
   font-family: var(--opnsans-font);
@@ -51,34 +59,13 @@ body {
   padding-block: 20px;
 }
 
-.article-image {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.article-image img {
-  margin-top: 30px;
-  width: 100%;
-  height: 500px;
-  text-align: center;
-  object-fit: cover;
-}
-
 h1 {
+  margin-block: 50px;
   font-weight: var(--mulish-weight-black);
   font-family: var(--mulish-font);
-  font-size: 50px;
-  border: 1px solid red;
+  font-size: 40px;
 
   width: 100%;
-  height: 300px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #006A4E 100%);
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
 }
 
 /* .background-title {
@@ -114,4 +101,24 @@ span {
   margin-top: 200px;
   padding-bottom: 80px;
   height: 100px;
+}
+
+
+/* -=-=-=-=-=-=-=- RESPONSIVITY -=-=-=-=-=-=-=- */
+@media (max-width: 480px) {
+  .container {
+    margin: 0 2rem;  
+  }
+
+  .container img {
+    height: auto;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  p {
+    font-size: 18px;
+  }
 }
