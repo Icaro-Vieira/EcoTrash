@@ -1,6 +1,5 @@
 <?php
 
-    require_once("../model/CadastroPJ.php");
     require_once("../model/CadastroDAO.php");
 
     $documento = $_POST['usuario'];
@@ -11,13 +10,10 @@
     $login = $cadastroDAO->login($documento, $senha);
 
     if($login){
-        header("Location: ../view/loginRealizado.html");
-    }
-    elseif ($login == "nao existe"){
-        header("Location: ../view/usuarionãocadastrado.html");
+        header("Location: http://localhost/PA/EcoTrash/index.html");
     }
     else{
-        header("Location: ../view/emailousenhaerrados.html");
+        header("Location: http://localhost/PA/EcoTrash/emailousenhaerrados.html"); //Aviso na tela
     }
 
 ?>

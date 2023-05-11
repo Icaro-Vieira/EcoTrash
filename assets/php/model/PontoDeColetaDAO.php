@@ -1,18 +1,18 @@
 <?php
 
-    define('HOSTENDERECO', 'localhost');
-    define('USERNDERECO', 'root');
-    define('PASSWORDNDERECO', 'Ec@305três*');
-    define('DB_NAMENDERECO', 'ecotrash');
+    define('HOSTPONTO', 'localhost');
+    define('USERPONTO', 'root');
+    define('PASSWORDPONTO', 'Ec@305três*');
+    define('DB_NAMEPONTO', 'ecotrash');
 
-    require_once("Endereco.php");
+    require_once("PontosColeta.php");
 
-    class EnderecoDAO{
+    class PontoDeColetaDAO{
 
         private $banco;
 
         public function __construct(){
-            $this->banco = new PDO('mysql:host='.HOSTENDERECO.'; dbname='.DB_NAMENDERECO,USERNDERECO,PASSWORDNDERECO);
+            $this->banco = new PDO('mysql:host='.HOSTPONTO.'; dbname='.DB_NAMEPONTO,USERPONTO,PASSWORDPONTO);
         }
 
         public function cadastrar($endereco){
@@ -32,19 +32,21 @@
             return false;
         }
 
-        public function excluir_endereco($id){    
+        public function consultar_pontoDeColetaPeloID($idEndereco){
 
-            $idEndereco = array($id);
+            $consulta = $this->banco->prepare('SELECT * FROM pontos_coleta WHERE ID_ENDERECO = :idEndereco');
+            $consulta->bindParam(':idEndereco', $idEndereco);
+            $consulta->execute();
 
-            $delete = $this->banco->prepare("DELETE FROM endereco WHERE ID=?");
-
-            $consulta_Id_endereco = $this->banco->prepare("SELECT ID_ENDERECO FROM cadastro WHERE DOCUMENTO=?");
-
-            if($delete->execute($idEndereco)){
-                return true;
-            }        
-            return false;
+            $pontoDeColeta = $consulta->fetchObject();
             
+            if (!$pontoDeColeta) {
+                return null;
+            }
+
+            $pontoDeColeta = new PontosColeta($pontoDeColeta->DESCRICAO, $pontoDeColeta->CNPJ, $pontoDeColeta->LATITUDE, $pontoDeColeta->LONGITUDE, $pontoDeColeta->ID_ENDERECO);
+
+            return $pontoDeColeta;
         }
 
         /* public function consultar_user_id($id){
