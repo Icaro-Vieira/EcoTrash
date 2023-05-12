@@ -1,6 +1,6 @@
 <?php
 
-abstract class Cadastro{
+abstract class User{
     protected $id;
     protected $nome;
     protected $documento;
@@ -8,16 +8,16 @@ abstract class Cadastro{
     protected $telefone;
     protected $idEndereco;
     protected $senha;
-    protected $tipoCadastro;
+    protected $tipoUsuario;
 
-    public function __construct($nome, $documento, $email, $telefone, $idEndereco, $senha, $tipoCadastro){
+    public function __construct($nome, $documento, $email, $telefone, $idEndereco, $senha, $tipoUsuario){
         $this->nome = $nome;
         $this->documento = $documento;
         $this->email = $email;
         $this->telefone = $telefone;
         $this->idEndereco = $idEndereco;
         $this->senha = $senha;
-        $this->tipoCadastro = $tipoCadastro;
+        $this->tipoUsuario = $tipoUsuario;
     }
 
     public function get_id(){
@@ -52,8 +52,8 @@ abstract class Cadastro{
         return $this->senha;
     }
 
-    public function get_tipoCadastro(){
-        return $this->tipoCadastro;
+    public function get_tipoUsuario(){
+        return $this->tipoUsuario;
     }
 }
 

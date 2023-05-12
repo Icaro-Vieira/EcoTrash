@@ -5,9 +5,9 @@
     define('PASSWORDNDERECO', 'Ec@305três*');
     define('DB_NAMENDERECO', 'ecotrash');
 
-    require_once("Endereco.php");
+    require_once("Address.php");
 
-    class EnderecoDAO{
+    class AddressDAO{
 
         private $banco;
 

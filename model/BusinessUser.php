@@ -1,8 +1,8 @@
 <?php
 
-require_once("Cadastro.php");
+require_once("User.php");
 
-class CadastroPJ extends Cadastro{
+class BusinessUser extends User{
 
     protected $segmento;
 

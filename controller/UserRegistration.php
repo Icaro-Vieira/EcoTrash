@@ -1,16 +1,16 @@
 <?php
 
-    require_once("../model/CadastroPJ.php");
+    require_once("../model/PersonalUser.php");
     require_once("../model/CadastroDAO.php");
-    require_once("../model/Endereco.php");
-    require_once("../model/EnderecoDAO.php");
+    require_once("../model/Address.php");
+    require_once("../model/AddressDAO.php");
 
-    //Inoformações da PJ
-    $nome = $_POST['nome-empresa']; 
-    $documento = $_POST['cnpj']; 
+    //Inoformações da PF
+    $nome = ($_POST['nome'] . $_POST['sobrenome']); 
+    $dataNasc = $_POST['data-nasc'];
+    $documento = $_POST['cpf']; 
     $email = $_POST['email']; 
-    $telefone = $_POST['telefone']; 
-    $segmento = $_POST['segmento-empresa']; 
+    $telefone = $_POST['telefone'];  
     $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
 
     //Informações do endereço
@@ -22,17 +22,17 @@
     $estado = $_POST['estado'];
     $cep = $_POST['cep'];
 
-    $endereco = new Endereco($logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep);
-    $enderecoDAO = new EnderecoDAO();
+    $endereco = new Address($logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep);
+    $enderecoDAO = new AddressDAO();
 
     if($enderecoDAO->cadastrar($endereco) == false){
         header("Location: ../view/Erro.html");
     }
 
-    $cadastroPJ = new CadastroPJ($nome, $documento, $email, $telefone, $endereco->get_id(), $segmento, $senha);
+    $usuario = new PersonalUser($nome, $dataNascimento, $documento, $email, $telefone, $endereco->get_id(), $senha);
     $cadastroDAO = new CadastroDAO();
 
-    if($cadastroDAO->cadastrar($cadastroPJ)){
+    if($cadastroDAO->cadastrar($usuario)){
         header("Location: ../view/cadastroRealizado.html");
     }
     else{

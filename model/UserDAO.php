@@ -5,10 +5,10 @@
     define('PASSWORD', 'Ec@305três*');
     define('DB_NAME', 'ecotrash');
 
-    require_once("CadastroPF.php");
-    require_once("CadastroPJ.php");
-    require_once("Endereco.php");
-    require_once("EnderecoDAO.php");
+    require_once("PersonalUser.php");
+    require_once("BusinessUser.php");
+    require_once("Address.php");
+    require_once("AddressDAO.php");
     require_once("PontoDeColetaDAO.php");
 
     class CadastroDAO{
@@ -56,10 +56,10 @@
 
             // Verifica se o cadastro é de uma pessoa física ou jurídica
             if ($usuario->TIPO_CADASTRO == 'F') {
-                $usuario = new CadastroPF($usuario->NOME, $usuario->DATA_NASCIMENTO, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SENHA);
+                $usuario = new PersonalUser($usuario->NOME, $usuario->DATA_NASCIMENTO, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SENHA);
             } 
             else {
-                $usuario = new CadastroPJ($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SEGMENTO, $usuario->SENHA);
+                $usuario = new BusinessUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SEGMENTO, $usuario->SENHA);
             }
 
             return $usuario;
@@ -79,7 +79,7 @@
 
         public function excluir_usuario($documento){    
 
-            $enderecoDAO = new EnderecoDAO();
+            $enderecoDAO = new AddressDAO();
             $pontoDeColetaDAO = new PontoDeColetaDAO();
 
             $cadastro = array($documento);
@@ -90,7 +90,7 @@
 
             $delete = $this->banco->prepare("DELETE FROM cadastro WHERE DOCUMENTO=?");
         
-            if(($consultarPontoDeColeta != null) && !$verificarEndereco){
+            if(($consultarPontoDeColeta == null) && !$verificarEndereco){
                 $excluirEndereco = $enderecoDAO->excluir_endereco($idEndereco);
 
                 if($delete->execute($cadastro))

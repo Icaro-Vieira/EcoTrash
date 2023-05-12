@@ -1,8 +1,8 @@
 <?php
 
-require_once("Cadastro.php");
+require_once("User.php");
 
-class CadastroPF extends Cadastro{
+class PersonalUser extends User{
 
     protected $dataNascimento;
 

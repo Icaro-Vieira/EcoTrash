@@ -1,6 +1,6 @@
 <?php
 
-class Endereco{
+class Address{
     protected $id;
     protected $logradouro;
     protected $numero;
