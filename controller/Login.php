@@ -1,13 +1,13 @@
 <?php
 
-    require_once("../model/CadastroDAO.php");
+    require_once("../model/UserDAO.php");
 
     $documento = $_POST['usuario'];
     $senha = $_POST['senha'];
 
-    $cadastroDAO = new CadastroDAO();
+    $usuarioDAO = new UserDAO();
 
-    $login = $cadastroDAO->login($documento, $senha);
+    $login = $usuarioDAO->login($documento, $senha);
 
     if($login){
         header("Location: http://localhost/PA/EcoTrash/index.html");

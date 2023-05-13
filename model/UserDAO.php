@@ -9,9 +9,9 @@
     require_once("BusinessUser.php");
     require_once("Address.php");
     require_once("AddressDAO.php");
-    require_once("PontoDeColetaDAO.php");
+    require_once("CollectionPointsDAO.php");
 
-    class CadastroDAO{
+    class UserDAO{
 
         private $banco;
 
@@ -19,27 +19,26 @@
             $this->banco = new PDO('mysql:host='.HOST.'; dbname='.DB_NAME,USER,PASSWORD);
         }
 
-        public function cadastrar($cadastro){
+        public function cadastrar($usuario){
 
             $inserir = $this->banco->prepare("INSERT INTO cadastro (NOME, DOCUMENTO, EMAIL, TELEFONE, SENHA, ID_ENDERECO, TIPO_CADASTRO, SEGMENTO, DATA_NASCIMENTO) VALUES (?,?,?,?,?,?,?,?,?);");
 
-            $novo_cadastro = array($cadastro->get_nome(), $cadastro->get_documento(), $cadastro->get_email(), $cadastro->get_telefone(), $cadastro->get_senha(), $cadastro->get_idEndereco(), $cadastro->get_tipoCadastro());
+            $novo_usuario = array($usuario->get_nome(), $usuario->get_documento(), $usuario->get_email(), $usuario->get_telefone(), $usuario->get_senha(), $usuario->get_idEndereco(), $usuario->get_tipoUsuario());
 
-            if($cadastro->get_tipoCadastro() == 'F'){
-                array_push($novo_cadastro, NULL); // Segmento
-                array_push($novo_cadastro, $cadastro->get_dataNascimento());
+            if($usuario->get_tipoUsuario() == 'F'){
+                array_push($novo_usuario, NULL); // Segmento
+                array_push($novo_usuario, $usuario->get_dataNascimento());
             }
             else{
-                array_push($novo_cadastro, $cadastro->get_segmento());
-                array_push($novo_cadastro, NULL); // Data de nascimento
+                array_push($novo_usuario, $usuario->get_segmento());
+                array_push($novo_usuario, NULL); // Data de nascimento
             }
 
-            if($inserir->execute($novo_cadastro)){
+            if($inserir->execute($novo_usuario)){
                 return true;
             }
-            else{
-                return false;
-            }     
+            
+            return false; 
         }
 
         public function consultar_documento($documento){
@@ -72,15 +71,14 @@
             if ($usuario != null && password_verify($senha, $usuario->get_senha())){
                 return true;
             } 
-            else {
-                return false;
-            }
+
+            return false;
         }
 
         public function excluir_usuario($documento){    
 
             $enderecoDAO = new AddressDAO();
-            $pontoDeColetaDAO = new PontoDeColetaDAO();
+            $pontoDeColetaDAO = new CollectionPointsDAO();
 
             $cadastro = array($documento);
             $idEndereco = $this->buscarIdEndereco($documento);
@@ -93,14 +91,16 @@
             if(($consultarPontoDeColeta == null) && !$verificarEndereco){
                 $excluirEndereco = $enderecoDAO->excluir_endereco($idEndereco);
 
-                if($delete->execute($cadastro))
+                if($delete->execute($cadastro)){
                     return true;
+                }
         
                 return false;
             }
 
-            if($delete->execute($cadastro))
+            if($delete->execute($cadastro)){
                 return true;
+            }
         
             return false;
         }
@@ -116,6 +116,7 @@
             if (!$idEndereco) {
                 return null;
             }
+            
             return $idEndereco->ID_ENDERECO;
         }
 

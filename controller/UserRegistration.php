@@ -1,13 +1,13 @@
 <?php
 
     require_once("../model/PersonalUser.php");
-    require_once("../model/CadastroDAO.php");
+    require_once("../model/UserDAO.php");
     require_once("../model/Address.php");
     require_once("../model/AddressDAO.php");
 
     //Inoformações da PF
     $nome = ($_POST['nome'] . $_POST['sobrenome']); 
-    $dataNasc = $_POST['data-nasc'];
+    $dataNascimento = $_POST['data-nasc'];
     $documento = $_POST['cpf']; 
     $email = $_POST['email']; 
     $telefone = $_POST['telefone'];  
@@ -30,9 +30,9 @@
     }
 
     $usuario = new PersonalUser($nome, $dataNascimento, $documento, $email, $telefone, $endereco->get_id(), $senha);
-    $cadastroDAO = new CadastroDAO();
+    $usuarioDAO = new UserDAO();
 
-    if($cadastroDAO->cadastrar($usuario)){
+    if($usuarioDAO->cadastrar($usuario)){
         header("Location: ../view/cadastroRealizado.html");
     }
     else{

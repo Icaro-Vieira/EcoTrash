@@ -1,7 +1,7 @@
 <?php
 
     require_once("../model/BusinessUser.php");
-    require_once("../model/CadastroDAO.php");
+    require_once("../model/UserDAO.php");
     require_once("../model/Address.php");
     require_once("../model/AddressDAO.php");
 
@@ -30,9 +30,9 @@
     }
 
     $empresa = new BusinessUser($nome, $documento, $email, $telefone, $endereco->get_id(), $segmento, $senha);
-    $cadastroDAO = new CadastroDAO();
+    $usuarioDAO = new UserDAO();
 
-    if($cadastroDAO->cadastrar($empresa)){
+    if($usuarioDAO->cadastrar($empresa)){
         header("Location: ../view/cadastroRealizado.html");
     }
     else{
