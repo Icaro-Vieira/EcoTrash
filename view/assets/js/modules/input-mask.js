@@ -16,19 +16,6 @@ function inputMasks() {
       cpf.value += "-";
     }
   });
-
-  // Máscara de data DD/MM/YYYY
-  data.addEventListener("change", () => {
-    data.value = data.value.replace(/(\d{2})(\d{2})(\d{4})$/, '$1/$2/$3');
-  });
-
-  data.addEventListener("keypress", (event) => {
-    const dataLength = event.target.value.length;
-
-    if (dataLength == 2 || dataLength == 5) {
-      data.value += "/";
-    }
-  })
 }
 
 inputMasks();
