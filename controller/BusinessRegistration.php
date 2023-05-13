@@ -1,9 +1,9 @@
 <?php
 
-    require_once("../model/CadastroPJ.php");
-    require_once("../model/CadastroDAO.php");
-    require_once("../model/Endereco.php");
-    require_once("../model/EnderecoDAO.php");
+    require_once("../model/BusinessUser.php");
+    require_once("../model/UserDAO.php");
+    require_once("../model/Address.php");
+    require_once("../model/AddressDAO.php");
 
     //Inoformações da PJ
     $nome = $_POST['nome-empresa']; 
@@ -22,17 +22,17 @@
     $estado = $_POST['estado'];
     $cep = $_POST['cep'];
 
-    $endereco = new Endereco($logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep);
-    $enderecoDAO = new EnderecoDAO();
+    $endereco = new Address($logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep);
+    $enderecoDAO = new AddressDAO();
 
     if($enderecoDAO->cadastrar($endereco) == false){
         header("Location: ../view/Erro.html");
     }
 
-    $cadastroPJ = new CadastroPJ($nome, $documento, $email, $telefone, $endereco->get_id(), $segmento, $senha);
-    $cadastroDAO = new CadastroDAO();
+    $empresa = new BusinessUser($nome, $documento, $email, $telefone, $endereco->get_id(), $segmento, $senha);
+    $usuarioDAO = new UserDAO();
 
-    if($cadastroDAO->cadastrar($cadastroPJ)){
+    if($usuarioDAO->cadastrar($empresa)){
         header("Location: ../view/cadastroRealizado.html");
     }
     else{
