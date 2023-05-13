@@ -1,4 +1,4 @@
-export default function eyeButton() {
+function eyeButton() {
     const inputPassword = document.querySelector("#senha");
     const inputPassword2 = document.querySelector("#confirmar-senha");
     const showButton = document.querySelector(".imagem-icon");
@@ -24,3 +24,4 @@ export default function eyeButton() {
         }
     };
 }
+eyeButton()
