@@ -1,6 +1,5 @@
 function inputMasks() {
   const cpf = document.querySelector("#cpf");
-  const data = document.querySelector("#data-nasc");
 
   // Máscara do CPF 000.000.000-00
   cpf.addEventListener("change", () => {

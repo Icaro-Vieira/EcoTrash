@@ -7,7 +7,6 @@
 
     //Inoformações da PF
     $nome = ($_POST['nome'] . $_POST['sobrenome']); 
-    $dataNascimento = $_POST['data-nasc'];
     $documento = $_POST['cpf']; 
     $email = $_POST['email']; 
     $telefone = $_POST['telefone'];  
@@ -29,7 +28,7 @@
         header("Location: ../view/Erro.html");
     }
 
-    $usuario = new PersonalUser($nome, $dataNascimento, $documento, $email, $telefone, $endereco->get_id(), $senha);
+    $usuario = new PersonalUser($nome, $documento, $email, $telefone, $endereco->get_id(), $senha);
     $usuarioDAO = new UserDAO();
 
     if($usuarioDAO->cadastrar($usuario)){

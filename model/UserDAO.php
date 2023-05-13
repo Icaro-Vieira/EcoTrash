@@ -21,24 +21,22 @@
 
         public function cadastrar($usuario){
 
-            $inserir = $this->banco->prepare("INSERT INTO cadastro (NOME, DOCUMENTO, EMAIL, TELEFONE, SENHA, ID_ENDERECO, TIPO_CADASTRO, SEGMENTO, DATA_NASCIMENTO) VALUES (?,?,?,?,?,?,?,?,?);");
+            $inserir = $this->banco->prepare("INSERT INTO cadastro (NOME, DOCUMENTO, EMAIL, TELEFONE, SENHA, ID_ENDERECO, TIPO_CADASTRO, SEGMENTO) VALUES (?,?,?,?,?,?,?,?);");
 
             $novo_usuario = array($usuario->get_nome(), $usuario->get_documento(), $usuario->get_email(), $usuario->get_telefone(), $usuario->get_senha(), $usuario->get_idEndereco(), $usuario->get_tipoUsuario());
 
             if($usuario->get_tipoUsuario() == 'F'){
                 array_push($novo_usuario, NULL); // Segmento
-                array_push($novo_usuario, $usuario->get_dataNascimento());
             }
             else{
                 array_push($novo_usuario, $usuario->get_segmento());
-                array_push($novo_usuario, NULL); // Data de nascimento
             }
 
             if($inserir->execute($novo_usuario)){
                 return true;
             }
             
-            return false; 
+            return false;
         }
 
         public function consultar_documento($documento){
@@ -55,7 +53,7 @@
 
             // Verifica se o cadastro é de uma pessoa física ou jurídica
             if ($usuario->TIPO_CADASTRO == 'F') {
-                $usuario = new PersonalUser($usuario->NOME, $usuario->DATA_NASCIMENTO, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SENHA);
+                $usuario = new PersonalUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SENHA);
             } 
             else {
                 $usuario = new BusinessUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SEGMENTO, $usuario->SENHA);
