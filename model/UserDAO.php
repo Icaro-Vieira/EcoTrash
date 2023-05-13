@@ -64,9 +64,7 @@
             return $usuario;
         }
 
-        public function login($documento, $senha){
-            
-            $usuario = $this->consultar_documento($documento);
+        public function login($usuario, $senha){
 
             if ($usuario != null && password_verify($senha, $usuario->get_senha())){
                 return true;
@@ -77,26 +75,8 @@
 
         public function excluir_usuario($documento){    
 
-            $enderecoDAO = new AddressDAO();
-            $pontoDeColetaDAO = new CollectionPointsDAO();
-
-            $cadastro = array($documento);
-            $idEndereco = $this->buscarIdEndereco($documento);
-
-            $consultarPontoDeColeta = $pontoDeColetaDAO->consultar_pontoDeColetaPeloID($idEndereco);
-            $verificarEndereco = $this->verificarEnderecoEmOutroCadastro($idEndereco);
-
             $delete = $this->banco->prepare("DELETE FROM cadastro WHERE DOCUMENTO=?");
-        
-            if(($consultarPontoDeColeta == null) && !$verificarEndereco){
-                $excluirEndereco = $enderecoDAO->excluir_endereco($idEndereco);
-
-                if($delete->execute($cadastro)){
-                    return true;
-                }
-        
-                return false;
-            }
+            $cadastro = array($documento);
 
             if($delete->execute($cadastro)){
                 return true;
