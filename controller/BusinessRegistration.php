@@ -22,21 +22,39 @@
     $estado = $_POST['estado'];
     $cep = $_POST['cep'];
 
-    $endereco = new Address($logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep);
-    $enderecoDAO = new AddressDAO();
-
-    if($enderecoDAO->cadastrar($endereco) == false){
-        header("Location: ../view/Erro.html");
-    }
-
-    $empresa = new BusinessUser($nome, $documento, $email, $telefone, $endereco->get_id(), $segmento, $senha);
     $usuarioDAO = new UserDAO();
 
-    if($usuarioDAO->cadastrar($empresa)){
-        header("Location: ../view/cadastroRealizado.html");
+    //Irá verificar se o CNPJ já está cadastrado
+    if ($usuarioDAO->verificarDocumento($documento) > 0) {
+        // CNPJ já cadastrado, retorna página de erro
+        header("Location: ../view/documentAlreadyRegistered.html");
+    } 
+    //Irá verificar se o Email já está cadastrado
+    elseif ($usuarioDAO->verificarEmail($email) > 0){
+        // Email já cadastrado, retorna página de erro
+        header("Location: ../view/emailAlreadyRegistered.html");
     }
-    else{
-        header("Location: ../view/cadastroProblema.html");
+    else {
+
+        // Realizando o cadastro do endereço
+        $endereco = new Address($logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep);
+        $enderecoDAO = new AddressDAO();
+
+        if($enderecoDAO->cadastrar($endereco)){
+            // Cadastro do endereço bem sucedido, será iniciado o cadastro da empresa
+            $empresa = new BusinessUser($nome, $documento, $email, $telefone, $endereco->get_id(), $segmento, $senha);
+        }
+        else{
+            echo "Ocorreu um erro inesperado no cadastro do endereço.";
+        }
+
+        if($usuarioDAO->cadastrar($empresa)){
+            // Cadastro da empresa bem sucedido, direcionar para o usuário efetuar o login.
+            header("Location: ../view/login.html");
+        }
+        else{
+            echo "Ocorreu um erro inesperado no cadastro da empresa.";
+        }
     }
 
 ?>

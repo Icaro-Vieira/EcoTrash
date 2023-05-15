@@ -21,7 +21,25 @@
         </ul>
       </div>
       <div>
-        <a href="login.html" class="login"><button class="button">Entrar</button></a>
+        <?php
+          //Verificando se o usuário está logado
+          
+          session_start();
+
+          $logado = isset($_SESSION['usuario']);
+
+          if ($logado) {
+            echo '<a href="perfil.php" class="perfil"><button class="button">Perfil</button></a>';
+
+            echo '<style>.login {display: none; }</style>';
+
+            echo '<form action="../controller/ExitUser.php" method="post">
+                  <button type="submit">Sair</button>';
+          } else {
+            echo '<a href="login.php" class="login"><button class="button">Entrar</button></a>';
+          }
+        ?>
+
       </div>
     </nav>
 
