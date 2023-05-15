@@ -53,6 +53,7 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5px;
 
     background-color: var(--white-color);
     padding: 8px 28px;
@@ -70,6 +71,7 @@ a:hover {
     border: 1px solid var(--medium-green-color);
     color: var(--medium-green-color);
     transition: .3s;
+    fill: var(--medium-green-color);
 }
 
 .section-map {
@@ -110,7 +112,7 @@ input[type="text"]::placeholder {
     font-size: 16px;
 }
 
-button {
+.button-search {
     display: flex;
     justify-content: center;
 
@@ -122,7 +124,7 @@ button {
     transition: .3s;
 }
 
-button:hover {
+.button-search:hover {
     filter: brightness(1.2);
     cursor: pointer;
     transition: .3s;
@@ -265,12 +267,14 @@ footer img {
 
     margin-bottom: 30px;
     transition: .3s;
+    cursor: pointer;
 }
 
 
 .footer-div-buttons button:hover {
     transition: .3s;
     font-weight: var(--opnsans-weight-semibold);
+    cursor: pointer;
 
     color: var(--medium-green-color);
     border-bottom: 2px solid var(--light-green-color);

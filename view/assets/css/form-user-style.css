@@ -41,16 +41,27 @@ body {
   height: 60px;
 
   display: flex;
-  align-items: center;
 }
 
 .navigation a {
-  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
   text-decoration: none;
   color: var(--white-color);
+  
+  background: #00281e;
+  border-radius: 100px;
+  padding: 5px 20px;
+  
   margin-left: 30px;
 }
 
+.navigation ul {
+  flex-direction: row;
+  justify-content: space-between;
+}
 .navigation li {
   list-style: none;
 }
