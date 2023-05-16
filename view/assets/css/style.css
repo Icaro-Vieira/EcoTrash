@@ -7,11 +7,18 @@
   --dark-green-color: #00281E;
   --medium-green-color: #006A4E;
   --light-green-color: #4DBB72;
+  --color-border-article: #ccc;
+  --color-button-article: #EBEBEB;
   --gray-font-color: #A2A3A5;
+  --gray-font-color-subtitle-article: #A0A0A0;
+  --dark-gray-font-color: #616161;
   --gray-input-color: #F3F4F6;
   --gray-input-border-color: #E1E1E3;
   --white-color: #FFFFFF;
-
+  --black-color: #000000;
+  --logo-eco-color: #7CC529;
+  --logo-trash-color: #46780D;
+  --logo-onu: #009EDB;
   /* FONTS */
   --mulish-font: 'Mulish', sans-serif;
   --opnsans-font: 'Open Sans', sans-serif;

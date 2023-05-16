@@ -77,7 +77,7 @@ body {
   font-weight: var(--opnsans-weight-semibold);
   color: var(--gray-font-color);
 
-  max-width: 880px;
+  max-width: 765px;
 }
 
 /* -=-=-=-=-=-=-=-=-=-=- FORM USER -=-=-=-=-=-=-=-=-=-=- */
@@ -232,4 +232,34 @@ input[type="submit"]:hover {
 .footer-copy {
   grid-column: 1/-1;
   margin-top: 40px;
+}
+
+/* -=-=-=-=-=-=- INPUT PASSWORD WITH EYE -=-=-=-=-=-=- */
+.icon-pass {
+  position: relative;
+}
+
+
+.icon-pass input[type="password"] {
+  background: url('img/eye-visibility.svg'); /* Define a imagem como background */
+  background-position: right center;
+  background-color: var(--gray-input-color);
+}
+
+.icon-pass .imagem-icon {
+  position: absolute;
+  width: 32px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.icon-pass .imagem-icon2 {
+  position: absolute;
+  width: 32px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
