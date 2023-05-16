@@ -15,38 +15,21 @@
             $this->banco = new PDO('mysql:host='.HOSTPONTO.'; dbname='.DB_NAMEPONTO,USERPONTO,PASSWORDPONTO);
         }
 
-        public function cadastrar($endereco){
+        public function cadastrar($pontoDeColeta){
             
-            $inserir = $this->banco->prepare("INSERT INTO endereco (LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, ESTADO, CEP) VALUES (?,?,?,?,?,?,?);");
+            $inserir = $this->banco->prepare("INSERT INTO pontos_coleta (DESCRICAO, CNPJ, LATITUDE, LONGITUDE, ID_ENDERECO) VALUES (?,?,?,?,?);");
 
-            $novoEndereco = array($endereco->get_logradouro(), $endereco->get_numero(), $endereco->get_complemento(), $endereco->get_bairro(), $endereco->get_cidade(), $endereco->get_estado(), $endereco->get_cep());
+            $novoPonto = array($pontoDeColeta->get_descricao(), $pontoDeColeta->get_documento(), $pontoDeColeta->get_latitude(), $pontoDeColeta->get_longitude(), $pontoDeColeta->idEndereco());
         
-            if($inserir->execute($novoEndereco)){
+            if($inserir->execute($novoPonto)){
                 $id = $this->banco->query("SELECT LAST_INSERT_ID()")->fetchColumn();
         
-                $endereco->set_id($id);
+                $pontoDeColeta->set_id($id);
         
                 return true;
             }
                 
             return false;
-        }
-
-        public function consultar_pontoDeColetaPeloID($idEndereco){
-
-            $consulta = $this->banco->prepare('SELECT * FROM pontos_coleta WHERE ID_ENDERECO = :idEndereco');
-            $consulta->bindParam(':idEndereco', $idEndereco);
-            $consulta->execute();
-
-            $pontoDeColeta = $consulta->fetchObject();
-            
-            if (!$pontoDeColeta){
-                return null;
-            }
-
-            $pontoDeColeta = new CollectionPoints($pontoDeColeta->DESCRICAO, $pontoDeColeta->CNPJ, $pontoDeColeta->LATITUDE, $pontoDeColeta->LONGITUDE, $pontoDeColeta->ID_ENDERECO);
-
-            return $pontoDeColeta;
         }
     }
 

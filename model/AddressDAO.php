@@ -55,6 +55,25 @@
 
             return false;
         }
+
+        public function consultarEndereco($idEndereco){
+
+            $consulta = $this->banco->prepare('SELECT * FROM endereco WHERE ID_ENDERECO = :idEndereco');
+            $consulta->bindParam(':idEndereco', $idEndereco);
+            $consulta->execute();
+
+            $endereco = $consulta->fetchObject();
+            
+            if (!$endereco){
+                return null;
+            }
+
+            $enderecoConsultado = new Address($endereco->LOGRADOURO, $endereco->NUMERO, $endereco->COMPLEMENTO, $endereco->BAIRRO, $endereco->CIDADE, $endereco->ESTADO,  $endereco->CEP);
+
+            $enderecoConsultado->set_id($endereco->ID);
+
+            return $enderecoConsultado;
+        }
     }
     
 ?>

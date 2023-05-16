@@ -65,13 +65,17 @@
 
             // Verifica se o cadastro é de uma pessoa física ou jurídica
             if ($usuario->TIPO_CADASTRO == 'F') {
-                $usuario = new PersonalUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SENHA);
+                $usuarioConsultado = new PersonalUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SENHA);
+
+                $usuarioConsultado->set_id($usuario->ID);
             } 
             else {
-                $usuario = new BusinessUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SEGMENTO, $usuario->SENHA);
+                $usuarioConsultado = new BusinessUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SEGMENTO, $usuario->SENHA);
+
+                $usuarioConsultado->set_id($usuario->ID);
             }
 
-            return $usuario;
+            return $usuarioConsultado;
         }
 
         public function login($usuario, $senha){
