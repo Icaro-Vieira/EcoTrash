@@ -2,7 +2,7 @@
 
     define('HOST', 'localhost');
     define('USER', 'root');
-    define('PASSWORD', '');
+    define('PASSWORD', 'Ec@305três*');
     define('DB_NAME', 'ecotrash');
 
     require_once("PersonalUser.php");

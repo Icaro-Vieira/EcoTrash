@@ -26,12 +26,22 @@
     //Irá verificar se o CNPJ já está cadastrado
     if ($usuarioDAO->verificarDocumento($documento) > 0) {
         // CPF já cadastrado, retorna página de erro
-        header("Location: ../view/documentAlreadyRegistered.html");
+
+        session_start();
+        
+        $_SESSION["documento"] = $documento;
+
+        header("Location: ../view/documentAlreadyRegistered.php");
     } 
     //Irá verificar se o Email já está cadastrado
     elseif ($usuarioDAO->verificarEmail($email) > 0){
         // Email já cadastrado, retorna página de erro
-        header("Location: ../view/emailAlreadyRegistered.html");
+
+        session_start();
+        
+        $_SESSION["email"] = $email;
+
+        header("Location: ../view/emailAlreadyRegistered.php");
     }
     else {
 

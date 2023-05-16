@@ -1,0 +1,95 @@
+@import "style.css";
+
+body {
+  margin: 0px;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+  
+.container > div {
+  text-align: center;
+}
+  
+.button {
+  display: inline-block;
+  margin: 0 10px;
+  font-family: var(--opnsans-font);
+  color: var(--dark-gray-font-color);
+  font-weight: var(--opnsans-weight-semibold);
+  font-size: 13px;
+}
+
+.container {
+  margin: 0 5rem;
+}
+
+.navigation {
+  font-family: var(--opnsans-font);
+  font-weight: var(--opnsans-weight-semibold);
+  background-color: var(--medium-green-color);
+
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navigation li {
+  list-style: none;
+}
+
+p {
+  color: var(--dark-gray-font-color);
+  font-family: var(--opnsans-font);
+  font-weight: var(--opnsans-weight-regular);
+  font-size: 20px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:visited {
+  color: var(--light-green-color);
+}
+
+span {
+  color: var(--light-green-color);
+}
+
+.footer {
+  background-color: var(--medium-green-color);
+  display: grid;
+  grid-template-columns: 3fr 5fr 4fr;
+  gap: 200px;
+  margin-top: 200px;
+  padding-bottom: 80px;
+  height: 100px;
+}
+
+
+/* -=-=-=-=-=-=-=- RESPONSIVITY -=-=-=-=-=-=-=- */
+@media (max-width: 480px) {
+  .container {
+    margin: 0 2rem;  
+  }
+
+  .container img {
+    height: auto;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
