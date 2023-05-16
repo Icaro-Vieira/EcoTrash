@@ -70,18 +70,32 @@
     <h3 id="artigo">Artigos</h3>
     <article id="articles">
       <div class="article">
-        <img src="img/img-article-one.jpg" alt="Imagem de uma placa eletronica de computador, autor da imagem jorge salvador, fonte unsplash." />
+        <img src="img/img-article-one.jpg"
+          alt="Imagem de uma placa eletronica de computador, autor da imagem jorge salvador, fonte unsplash." />
         <p class="article-title">Lixo eletrônico e lixo digital – entenda as diferenças entre eles</p>
         <div class="span">
-          <span>Descrição da noticia</span>
+          <a href="article-one.html">
+            <button class="button-article">
+              <img src="img/icon-world-web.svg">
+              Ler artigo
+            </button>
+          </a>
         </div>
+      </div>
       </div>
 
       <div class="article">
-        <img src="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" />
+        <img
+          src="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+          alt="" />
         <p class="article-title">ONU alerta que apenas 3% do lixo eletrônico da AL é reciclado</p>
         <div class="span">
-          <span>Descrição da noticia</span>
+          <a href="article-two.html">
+            <button class="button-article">
+              <img src="img/icon-world-web.svg">
+              Ler artigo
+            </button>
+          </a>
         </div>
       </div>
 
@@ -89,7 +103,13 @@
         <img src="img/logo-onu-with-backgroun.svg" alt="" />
         <p class="article-title">Objetivos de Desenvolvimento Sustentável</p>
         <div class="span">
-          <span>Como as Nações Unidas apoiam as ODS no Brasil</span>
+          <a href="https://brasil.un.org/pt-br/sdgs#:~:text=Os%20Objetivos%20de%20Desenvolvimento%20Sustent%C3%A1vel%20s%C3%A3o%20um%20apelo%20global%20%C3%A0,de%20paz%20e%20de%20prosperidade."
+            target="_blank">
+            <button class="button-article">
+              <img src="img/icon-world-web.svg">
+              Saiba mais
+            </button>
+          </a>
         </div>
       </div>
     </article>
