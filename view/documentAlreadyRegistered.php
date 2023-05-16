@@ -1,4 +1,5 @@
 <?php
+
   session_start();
 
   $erro = isset($_SESSION['documento']);
@@ -12,6 +13,7 @@
   }
 
   session_destroy();
+  
 ?>
 
 <!DOCTYPE html>

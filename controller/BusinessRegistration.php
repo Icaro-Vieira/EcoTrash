@@ -33,6 +33,7 @@
         $_SESSION["documento"] = $documento;
 
         header("Location: ../view/documentAlreadyRegistered.php");
+        exit();
     } 
     //Irá verificar se o Email já está cadastrado
     elseif ($usuarioDAO->verificarEmail($email) > 0){
@@ -43,6 +44,7 @@
         $_SESSION["email"] = $email;
 
         header("Location: ../view/emailAlreadyRegistered.php");
+        exit();
     }
     else {
 
@@ -56,11 +58,13 @@
         }
         else{
             echo "Ocorreu um erro inesperado no cadastro do endereço.";
+            exit();
         }
 
         if($usuarioDAO->cadastrar($empresa)){
             // Cadastro da empresa bem sucedido, direcionar para o usuário efetuar o login.
             header("Location: ../view/login.php");
+            exit();
         }
         else{
             echo "Ocorreu um erro inesperado no cadastro da empresa.";

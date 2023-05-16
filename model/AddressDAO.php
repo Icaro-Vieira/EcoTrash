@@ -31,6 +31,18 @@
             return false;
         }
 
+        public function editar_endereco($idEndereco, $logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep){
+
+            $update = $this->banco->prepare("UPDATE endereco SET LOGRADOURO=?, NUMERO=?, COMPLEMENTO=?, BAIRRO=?, CIDADE=?, ESTADO=?, CEP=? WHERE ID=?");
+            $editar_endereco = array($logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep, $idEndereco);
+
+            if($update->execute($editar_endereco)){
+                return true;
+            }
+            
+            return false;
+        }
+
         public function excluir_endereco($id){    
 
             $idEndereco = array($id);

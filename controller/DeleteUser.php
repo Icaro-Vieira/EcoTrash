@@ -1,29 +1,33 @@
 <?php
 
+    require_once("../model/PersonalUser.php");
+    require_once("../model/BusinessUser.php");
     require_once("../model/UserDAO.php");
     require_once("../model/AddressDAO.php");
-    require_once("../model/CollectionPointsDAO.php");
 
-    $documento = $_POST['documento'];
+    session_start();
+    $usuario = $_SESSION['usuario'];
+    $documento = $usuario->get_documento();
 
     $usuarioDAO = new UserDAO();
     $enderecoDAO = new AddressDAO();
-    $pontoDeColetaDAO = new CollectionPointsDAO();
 
     $idEndereco = $usuarioDAO->buscarIdEndereco($documento);
 
-    $consultarPontoDeColeta = $pontoDeColetaDAO->consultar_pontoDeColetaPeloID($idEndereco);
-    $verificarEndereco = $usuarioDAO->verificarEnderecoEmOutroCadastro($idEndereco);
-        
-    if(($consultarPontoDeColeta == null) && !$verificarEndereco){
-        $excluirEndereco = $enderecoDAO->excluir_endereco($idEndereco);
-    }
-
     if($usuarioDAO->excluir_usuario($documento)){
-        header("Location: ../view/DeletarSucesso.html");
+
+        if($enderecoDAO->excluir_endereco($idEndereco)){
+
+            session_destroy();
+            
+            header("Location: ../view/index.php");
+        }
+        else{
+            echo "Ocorreu um erro inesperado na exclusão do endereço.";
+        }
     }
     else{
-        header("Location: ../view/DeletarProblema.html");
+        echo "Não foi possível realizar a exclusão do usuário.";
     }
 
 ?>

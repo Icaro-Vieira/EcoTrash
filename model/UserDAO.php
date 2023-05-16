@@ -39,6 +39,18 @@
             return false;
         }
 
+        public function editar_usuario($documento, $nome, $email, $telefone, $senha){
+
+            $update = $this->banco->prepare("UPDATE cadastro SET NOME=?, EMAIL=?, TELEFONE =?, SENHA=? WHERE DOCUMENTO=?");
+            $editar_usuario = array($nome, $email, $telefone, $senha, $documento);
+
+            if($update->execute($editar_usuario)){
+                return true;
+            }
+            
+            return false;
+        }
+
         public function consultar_documento($documento){
 
             $consulta = $this->banco->prepare('SELECT * FROM cadastro WHERE DOCUMENTO = :documento');
@@ -71,15 +83,6 @@
             return false;
         }
 
-        public function editar_usuario($usuario, $campoDeEdicao){
-
-            //if ($usuario != null && password_verify($senha, $usuario->get_senha())){
-              //  return true;
-            //} 
-
-            return false;
-        }
-
         public function excluir_usuario($documento){    
 
             $delete = $this->banco->prepare("DELETE FROM cadastro WHERE DOCUMENTO=?");
@@ -105,17 +108,6 @@
             }
             
             return $idEndereco->ID_ENDERECO;
-        }
-
-        public function verificarEnderecoEmOutroCadastro($idEndereco){    
-
-            $query = $this->banco->prepare("SELECT COUNT(*) as count FROM cadastro WHERE ID_ENDERECO = :id_endereco");
-            $query->bindParam(":id_endereco", $id_endereco);
-            $query->execute();
-
-            $result = $query->fetch(PDO::FETCH_ASSOC);
-
-            return ($result['count'] > 1);
         }
 
         public function verificarDocumento($documento){    

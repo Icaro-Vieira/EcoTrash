@@ -1,3 +1,14 @@
+<?php
+  require_once("../model/PersonalUser.php");
+  require_once("../model/BusinessUser.php");
+  require_once("../model/UserDAO.php");
+
+  session_start();
+
+  $logado = isset($_SESSION['usuario']);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -24,16 +35,11 @@
     </div>
     <?php
       //Verificando se o usuário está logado
-
-      session_start();
-
-      $logado = isset($_SESSION['usuario']);
-
       if ($logado) {
 
-        $tipoDeUsuário = $_SESSION['tipoDeUsuário'];
+        $usuario = $_SESSION['usuario'];
 
-        if ($tipoDeUsuário == "J") {
+        if ($usuario->get_tipoUsuario() == "J") {
           echo '<a href="businessProfile.php" class="login">
                   <button class="button">
                     <img src="img/icon-business-profile.svg" alt=""> 
