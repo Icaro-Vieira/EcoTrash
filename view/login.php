@@ -13,7 +13,7 @@
 <body id="register">
   <nav class="navigation">
       <ul>
-          <li><a href="index.html">Voltar</a></li>
+          <li><a href="index.php">Voltar</a></li>
       </ul>
   </nav>
   <article class="header-writings">
@@ -54,7 +54,7 @@
             $erro = isset($_SESSION['error']);
 
             if ($erro) {
-              echo '<p class="erro"> Senha e/ou Documento da conta incorreto, tente novamente.</p>';
+              echo '<p class="erro">Usuário ou Senha incorreto, tente novamente!</p>';
 
               session_destroy();
             }

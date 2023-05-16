@@ -50,7 +50,7 @@
 
         if($usuarioDAO->cadastrar($empresa)){
             // Cadastro da empresa bem sucedido, direcionar para o usuário efetuar o login.
-            header("Location: ../view/login.html");
+            header("Location: ../view/login.php");
         }
         else{
             echo "Ocorreu um erro inesperado no cadastro da empresa.";

@@ -214,6 +214,15 @@ input[type="submit"]:hover {
   color: var(--light-green-color);
 }
 
+.erro {
+  font-family: var(--opnsans-font);
+  font-weight: var(--opnsans-weight-regular);
+  font-size: 16px;
+  color: var(--red-color);
+  text-align: center;
+  max-width: 230px;
+}
+
 /* -=-=-=-=-=-=-=-=-=-=- FOOTER -=-=-=-=-=-=-=-=-=-=- */
 .footer-bg {
   background-color: var(--medium-green-color);

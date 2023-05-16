@@ -23,37 +23,40 @@
       </ul>
     </div>
     <?php
-    //Verificando se o usuário está logado
+      //Verificando se o usuário está logado
 
-    session_start();
+      session_start();
 
-    $logado = isset($_SESSION['usuario']);
+      $logado = isset($_SESSION['usuario']);
 
-    if ($logado) {
+      if ($logado) {
 
-      $tipoDeUsuário = $_SESSION['tipoDeUsuário'];
+        $tipoDeUsuário = $_SESSION['tipoDeUsuário'];
 
-      if ($tipoDeUsuário == "J") {
-        echo '<a href="businessProfile.html" class="login">
-                <button class="button">
-                  <img src="img/icon-business-profile.svg" alt=""> 
-                  Perfil Empresa
-                </button>
-              </a>';
+        if ($tipoDeUsuário == "J") {
+          echo '<a href="businessProfile.php" class="login">
+                  <button class="button">
+                    <img src="img/icon-business-profile.svg" alt=""> 
+                    Perfil Empresa
+                  </button>
+                </a>';
+        } else {
+          echo '<a href="userProfile.php" class="login">
+                  <button class="button">
+                    <img src="img/icon-user-profile.svg" alt=""> 
+                    Meu Perfil
+                  </button>
+                </a>';
+        }
+
+        echo '<form action="../controller/ExitUser.php" method="post">
+                  <button type="submit" class="button">Sair</button>
+              </form>';
       } else {
-        echo '<a href="userProfile.html" class="login">
-                <button class="button">
-                  <img src="img/icon-user-profile.svg" alt=""> 
-                  Meu Perfil
-                </button>
+        echo '<a href="login.php" class="login">
+                <button class="button">Entrar</button>
               </a>';
       }
-
-      echo '<form action="../controller/ExitUser.php" method="post">
-                  <button type="submit" class="login">Sair</button>';
-    } else {
-      echo '<a href="login.html" class="login"><button class="button">Entrar</button></a>';
-    }
     ?>
   </nav>
 
@@ -62,7 +65,7 @@
       <h3 class="h3-map">Pesquise o ponto de coleta mais próximo de você</h3>
       <form action="" method="">
         <input type="text" placeholder="Digite o tipo de material que deseja descartar..." />
-        <button type="submit"><img src="img/icon-search.svg" /></button>
+        <button type="submit" class="search-button"><img src="img/icon-search.svg" /></button>
       </form>
       <div class="map"></div>
     </section>
@@ -74,7 +77,7 @@
           alt="Imagem de uma placa eletronica de computador, autor da imagem jorge salvador, fonte unsplash." />
         <p class="article-title">Lixo eletrônico e lixo digital – entenda as diferenças entre eles</p>
         <div class="span">
-          <a href="article-one.html">
+          <a href="article-one.html" target="_blank">
             <button class="button-article">
               <img src="img/icon-world-web.svg">
               Ler artigo
@@ -90,7 +93,7 @@
           alt="" />
         <p class="article-title">ONU alerta que apenas 3% do lixo eletrônico da AL é reciclado</p>
         <div class="span">
-          <a href="article-two.html">
+          <a href="article-two.html" target="_blank">
             <button class="button-article">
               <img src="img/icon-world-web.svg">
               Ler artigo
@@ -116,8 +119,20 @@
     <section id="faq"></section>
   </main>
 
+  <div class="line-footer"></div>
   <footer class="container">
-    <img src="img/horizontal-logo.svg" alt="Logo EcoTrash, um circulo com o simbolo de um botão power com duas folhas em cima dele" />
+    <img src="img/horizontal-logo.svg"
+      alt="Logo EcoTrash, um circulo com o simbolo de um botão power com duas folhas em cima dele" />
+
+    <div class="footer-div">
+      <div class="footer-div-buttons">
+        <button>Voltar ao topo</button>
+        <a href="termsofUse.html" target="_blank">
+          <button>Termos de uso</button>
+        </a>
+      </div>
+      <p>Copyright © 2023. Todos os direitos reservados</p>
+    </div>
   </footer>
 </body>
 
