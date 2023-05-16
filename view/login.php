@@ -45,6 +45,21 @@
               </div>
             </article>
           </form>
+
+          <?php
+            //Verificando se o usuário está logado
+            
+            session_start();
+
+            $erro = isset($_SESSION['error']);
+
+            if ($erro) {
+              echo '<p class="erro"> Senha e/ou Documento da conta incorreto, tente novamente.</p>';
+
+              session_destroy();
+            }
+          ?>
+        
       </article>
   </main>
   <!-- NÃO REMOVER ESSA PARTE! -->

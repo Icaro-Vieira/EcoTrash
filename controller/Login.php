@@ -11,10 +11,18 @@
     $login = $usuarioDAO->login($usuario, $senha);
 
     if($login){
-        header("Location: http://localhost/ProjetoAplicado/EcoTrash/view/index.html");
+        session_start();
+        
+        $_SESSION["usuario"] = $usuario;
+        $_SESSION["tipoDeUsuário"] = $usuario->get_tipoUsuario();
+
+        header("Location: http://localhost/ProjetoAplicado/EcoTrash/view/index.php");
     }
     else{
-        header("Location: http://localhost/PA/EcoTrash/emailousenhaerrados.html"); //Aviso na tela
+        session_start();
+        $_SESSION["error"] = "erroLogin"; // Essa session irá permitir que seja exibido um erro na tela
+
+        header("Location: http://localhost/ProjetoAplicado/EcoTrash/view/login.php");
     }
 
 ?>

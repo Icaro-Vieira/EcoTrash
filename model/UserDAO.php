@@ -71,6 +71,15 @@
             return false;
         }
 
+        public function editar_usuario($usuario, $campoDeEdicao){
+
+            //if ($usuario != null && password_verify($senha, $usuario->get_senha())){
+              //  return true;
+            //} 
+
+            return false;
+        }
+
         public function excluir_usuario($documento){    
 
             $delete = $this->banco->prepare("DELETE FROM cadastro WHERE DOCUMENTO=?");
@@ -107,6 +116,28 @@
             $result = $query->fetch(PDO::FETCH_ASSOC);
 
             return ($result['count'] > 1);
+        }
+
+        public function verificarDocumento($documento){    
+
+            $query = $this->banco->prepare("SELECT COUNT(*) as count FROM cadastro WHERE DOCUMENTO = :documento");
+            $query->bindParam(":documento", $documento);
+            $query->execute();
+            
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            return $result['count'];
+        }
+
+        public function verificarEmail($email){    
+
+            $query = $this->banco->prepare("SELECT COUNT(*) as count FROM cadastro WHERE EMAIL = :email");
+            $query->bindParam(":email", $email);
+            $query->execute();
+            
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            return $result['count'];
         }
     }
 
