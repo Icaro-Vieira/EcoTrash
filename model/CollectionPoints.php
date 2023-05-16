@@ -3,14 +3,14 @@
     class CollectionPoints{
         protected $id;
         protected $descricao;
-        protected $idCadastro;
+        protected $documento;
         protected $latitude;
         protected $longitude;
         protected $idEndereco;
 
-        public function __construct($descricao, $idCadastro, $latitude, $longitude, $idEndereco){
+        public function __construct($descricao, $documento , $latitude, $longitude, $idEndereco){
             $this->descricao = $descricao;
-            $this->idCadastro = $idCadastro;
+            $this->documento = $documento;
             $this->latitude = $latitude;
             $this->longitude = $longitude;
             $this->idEndereco = $idEndereco;
@@ -28,8 +28,8 @@
             return $this->descricao;
         }
 
-        public function get_idCadastro(){
-            return $this->idCadastro;
+        public function get_documento(){
+            return $this->documento;
         }
 
         public function get_latitude(){

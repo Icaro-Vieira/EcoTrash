@@ -12,7 +12,9 @@
 
     if($login){
         session_start();
+        
         $_SESSION["usuario"] = $usuario;
+        $_SESSION["tipoDeUsuário"] = $usuario->get_tipoUsuario();
 
         header("Location: http://localhost/ProjetoAplicado/EcoTrash/view/index.php");
     }

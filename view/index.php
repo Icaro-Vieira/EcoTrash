@@ -29,14 +29,30 @@
           $logado = isset($_SESSION['usuario']);
 
           if ($logado) {
-            echo '<a href="perfil.php" class="perfil"><button class="button">Perfil</button></a>';
 
-            echo '<style>.login {display: none; }</style>';
+            $tipoDeUsuário = $_SESSION['tipoDeUsuário'];
+
+            if ($tipoDeUsuário == "J"){
+              echo '<a href="businessProfile.html" class="login">
+                      <button class="button">
+                        <img src="img/icon-business-profile.svg" alt=""> 
+                        Perfil Empresa
+                      </button>
+                    </a>';
+              
+            }else{
+              echo '<a href="userProfile.html" class="login">
+                      <button class="button">
+                        <img src="img/icon-user-profile.svg" alt=""> 
+                        Meu Perfil
+                      </button>
+                    </a>';
+            }
 
             echo '<form action="../controller/ExitUser.php" method="post">
                   <button type="submit">Sair</button>';
           } else {
-            echo '<a href="login.php" class="login"><button class="button">Entrar</button></a>';
+            echo '<a href="login.html" class="login"><button class="button">Entrar</button></a>';
           }
         ?>
 
