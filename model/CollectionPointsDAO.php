@@ -2,7 +2,7 @@
 
     define('HOSTPONTO', 'localhost');
     define('USERPONTO', 'root');
-    define('PASSWORDPONTO', 'Ec@305três*');
+    define('PASSWORDPONTO', '');
     define('DB_NAMEPONTO', 'ecotrash');
 
     require_once("CollectionPoints.php");

@@ -1,3 +1,277 @@
+/* -=-=-=-=-=-=-=-=-=-=- IMPORTING GLOBAL STYLE -=-=-=-=-=-=-=-=-=-=- */
+@import "style.css";
+
 body {
-    background-color: red;
+  margin: 0px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=- HEADER -=-=-=-=-=-=-=-=-=-=- */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.container {
+  box-sizing: border-box;
+  max-width: 1200px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#register {
+  background: linear-gradient(var(--white-color) 690px, var(--medium-green-color) 10px);
+}
+
+/* -=-=-=-=-=-=-=-=-=-=- NAVIGATION -=-=-=-=-=-=-=-=-=-=- */
+
+.navigation {
+  font-family: var(--opnsans-font);
+  font-weight: var(--opnsans-weight-semibold);
+  background-color: var(--medium-green-color);
+
+  height: 60px;
+
+  display: flex;
+}
+
+.navigation a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  text-decoration: none;
+  color: var(--white-color);
+  
+  background: #00281e;
+  border-radius: 100px;
+  padding: 5px 20px;
+  
+  margin-left: 30px;
+}
+
+.navigation ul {
+  flex-direction: row;
+  justify-content: space-between;
+}
+.navigation li {
+  list-style: none;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=- HEADER WRITINGS -=-=-=-=-=-=-=-=-=-=- */
+
+.header-writings {
+  margin-top: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-writings h1 {
+  font-family: var(--mulish-font);
+  font-weight: var(--mulish-weight-black);
+  font-size: 30px;
+}
+
+.header-writings p {
+  font-family: var(--opnsans-font);
+  font-size: 18px;
+  font-weight: var(--opnsans-weight-semibold);
+  color: var(--gray-font-color);
+
+  max-width: 880px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=- FORM USER -=-=-=-=-=-=-=-=-=-=- */
+
+.form-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 780px;
+  height: auto;
+
+  border-radius: 10px;
+  background-color: var(--white-color);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+
+  margin: auto;
+  margin-top: 30px;
+}
+
+input {
+  width: 360px;
+  height: 50px;
+  padding: 14px 20px 14px 20px;
+
+  background-color: var(--gray-input-color);
+  border: 1px solid var(--gray-input-border-color);
+  border-radius: 10px;
+
+  font-size: 16px;
+  outline: none;
+}
+
+input:focus {
+  outline: 1.5px solid var(--light-green-color);
+}
+
+::placeholder {
+  color: var(--gray-font-color);
+  font-weight: var(--opnsans-weight-regular);
+}
+
+form {
+  padding: 30px 20px 0 20px;
+}
+
+.form-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=- INPUT WITH TWO FIELDS -=-=-=-=-=-=-=-=-=-=- */
+
+.two-inputs {
+  display: flex;
+  gap: 20px;
+}
+
+/* Input Maior */
+.medium-input {
+  width: 210px;
+}
+
+/* Input Menor */
+.little-input {
+  width: 130px;
+}
+
+
+/* -=-=-=-=-=-=-=-=-=-=- CHECKBOX AND BUTTON -=-=-=-=-=-=-=-=-=-=- */
+.terms-of-use {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+  text-align: center;
+}
+
+.terms-of-use label {
+  font-size: 16px;
+  font-family: var(--opnsans-font);
+  font-weight: var(--opnsans-weight-regular);
+  color: var(--gray-font-color);
+}
+
+.terms-of-use a {
+  color: var(--light-green-color);
+}
+
+.terms-of-use input[type="checkbox"] {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  width: 15px;
+  height: 15px;
+  outline: none;
+  background-color: var(--light-green-color);
+}
+
+.center-terms-submit {
+  grid-column: 1/-1;
+  gap: 20px;
+  justify-self: center;
+
+  margin-bottom: 16px;
+}
+
+input[type="submit"] {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 11px, 122px, 11px, 122px;
+  border-radius: 50px;
+
+  color: var(--white-color);
+  font-family: var(--opnsans-font);
+  font-size: 16px;
+  font-weight: var(--opnsans-weight-bold);
+
+  background-color: var(--light-green-color);
+  box-shadow: 0px 7px 7px rgba(77, 187, 114, 0.3);
+  outline: none;
+}
+
+input[type="submit"]:hover {
+  filter: brightness(1.2);
+  cursor: pointer;
+}
+
+/* -=-=-=-=-=-=-=-=-=-=- FOOTER -=-=-=-=-=-=-=-=-=-=- */
+
+.footer-bg {
+  background-color: var(--medium-green-color);
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 3fr 5fr 4fr;
+  gap: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.footer-copy {
+  grid-column: 1/-1;
+  margin-top: 40px;
+}
+
+/* -=-=-=-=-=-=- INPUT PASSWORD WITH EYE -=-=-=-=-=-=- */
+.icon-pass {
+  position: relative;
+}
+
+
+.icon-pass input[type="password"] {
+  background: url('img/eye-visibility.svg');
+  /* Define a imagem como background */
+  background-position: right center;
+  background-color: var(--gray-input-color);
+}
+
+.icon-pass .imagem-icon {
+  position: absolute;
+  width: 32px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.icon-pass .imagem-icon2 {
+  position: absolute;
+  width: 32px;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
