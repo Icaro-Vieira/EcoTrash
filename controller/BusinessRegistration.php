@@ -5,13 +5,13 @@
     require_once("../model/Address.php");
     require_once("../model/AddressDAO.php");
 
-    //Inoformações da PJ
+    //Informações da PJ
     $nome = $_POST['nome-empresa']; 
     $documento = $_POST['cnpj']; 
     $email = $_POST['email']; 
     $telefone = $_POST['telefone']; 
     $segmento = $_POST['segmento-empresa']; 
-    $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
+    $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT); //Função utilizada para gerar um hash seguro. A senha é recebida junto ao algoritmo de hashing.
 
     //Informações do endereço
     $logradouro = $_POST['logradouro'];
@@ -30,10 +30,7 @@
 
         session_start();
         
-        $_SESSION["documento"] = $documento;
-
-        header("Location: ../view/documentAlreadyRegistered.php");
-        exit();
+        $_SESSION["erroDocumento"] = $documento;
     } 
     //Irá verificar se o Email já está cadastrado
     elseif ($usuarioDAO->verificarEmail($email) > 0){
@@ -41,10 +38,7 @@
 
         session_start();
         
-        $_SESSION["email"] = $email;
-
-        header("Location: ../view/emailAlreadyRegistered.php");
-        exit();
+        $_SESSION["erroEmail"] = $email;
     }
     else {
 
@@ -63,6 +57,10 @@
 
         if($usuarioDAO->cadastrar($empresa)){
             // Cadastro da empresa bem sucedido, direcionar para o usuário efetuar o login.
+            session_start();
+        
+            $_SESSION["cadastrado"] = "Cadastro realizado com sucesso!";
+
             header("Location: ../view/login.php");
             exit();
         }
@@ -71,4 +69,5 @@
         }
     }
 
+    header("Location: ../view/businessRegistration.php");
 ?>

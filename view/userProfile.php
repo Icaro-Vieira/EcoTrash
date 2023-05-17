@@ -47,7 +47,7 @@
             <form action="../controller/ToEditUser.php" method="POST">
                 <article class="form-column">
                     <label for="">
-                        <input type="text" name="nome" id="nome" placeholder="Nome" required>
+                        <input type="text" name="nome" id="nome" placeholder="Nome" value="<?php echo $usuario->get_nome(); ?>" required>
                     </label>
 
                     <label for="">

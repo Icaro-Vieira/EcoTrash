@@ -39,14 +39,15 @@
 
         $usuario = $_SESSION['usuario'];
 
-        if ($usuario->get_tipoUsuario() == "J") {
+        if ($usuario->juridico()) {
           echo '<a href="businessProfile.php" class="login">
                   <button class="button">
                     <img src="img/icon-business-profile.svg" alt=""> 
                     Perfil Empresa
                   </button>
                 </a>';
-        } else {
+        } 
+        else {
           echo '<a href="userProfile.php" class="login">
                   <button class="button">
                     <img src="img/icon-user-profile.svg" alt=""> 
@@ -54,11 +55,11 @@
                   </button>
                 </a>';
         }
-
         echo '<form action="../controller/ExitUser.php" method="post">
                   <button type="submit" class="button">Sair</button>
               </form>';
-      } else {
+      } 
+      else {
         echo '<a href="login.php" class="login">
                 <button class="button">Entrar</button>
               </a>';

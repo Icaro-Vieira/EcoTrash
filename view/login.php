@@ -1,3 +1,18 @@
+<?php
+
+  session_start();
+
+  $erro = isset($_SESSION['error']);
+
+  $cadastrado = isset($_SESSION['cadastrado']);
+
+  if ($cadastrado) {
+    echo '<script> alert("Cadastro realizado com sucesso!"); </script>';
+  }
+
+  session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -47,16 +62,9 @@
           </form>
 
           <?php
-            //Verificando se o usuário está logado
-            
-            session_start();
-
-            $erro = isset($_SESSION['error']);
-
+            //Verificando se ocorreu erro no usuário ou senha.
             if ($erro) {
               echo '<p class="erro">Usuário ou Senha incorreto, tente novamente!</p>';
-
-              session_destroy();
             }
           ?>
         

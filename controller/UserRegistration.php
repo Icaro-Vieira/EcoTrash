@@ -6,7 +6,8 @@
     require_once("../model/AddressDAO.php");
 
     //Inoformações da PF
-    $nome = ($_POST['nome'] . " " . $_POST['sobrenome']); 
+    $nome = $_POST['nome']; 
+    $sobrenome = $_POST['sobrenome'];
     $documento = $_POST['cpf']; 
     $email = $_POST['email']; 
     $telefone = $_POST['telefone'];  
@@ -23,17 +24,13 @@
 
     $usuarioDAO = new UserDAO();
 
-    //Irá verificar se o CNPJ já está cadastrado
+    //Irá verificar se o CPF já está cadastrado
     if ($usuarioDAO->verificarDocumento($documento) > 0) {
         // CPF já cadastrado, retorna página de erro
 
         session_start();
         
-        $_SESSION["documento"] = $documento;
-
-        header("Location: ../view/documentAlreadyRegistered.php");
-        exit();
-        
+        $_SESSION["erroDocumento"] = $documento;
     } 
     //Irá verificar se o Email já está cadastrado
     elseif ($usuarioDAO->verificarEmail($email) > 0){
@@ -41,10 +38,7 @@
 
         session_start();
         
-        $_SESSION["email"] = $email;
-
-        header("Location: ../view/emailAlreadyRegistered.php");
-        exit();
+        $_SESSION["erroEmail"] = $email;
     }
     else {
 
@@ -54,7 +48,7 @@
 
         if($enderecoDAO->cadastrar($endereco)){
             // Cadastro do endereço bem sucedido, será iniciado o cadastro da empresa
-            $usuario = new PersonalUser($nome, $documento, $email, $telefone, $endereco->get_id(), $senha);
+            $usuario = new PersonalUser($nome, $sobrenome, $documento, $email, $telefone, $endereco->get_id(), $senha);
         }
         else{
             echo "Ocorreu um erro inesperado no cadastro do endereço.";
@@ -63,6 +57,10 @@
 
         if($usuarioDAO->cadastrar($usuario)){
             // Cadastro da Pessoa Física bem sucedido, direcionar para o usuário efetuar o login.
+            session_start();
+        
+            $_SESSION["cadastrado"] = "Cadastro realizado com sucesso!";
+
             header("Location: ../view/login.php");
             exit();
         }
@@ -71,4 +69,5 @@
         }
     }
 
+    header("Location: ../view/userRegistration.php");
 ?>

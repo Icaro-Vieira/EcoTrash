@@ -20,7 +20,7 @@
     }
     else{
         session_start();
-        $_SESSION["error"] = "erroLogin"; // Essa session irá permitir que seja exibido um erro na tela
+        $_SESSION["error"] = true; // Essa session irá permitir que seja exibido um erro na tela
 
         header("Location: ../view/login.php");
     }

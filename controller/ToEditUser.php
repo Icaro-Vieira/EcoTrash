@@ -10,7 +10,8 @@
     $documento = $usuario->get_documento();
 
     //Inoformações para edição do usuário
-    $nome = ($_POST['nome'] . " " . $_POST['sobrenome']); 
+    $nome = $_POST['nome']; 
+    $sobrenome = $_POST['sobrenome'];
     $email = $_POST['email']; 
     $telefone = $_POST['telefone'];  
     $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
@@ -29,7 +30,7 @@
 
     $idEndereco = $usuarioDAO->buscarIdEndereco($documento);
 
-    $editar = $usuarioDAO->editar_usuario($documento, $nome, $email, $telefone, $senha);
+    $editar = $usuarioDAO->editar_usuario($documento, $nome, $sobrenome, $email, $telefone, $senha);
     $editar_endereco = $enderecoDAO->editar_endereco($idEndereco, $logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep);
 
     if($editar){
