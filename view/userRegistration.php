@@ -35,13 +35,11 @@
 <body id="register">
     <nav class="navigation">
         <ul>
-            <li><a href="chooseRegistration.html"><img src="img/arow-back.svg" alt="">Voltar</a></li>
-            <li><img src="img/horizontal-white-logo.svg" alt=""></li>
+            <li><a class="back-button" href="chooseRegistration.html"><img src="img/arow-back.svg" alt="">Voltar</a></li>
+            <li><a href="index.php"><img src="img/horizontal-white-logo.svg" alt=""></a></li>
         </ul>
     </nav>
-    <div>
-        
-    </div>
+
     <article class="header-writings">
         <h1>Faça o seu cadastro.</h1>
         <p>Para cadastrar um endereço de ponto de coleta de resíduos eletrônicos e/ ou gerar rotas até o mesmo

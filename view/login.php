@@ -28,7 +28,7 @@
 <body id="register">
   <nav class="navigation">
       <ul>
-          <li><a href="index.php">Voltar</a></li>
+        <li><a class="back-button" href="index.php"><img src="img/arow-back.svg" alt="">Voltar</a></li>
       </ul>
   </nav>
   <article class="header-writings">

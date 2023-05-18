@@ -35,7 +35,8 @@
 <body id="register">
     <nav class="navigation">
         <ul>
-            <li><a href="chooseRegistration.html">Voltar</a></li>
+            <li><a class="back-button" href="chooseRegistration.html"><img src="img/arow-back.svg" alt="">Voltar</a></li>
+            <li><a href="index.php"><img src="img/horizontal-white-logo.svg" alt=""></a></li>
         </ul>
     </nav>
     <article class="header-writings">
