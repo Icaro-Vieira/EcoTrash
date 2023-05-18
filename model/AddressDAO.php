@@ -58,7 +58,7 @@
 
         public function consultarEndereco($idEndereco){
 
-            $consulta = $this->banco->prepare('SELECT * FROM endereco WHERE ID_ENDERECO = :idEndereco');
+            $consulta = $this->banco->prepare('SELECT * FROM endereco WHERE ID = :idEndereco');
             $consulta->bindParam(':idEndereco', $idEndereco);
             $consulta->execute();
 

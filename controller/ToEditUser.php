@@ -14,7 +14,7 @@
     $sobrenome = $_POST['sobrenome'];
     $email = $_POST['email']; 
     $telefone = $_POST['telefone'];  
-    $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
+    // $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
 
     //Informações para edição do endereço
     $logradouro = $_POST['logradouro'];
@@ -30,7 +30,7 @@
 
     $idEndereco = $usuarioDAO->buscarIdEndereco($documento);
 
-    $editar = $usuarioDAO->editar_usuario($documento, $nome, $sobrenome, $email, $telefone, $senha);
+    $editar = $usuarioDAO->editar_usuario($documento, $nome, $sobrenome, $email, $telefone);
     $editar_endereco = $enderecoDAO->editar_endereco($idEndereco, $logradouro, $numero, $complemento, $bairro, $cidade, $estado, $cep);
 
     if($editar){
@@ -41,6 +41,10 @@
 
             $usuario = $usuarioDAO->consultar_documento($documento);
             $_SESSION["usuario"] = $usuario;
+
+            $idEndereco = $usuarioDAO->buscarIdEndereco($documento);
+            $endereco = $enderecoDAO->consultarEndereco($idEndereco);
+            $_SESSION["endereco"] = $endereco;
 
             $_SESSION["atualizado"] = "Perfil atualizado com sucesso!";
 

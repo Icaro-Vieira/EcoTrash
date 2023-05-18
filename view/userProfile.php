@@ -1,28 +1,33 @@
 <?php
 
-require_once("../model/PersonalUser.php");
-require_once("../model/BusinessUser.php");
-require_once("../model/UserDAO.php");
+  require_once("../model/PersonalUser.php");
+  require_once("../model/BusinessUser.php");
+  require_once("../model/UserDAO.php");
+  require_once("../model/Address.php");
+  require_once("../model/AddressDAO.php");
 
-session_start();
 
-$logado = isset($_SESSION['usuario']);
-$atualizado = isset($_SESSION['atualizado']);
+  session_start();
 
-if (!$logado) {
+  $logado = isset($_SESSION['usuario']);
+  $atualizado = isset($_SESSION['atualizado']);
 
+  if(!$logado){
+    
     header("Location: login.php");
     exit();
-} else {
+  }
+  else{
 
-    if ($atualizado) {
-        echo '<script> alert("Perfil atualizado com sucesso!"); </script>';
+    if($atualizado){
+      echo '<script> alert("Perfil atualizado com sucesso!"); </script>';
     }
 
     $usuario = $_SESSION['usuario'];
-}
+    $endereco = $_SESSION['endereco'];
+  }
 
-unset($_SESSION['atualizado']);
+  unset($_SESSION['atualizado']);
 ?>
 
 <!DOCTYPE html>
@@ -37,197 +42,98 @@ unset($_SESSION['atualizado']);
     <title>EcoTrash - Meu Perfil</title>
 </head>
 
-<body>
+<body id="register">
     <nav class="navigation">
         <ul>
-            <li><a href="index.php"><img src="img/arow-back.svg" alt="">Voltar</a></li>
-            <li><img src="img/horizontal-white-logo.svg" alt=""></li>
+            <li><a class="back-button" href="index.php"><img src="img/arow-back.svg" alt="">Voltar</a></li>
+            <li><a href="index.php"><img src="img/horizontal-white-logo.svg" alt=""></a></li>
         </ul>
     </nav>
-
-    <div>
-        <p>Olá bem vindo ao seu perfil do EcoTrash, <?php echo $usuario->get_nome() . " " . $usuario->get_sobrenome(); ?></p>
-    </div>
-
-    <article class="form-bg">
-        <form action="../controller/ToEditUser.php" method="POST">
-            <article class="form-column">
-                <label for="">
-                    <input type="text" name="nome" id="nome" placeholder="Nome" value="<?php echo $usuario->get_nome(); ?>" required>
-                </label>
-
-                <label for="">
-                    <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
-                </label>
-
-                <label for="">
-                    <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" required>
-                </label>
-
-                <label for="">
-                    <input type="text" name="cep" id="cep" placeholder="CEP" autocomplete="off" maxlength="9" required>
-                </label>
-
-                <label for="">
-                    <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required>
-                </label>
-
-                <label for="">
-                    <input type="text" name="complemento" placeholder="Complemento">
-                </label>
-
-                <article class="two-inputs">
-                    <label for="">
-                        <input type="text" name="logradouro" id="logradouro" class="medium-input" placeholder="Logradouro" required>
-                    </label>
-
-                    <label for="">
-                        <input type="number" name="numero" class="little-input" placeholder="Número" maxlength="15" min="0" autocomplete="off" required>
-                    </label>
-                </article>
-
-                <label for="">
-                    <input type="text" name="bairro" id="bairro" placeholder="Bairro">
-                </label>
-
-                <article class="two-inputs">
-                    <label for="">
-                        <input type="text" name="cidade" id="cidade" class="medium-input" placeholder="Cidade">
-                    </label>
-
-                    <label for="">
-                        <input type="text" name="estado" id="estado" class="little-input" placeholder="Estado">
-                    </label>
-                </article>
-
-                <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->
-                <label for="" class="icon-pass">
-                    <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="8" required>
-                    <img class="imagem-icon" src="img/eye-visibility-off.svg" alt="mostrar senha">
-                </label>
-
-                <label for="" class="icon-pass">
-                    <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar Senha" maxlength="8" required>
-                    <img class="imagem-icon2" src="img/eye-visibility-off.svg" alt="mostrar senha">
-                </label>
-
-                <input type="submit" value="Editar">
-                <a href="../controller/DeleteUser.php">
-                    <button class="button">
-                        Deletar
-                    </button>
-                </a>
-            </article>
-        </form>
-    </article>
-    <footer class="footer-bg">
-        <div class="footer container">
-            <p class="footer-copy">⠀⠀⠀⠀⠀⠀</p>
-        </div>
-    </footer>
-
-    <script type="module" src="assets/js/script.js"></script>
-    <script src="assets/js/modules/eye-button.js"></script>
-    <script src="assets/js/modules/api-cep.js"></script>
-    <script src="assets/js/modules/input-mask.js"></script>
-</body>
-<!-- 
-<body id="register">
-
-    <article class="header-writings">
-        <h1>Faça o seu cadastro.</h1>
-        <p>Para cadastrar um endereço de ponto de coleta de resíduos eletrônicos e/ ou gerar rotas até o mesmo
-            preencha os campos abaixo corretamente.</p>
-    </article>
-    <main>
-        <article class="form-bg">
-            <form action="../controller/UserRegistration.php" method="POST">
+    <div class="bg-nav"></div>
+    <div class="profile-divisor">
+        <article class="info-user">
+            <img src="img/icon-user.svg" alt="">
+            <h1>
+                <?php 
+                    echo $usuario->get_nome() . " " . $usuario->get_sobrenome(); 
+                ?>
+            </h1>
+            <p>
+                <?php 
+                    echo $usuario->get_documento(); 
+                ?>
+            </p>            
+            <a href="../controller/DeleteUser.php">
+                <button class="button-del">
+                    Deletar conta
+                </button>
+            </a>
+        </article>
+    
+        <article class="form-user-bg">
+            <form action="../controller/ToEditUser.php" method="POST">
                 <article class="form-column">
                     <label for="">
-                        <input type="text" name="nome" id="nome" placeholder="Nome" required>
+                        <input type="text" name="nome" id="nome" placeholder="Nome" value="<?php echo $usuario->get_nome(); ?>" required>
                     </label>
-
+    
                     <label for="">
-                        <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
+                        <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" value="<?php echo $usuario->get_sobrenome(); ?>" required>
                     </label>
-
+    
                     <label for="">
-                        <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" required>
+                        <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" value="<?php echo $usuario->get_email(); ?>"required>
                     </label>
-
+    
                     <label for="">
-                        <input type="text" name="cpf" id="cpf" placeholder="CPF" autocomplete="off" maxlength="14" required>
+                        <input type="text" name="cep" id="cep" placeholder="CEP" autocomplete="off" value="<?php echo $endereco->get_cep(); ?>" maxlength="9" required>
                     </label>
-
+    
                     <label for="">
-                        <input type="text" name="cep" id="cep" placeholder="CEP" autocomplete="off" maxlength="9" required>
+                        <input type="tel" name="telefone" id="telefone" placeholder="Telefone"  value="<?php echo $usuario->get_telefone(); ?>" required>
                     </label>
-
+    
                     <label for="">
-                        <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required>
+                        <input type="text" name="complemento" placeholder="Complemento" value="<?php echo $endereco->get_complemento(); ?>" >
                     </label>
-
-                    <label for="">
-                        <input type="text" name="complemento" placeholder="Complemento">
-                    </label>
-
+    
                     <article class="two-inputs">
                         <label for="">
-                            <input type="text" name="logradouro" id="logradouro" class="medium-input" placeholder="Logradouro" required>
+                            <input type="text" name="logradouro" id="logradouro" class="medium-input" placeholder="Logradouro" value="<?php echo $endereco->get_logradouro(); ?>"  required>
                         </label>
-
+    
                         <label for="">
-                            <input type="number" name="numero" class="little-input" placeholder="Número" maxlength="15" min="0" autocomplete="off" required>
+                            <input type="number" name="numero" class="little-input" placeholder="Número" maxlength="15" min="0" autocomplete="off"  value="<?php echo $endereco->get_numero(); ?>" required>
                         </label>
                     </article>
-
+    
                     <label for="">
-                        <input type="text" name="bairro" id="bairro" placeholder="Bairro">
+                        <input type="text" name="bairro" id="bairro" placeholder="Bairro" value="<?php echo $endereco->get_bairro(); ?>" >
                     </label>
-
-                    <article class="two-inputs">
-                        <label for="">
-                            <input type="text" name="cidade" id="cidade" class="medium-input" placeholder="Cidade">
-                        </label>
-
-                        <label for="">
-                            <input type="text" name="estado" id="estado" class="little-input" placeholder="Estado">
-                        </label>
-                    </article>
-
-                    <label for="" class="icon-pass">
-                        <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="8" required>
-                        <img class="imagem-icon" src="img/eye-visibility-off.svg" alt="mostrar senha">
+    
+                    <label for="">
+                        <input type="text" name="cidade" id="cidade" placeholder="Cidade" value="<?php echo $endereco->get_cidade()?>">
                     </label>
-
-                    <label for="" class="icon-pass">
-                        <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirmar Senha" maxlength="8" required>
-                        <img class="imagem-icon2" src="img/eye-visibility-off.svg" alt="mostrar senha">
+    
+                    <label for="">
+                        <input type="text" name="estado" id="estado" placeholder="Estado" value="<?php echo $endereco->get_estado()?>">
                     </label>
-
+    
                     <article class="center-terms-submit">
                         <article class="terms-of-use">
                             <input type="checkbox" name="termos-aceito" id="" required>
-                            <label for="">Declaro que li e aceito os <span><a href="termsofUse.html" target="_blank">termos de uso</a></span></label>
+                            <label for="">Confirmo que verifiquei meus dados!</span></label>
                         </article>
-                        <input type="submit" value="Cadastrar">
+                        <input type="submit" value="Editar">
                     </article>
+    
                 </article>
             </form>
         </article>
-    </main>
-    
-    <footer class="footer-bg">
-        <div class="footer container">
-            <p class="footer-copy">⠀⠀⠀⠀⠀⠀</p>
-        </div>
-    </footer>
+    </div>
 
     <script type="module" src="assets/js/script.js"></script>
     <script src="assets/js/modules/eye-button.js"></script>
-    <script src="assets/js/modules/api-cep.js"></script>
     <script src="assets/js/modules/input-mask.js"></script>
-</body> -->
-
-
-</html>
+</body>
+</html>/

@@ -41,10 +41,10 @@
             return false;
         }
 
-        public function editar_usuario($documento, $nome, $sobrenome, $email, $telefone, $senha){
+        public function editar_usuario($documento, $nome, $sobrenome, $email, $telefone){
 
-            $update = $this->banco->prepare("UPDATE cadastro SET NOME=?, SOBRENOME=?, EMAIL=?, TELEFONE =?, SENHA=? WHERE DOCUMENTO=?");
-            $editar_usuario = array($nome, $sobrenome, $email, $telefone, $senha, $documento);
+            $update = $this->banco->prepare("UPDATE cadastro SET NOME=?, SOBRENOME=?, EMAIL=?, TELEFONE =? WHERE DOCUMENTO=?");
+            $editar_usuario = array($nome, $sobrenome, $email, $telefone, $documento);
 
             if($update->execute($editar_usuario)){
                 return true;

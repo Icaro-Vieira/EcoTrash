@@ -74,7 +74,8 @@
         <input type="text" placeholder="Digite o tipo de material que deseja descartar..." />
         <button type="submit" class="search-button"><img src="img/icon-search.svg" /></button>
       </form>
-      <div class="map"></div>
+      <!-- <div class="map"></div> -->
+      <img src="img/Mapa.png" class="map" alt="">
     </section>
 
     <h3 id="artigo">Artigos</h3>

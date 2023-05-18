@@ -49,7 +49,7 @@
               
               <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->
               <label for="" class="icon-pass">
-                <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="8" autocomplete="off" required>
+                <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="8" autocomplete="off" required autocomplete="off">
                 <img class="imagem-icon" src="img/eye-visibility-off.svg" alt="mostrar senha">
               </label>
               
