@@ -74,42 +74,44 @@
             <form action="../controller/ToEditUser.php" method="POST">
                 <!-- Falta Editar o CSS dos Botões e fazer paginação, WIP - 18/05/23 -->
                 <div class="top-buttons-profile">
-                    <a href="userProfile.php" class="edit-button active">Editar Perfil</a>
-                    <a href="requestRegister.php" class="edit-button border-bottom">Solicitar Cadastro</a>
+                    <a href="userProfile.php" class="edit-button border-bottom">Editar Perfil</a>
+                    <a href="requestRegister.php" class="edit-button active">Solicitar Cadastro</a>
                 </div>
-
+                <header class="">
+                    <h1>Preencha os dados abaixo atentamente.</h1>
+                </header>
                 <article class="form-column">
                     <label for="">
-                        <input type="text" name="nome" id="nome" placeholder="Nome" value="<?php echo $usuario->get_nome(); ?>" required>
+                        <input type="text" name="nome" id="nome" placeholder="Nome" required>
                     </label>
     
                     <label for="">
-                        <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" value="<?php echo $usuario->get_sobrenome(); ?>" required>
+                        <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
                     </label>
     
                     <label for="">
-                        <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" value="<?php echo $usuario->get_email(); ?>"required>
+                        <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" required>
                     </label>
     
                     <label for="">
-                        <input type="text" name="cep" id="cep" placeholder="CEP" autocomplete="off" value="<?php echo $endereco->get_cep(); ?>" maxlength="9" required>
+                        <input type="text" name="cep" id="cep" placeholder="CEP" autocomplete="off" maxlength="9" required>
                     </label>
     
                     <label for="">
-                        <input type="tel" name="telefone" id="telefone" placeholder="Telefone"  value="<?php echo $usuario->get_telefone(); ?>" required>
+                        <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required>
                     </label>
     
                     <label for="">
-                        <input type="text" name="complemento" placeholder="Complemento" value="<?php echo $endereco->get_complemento(); ?>" >
+                        <input type="text" name="complemento" placeholder="Complemento">
                     </label>
     
                     <article class="two-inputs">
                         <label for="">
-                            <input type="text" name="logradouro" id="logradouro" class="medium-input" placeholder="Logradouro" value="<?php echo $endereco->get_logradouro(); ?>"  required>
+                            <input type="text" name="logradouro" id="logradouro" class="medium-input" placeholder="Logradouro" required>
                         </label>
     
                         <label for="">
-                            <input type="number" name="numero" class="little-input" placeholder="Número" maxlength="15" min="0" autocomplete="off"  value="<?php echo $endereco->get_numero(); ?>" required>
+                            <input type="number" name="numero" class="little-input" placeholder="Número" maxlength="15" min="0" autocomplete="off" required>
                         </label>
                     </article>
     
