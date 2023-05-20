@@ -72,7 +72,6 @@
     
         <article class="form-user-bg">
             <form action="../controller/ToEditUser.php" method="POST">
-                <!-- Falta Editar o CSS dos Botões e fazer paginação, WIP - 18/05/23 -->
                 <div class="top-buttons-profile">
                     <a href="userProfile.php" class="edit-button border-bottom">Editar Perfil</a>
                     <a href="requestRegister.php" class="edit-button active">Solicitar Cadastro</a>
@@ -82,66 +81,76 @@
                 </header>
                 <article class="form-column">
                     <label for="">
-                        <input type="text" name="nome" id="nome" placeholder="Nome" required>
+                        <input type="text" name="nomePontoSc" id="nomePontoSc" placeholder="Nome do ponto" required>
                     </label>
     
                     <label for="">
-                        <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome" required>
+                        <input type="text" name="cepPontoSc" id="cepSc" placeholder="CEP" autocomplete="off" maxlength="9" required>
                     </label>
-    
+                    
                     <label for="">
-                        <input type="email" name="email" id="email" placeholder="Email" autocomplete="off" required>
+                        <input type="text" name="logradouroPontoSc" id="logradouroPontoSc" placeholder="Logradouro" required>
                     </label>
-    
-                    <label for="">
-                        <input type="text" name="cep" id="cep" placeholder="CEP" autocomplete="off" maxlength="9" required>
-                    </label>
-    
-                    <label for="">
-                        <input type="tel" name="telefone" id="telefone" placeholder="Telefone" required>
-                    </label>
-    
-                    <label for="">
-                        <input type="text" name="complemento" placeholder="Complemento">
-                    </label>
-    
+                    
                     <article class="two-inputs">
                         <label for="">
-                            <input type="text" name="logradouro" id="logradouro" class="medium-input" placeholder="Logradouro" required>
+                            <input type="text" name="bairroPontoSc" id="bairroPontoSc" class="medium-input" placeholder="Bairro" required>
                         </label>
     
                         <label for="">
-                            <input type="number" name="numero" class="little-input" placeholder="Número" maxlength="15" min="0" autocomplete="off" required>
+                            <input type="number" name="numeroPontoSc" class="little-input" placeholder="Número" maxlength="15" min="0" autocomplete="off" required>
                         </label>
                     </article>
-    
-                    <label for="">
-                        <input type="text" name="bairro" id="bairro" placeholder="Bairro" value="<?php echo $endereco->get_bairro(); ?>" >
-                    </label>
-    
-                    <label for="">
-                        <input type="text" name="cidade" id="cidade" placeholder="Cidade" value="<?php echo $endereco->get_cidade()?>">
-                    </label>
-    
-                    <label for="">
-                        <input type="text" name="estado" id="estado" placeholder="Estado" value="<?php echo $endereco->get_estado()?>">
-                    </label>
-    
-                    <article class="center-terms-submit">
-                        <article class="terms-of-use">
-                            <input type="checkbox" name="confirm-edition" required>
-                            <label for="">Confirmo que verifiquei meus dados!</span></label>
+                    <article class="request-register-options">
+                        <article class="options-collect">
+                            <h2>Selecione os materiais que este ponto coleta:</h2>
+                            <div class="options-collect-box">
+                                <div>
+                                    <label for="Bateriasepilhas">
+                                        <input type="checkbox" name="bateriasEpilhas" id="Bateriasepilhas" value="lixo">
+                                        Baterias e pilhas
+                                    </label>
+                                    
+                                    <label for="celulares">
+                                        <input type="checkbox" name="celulares" id="celulares" value="lixo">
+                                        Celulares, smartphones e tables
+                                    </label>
+
+                                    <label for="cameras">
+                                        <input type="checkbox" name="cameras" id="cameras" value="lixo">
+                                        Cameras digitais e filmadoras
+                                    </label>
+                                </div>
+
+                                <div>
+                                    <label for="impressoras">
+                                        <input type="checkbox" id="impressoras" id="impressoras" value="lixo">
+                                        Impressoras e Scanners
+                                    </label>
+
+                                    <label for="eletrodomestico">
+                                        <input type="checkbox" name="eletrodomestico" id="eletrodomestico" value="lixo">
+                                        Eletrodomésticos
+                                    </label>
+                                    
+                                    <label for="outros">
+                                        <input type="checkbox" name="outros" id="outros" value="lixo">
+                                        Outros
+                                    </label>
+                                </div>
+                            </div>
                         </article>
-                        <input type="submit" value="Editar">
-                    </article>
     
+                    </article>
+                    <div class="center-terms-submit">
+                        <input type="submit" value="Solicitar cadastro do Ponto de coleta">
+                    </div>
                 </article>
             </form>
         </article>
     </div>
 
     <script type="module" src="assets/js/script.js"></script>
-    <!-- <script src="assets/js/modules/eye-button.js"></script>
-    <script src="assets/js/modules/input-mask.js"></script> -->
+    <script src="assets/js/modules/api-cep-ponto-sc.js"></script>
 </body>
 </html>

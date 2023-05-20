@@ -72,7 +72,6 @@
     
         <article class="form-user-bg">
             <form action="../controller/ToEditUser.php" method="POST">
-                <!-- Falta Editar o CSS dos Botões e fazer paginação, WIP - 18/05/23 -->
                 <div class="top-buttons-profile">
                     <a href="userProfile.php" class="edit-button active">Editar Perfil</a>
                     <a href="requestRegister.php" class="edit-button border-bottom">Solicitar Cadastro</a>
@@ -139,7 +138,6 @@
     </div>
 
     <script type="module" src="assets/js/script.js"></script>
-    <!-- <script src="assets/js/modules/eye-button.js"></script>
-    <script src="assets/js/modules/input-mask.js"></script> -->
+    <script src="assets/js/modules/api-cep.js"></script>
 </body>
 </html>
