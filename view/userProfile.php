@@ -63,7 +63,7 @@
                     echo $usuario->get_documento(); 
                 ?>
             </p>            
-            <a href="../controller/DeleteUser.php">
+            <a class="a-button-del" href="../controller/DeleteUser.php">
                 <button class="button-del">
                     Deletar conta
                 </button>
@@ -72,6 +72,12 @@
     
         <article class="form-user-bg">
             <form action="../controller/ToEditUser.php" method="POST">
+                <!-- Falta Editar o CSS dos Botões e fazer paginação, WIP - 18/05/23 -->
+                <div class="top-buttons-profile">
+                    <button class="edit-button active">Editar Perfil</button>
+                    <button class="request-register">Solicitar Cadastro</button>
+                </div>
+
                 <article class="form-column">
                     <label for="">
                         <input type="text" name="nome" id="nome" placeholder="Nome" value="<?php echo $usuario->get_nome(); ?>" required>
@@ -136,4 +142,4 @@
     <script src="assets/js/modules/eye-button.js"></script>
     <script src="assets/js/modules/input-mask.js"></script>
 </body>
-</html>/
+</html>

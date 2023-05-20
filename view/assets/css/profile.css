@@ -95,22 +95,6 @@ body {
   max-width: 880px;
 }
 
-.button-del {
-  padding: 10px 25px;
-  border-radius: 100px;
-  border: 1px solid #ec0f32;
-  background: #fff;
-  color: #ec0f32;
-  transition: 0.3s;
-}
-
-.button-del:hover {
-  transition: 0.3s;
-  cursor: pointer;
-  background: #ec0f32;
-  color: #fff;
-}
-
 .header-writings span {
   font-family: var(--opnsans-font);
   font-size: 18px;
@@ -352,21 +336,24 @@ input[type="submit"]:hover {
   margin-top: 5px;
 }
 
+.a-button-del {
+  margin-top: 250px
+}
+
 .button-del {
   padding: 10px 25px;
   border-radius: 100px;
-  border: 1px solid #ec0f32;
-  background: #fff;
-  color: #ec0f32;
+  border: 1px solid var(--red-color);
+  background: var(--white-color);
+  color: var(--red-color);
   transition: 0.3s;
-  margin-top: 250px;
 }
 
 .button-del:hover {
   transition: 0.3s;
   cursor: pointer;
-  background: #ec0f32;
-  color: #fff;
+  background: var(--red-color);
+  color: var(--white-color);
 }
 
 
@@ -382,4 +369,26 @@ input[type="submit"]:hover {
   background-color: var(--white-color);
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   margin: 30px auto auto 25px;
+}
+
+.top-buttons-profile {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 10px;
+  margin: -10px auto 20px auto;
+  border-bottom: 1px solid #3131f0;
+  gap: 20px;
+}
+
+.edit-button {
+  padding: 10px 15px;
+  background: transparent;
+  border: none;
+  color: green;
+  font-weight: bold;
+}
+
+.active {
+  border-bottom: 1px solid green;
 }
