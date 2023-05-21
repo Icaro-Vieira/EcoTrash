@@ -63,10 +63,8 @@
                     echo $usuario->get_documento(); 
                 ?>
             </p>            
-            <a class="a-button-del" href="../controller/DeleteUser.php">
-                <button class="button-del">
-                    Deletar conta
-                </button>
+            <a class="a-button-del button-del" href="../controller/DeleteUser.php">
+                Deletar conta
             </a>
         </article>
     
