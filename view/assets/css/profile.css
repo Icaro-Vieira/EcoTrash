@@ -506,3 +506,25 @@ tr:nth-child(even) {
   transition: .3s;
   background-color: var(--red-color);
 }
+
+#confirmationModal {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 300px;
+  height: 400px;
+
+  border: 1px solid var(--gray-line-profile);
+}
+
+#confirmationModal p {
+  font-size: 20px;
+  color: red;
+  text-align: center;
+}
+
+#confirmationModal input {
+  
+}
