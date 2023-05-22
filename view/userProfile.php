@@ -63,10 +63,9 @@
                     echo $usuario->get_documento(); 
                 ?>
             </p>            
-            <a class="a-button-del" href="../controller/DeleteUser.php">
-                <button class="button-del">
-                    Deletar conta
-                </button>
+
+            <a class="a-button-del button-del" href="#" onclick="showConfirmationAlert()">
+                Deletar conta
             </a>
         </article>
     
@@ -139,5 +138,20 @@
 
     <script type="module" src="assets/js/script.js"></script>
     <script src="assets/js/modules/api-cep.js"></script>
+
+    <script>
+        function showConfirmationAlert() {
+            // Exibir o alerta de confirmação
+            var confirmation = prompt('Digite "DELETAR MINHA CONTA" para confirmar:');
+
+            if (confirmation === 'DELETAR MINHA CONTA') {
+                // Chamar a função DeleteUser.php ou redirecionar
+                window.location.href = '../controller/DeleteUser.php';
+            } else {
+                // Valor incorreto, exibir mensagem de erro
+                alert('Digite corretamente: "DELETAR MINHA CONTA", caso queira deletar sua conta!');
+            }
+        }
+    </script>
 </body>
 </html>

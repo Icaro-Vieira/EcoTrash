@@ -52,10 +52,10 @@
     <div class="bg-nav"></div>
     <div class="profile-divisor">
         <article class="info-user">
-            <img src="img/icon-user.svg" alt="">
+            <img src="img/icon-business.svg" alt="">
             <h1>
                 <?php 
-                    echo $usuario->get_nome() . " " . $usuario->get_sobrenome(); 
+                    echo $usuario->get_nome(); 
                 ?>
             </h1>
             <p>
@@ -71,8 +71,8 @@
         <article class="form-user-bg">
             <form action="../controller/ToEditUser.php" method="POST">
                 <div class="top-buttons-profile">
-                    <a href="userProfile.php" class="edit-button border-bottom">Editar Perfil</a>
-                    <a href="requestRegister.php" class="edit-button active">Solicitar Cadastro</a>
+                    <a href="businessProfile.php" class="edit-button border-bottom">Pontos Cadastrados</a>
+                    <a href="requestRegister.php" class="edit-button active">Cadastrar Pontos</a>
                 </div>
                 <header class="">
                     <h1>Preencha os dados abaixo atentamente.</h1>
@@ -136,7 +136,7 @@
     
                     </article>
                     <div class="center-terms-submit">
-                        <input type="submit" value="Solicitar cadastro do Ponto de coleta">
+                        <input type="submit" value="Adicionar Ponto">
                     </div>
                 </article>
             </form>
