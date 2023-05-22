@@ -21,15 +21,17 @@
 
         public function cadastrar($usuario){
 
-            $inserir = $this->banco->prepare("INSERT INTO cadastro (NOME, DOCUMENTO, EMAIL, TELEFONE, SENHA, ID_ENDERECO, TIPO_CADASTRO, SEGMENTO) VALUES (?,?,?,?,?,?,?,?);");
+            $inserir = $this->banco->prepare("INSERT INTO cadastro (NOME, DOCUMENTO, EMAIL, TELEFONE, SENHA, ID_ENDERECO, TIPO_CADASTRO, SEGMENTO, SOBRENOME) VALUES (?,?,?,?,?,?,?,?,?);");
 
             $novo_usuario = array($usuario->get_nome(), $usuario->get_documento(), $usuario->get_email(), $usuario->get_telefone(), $usuario->get_senha(), $usuario->get_idEndereco(), $usuario->get_tipoUsuario());
 
-            if($usuario->get_tipoUsuario() == 'F'){
-                array_push($novo_usuario, NULL); // Segmento
+            if($usuario->juridico()){
+                array_push($novo_usuario, $usuario->get_segmento());
+                array_push($novo_usuario, NULL); // Sobrenome
             }
             else{
-                array_push($novo_usuario, $usuario->get_segmento());
+                array_push($novo_usuario, NULL); // Segmento
+                array_push($novo_usuario, $usuario->get_sobrenome());
             }
 
             if($inserir->execute($novo_usuario)){
@@ -39,6 +41,19 @@
             return false;
         }
 
+        public function editar_usuario($documento, $nome, $sobrenome, $email, $telefone){
+
+            $update = $this->banco->prepare("UPDATE cadastro SET NOME=?, SOBRENOME=?, EMAIL=?, TELEFONE =? WHERE DOCUMENTO=?");
+            $editar_usuario = array($nome, $sobrenome, $email, $telefone, $documento);
+
+            if($update->execute($editar_usuario)){
+                return true;
+            }
+            
+            return false;
+        }
+
+        // Função irá retornar todas as informações do usuário com base em seu documento (CFP / CNPJ)
         public function consultar_documento($documento){
 
             $consulta = $this->banco->prepare('SELECT * FROM cadastro WHERE DOCUMENTO = :documento');
@@ -51,15 +66,19 @@
                 return null;
             }
 
-            // Verifica se o cadastro é de uma pessoa física ou jurídica
+            // Verifica se o cadastro é de uma pessoa física ou jurídica, assim será criado um usuário para retornar da busca
             if ($usuario->TIPO_CADASTRO == 'F') {
-                $usuario = new PersonalUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SENHA);
+                $usuarioConsultado = new PersonalUser($usuario->NOME, $usuario->SOBRENOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SENHA);
+
+                $usuarioConsultado->set_id($usuario->ID);
             } 
             else {
-                $usuario = new BusinessUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SEGMENTO, $usuario->SENHA);
+                $usuarioConsultado = new BusinessUser($usuario->NOME, $usuario->DOCUMENTO, $usuario->EMAIL, $usuario->TELEFONE, $usuario->ID_ENDERECO, $usuario->SEGMENTO, $usuario->SENHA);
+
+                $usuarioConsultado->set_id($usuario->ID);
             }
 
-            return $usuario;
+            return $usuarioConsultado;
         }
 
         public function login($usuario, $senha){
@@ -67,15 +86,6 @@
             if ($usuario != null && password_verify($senha, $usuario->get_senha())){
                 return true;
             } 
-
-            return false;
-        }
-
-        public function editar_usuario($usuario, $campoDeEdicao){
-
-            //if ($usuario != null && password_verify($senha, $usuario->get_senha())){
-              //  return true;
-            //} 
 
             return false;
         }
@@ -105,17 +115,6 @@
             }
             
             return $idEndereco->ID_ENDERECO;
-        }
-
-        public function verificarEnderecoEmOutroCadastro($idEndereco){    
-
-            $query = $this->banco->prepare("SELECT COUNT(*) as count FROM cadastro WHERE ID_ENDERECO = :id_endereco");
-            $query->bindParam(":id_endereco", $id_endereco);
-            $query->execute();
-
-            $result = $query->fetch(PDO::FETCH_ASSOC);
-
-            return ($result['count'] > 1);
         }
 
         public function verificarDocumento($documento){    

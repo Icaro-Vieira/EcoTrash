@@ -46,14 +46,26 @@ main {
   height: 60px;
 
   display: flex;
-  align-items: center;
 }
 
-.navigation a {
-  list-style: none;
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
   text-decoration: none;
   color: var(--white-color);
-  margin-left: 30px;
+
+  background: #00281e;
+  border-radius: 100px;
+  padding: 5px 20px;
+}
+
+.navigation ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 400%;
 }
 
 .navigation li {

@@ -55,6 +55,10 @@
         public function get_tipoUsuario(){
             return $this->tipoUsuario;
         }
+
+        public function juridico(){
+            if ($this->get_tipoUsuario() == "J") return true;
+        }
     }
 
 ?>

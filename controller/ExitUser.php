@@ -1,8 +1,11 @@
 <?php
+
     session_start();
+    session_unset();
     session_destroy();
 
-    header("Location: http://localhost/ProjetoAplicado/EcoTrash/view/index.php");
+    header("Location: ../view/index.php");
     
     exit();
+
 ?>

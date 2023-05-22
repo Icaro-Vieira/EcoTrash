@@ -1,3 +1,24 @@
+<?php
+
+  require_once("../model/PersonalUser.php");
+  require_once("../model/BusinessUser.php");
+  require_once("../model/UserDAO.php");
+
+  session_start();
+
+  $logado = isset($_SESSION['usuario']);
+
+  if(!$logado){
+    
+    header("Location: login.php");
+    exit();
+  }
+  else{
+    $usuario = $_SESSION['usuario'];
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -11,6 +32,14 @@
 </head>
 
 <body>
+
+<p><?php echo $usuario->get_documento(); ?></p>
+
+<a href="../controller/DeleteUser.php">
+  <button class="button">
+    Deletar
+  </button>
+</a>
   
 </body>
 

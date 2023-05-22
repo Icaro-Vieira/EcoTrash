@@ -8,7 +8,7 @@
         protected $longitude;
         protected $idEndereco;
 
-        public function __construct($descricao, $documento , $latitude, $longitude, $idEndereco){
+        public function __construct($descricao, $documento, $latitude, $longitude, $idEndereco){
             $this->descricao = $descricao;
             $this->documento = $documento;
             $this->latitude = $latitude;
