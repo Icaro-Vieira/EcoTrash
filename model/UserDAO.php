@@ -2,8 +2,8 @@
 
     define('HOST', 'localhost');
     define('USER', 'root');
-    define('PASSWORD', '');
-    define('DB_NAME', 'ecotrash');
+    define('PASSWORD', 'Ec@305três*');
+    define('DB_NAME', 'ecotrash2');
 
     require_once("PersonalUser.php");
     require_once("BusinessUser.php");

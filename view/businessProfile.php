@@ -1,24 +1,23 @@
 <?php
 
-require_once("../model/PersonalUser.php");
-require_once("../model/BusinessUser.php");
-require_once("../model/UserDAO.php");
-require_once("../model/Address.php");
-require_once("../model/AddressDAO.php");
+  require_once("../model/PersonalUser.php");
+  require_once("../model/BusinessUser.php");
+  require_once("../model/UserDAO.php");
+  require_once("../model/Address.php");
+  require_once("../model/AddressDAO.php");
 
 
-session_start();
+  session_start();
 
-$logado = isset($_SESSION['usuario']);
+  $logado = isset($_SESSION['usuario']);
 
-if (!$logado) {
+  if (!$logado) {
 
-  header("Location: login.php");
-  exit();
-} else {
-  $usuario = $_SESSION['usuario'];
-  $endereco = $_SESSION['endereco'];
-}
+    header("Location: login.php");
+    exit();
+  } else {
+    $usuario = $_SESSION['usuario'];
+  }
 
 ?>
 
@@ -75,9 +74,9 @@ if (!$logado) {
             <th>Editar</th>
           </tr>
           <tr>
-            <td><?php echo $usuario->get_nome(); ?></td>
-            <td><?php echo $endereco->get_logradouro(); ?></td>
-            <td><?php echo $endereco->get_cep(); ?></td>
+            <td><?php echo $ponto->get_descricao(); ?></td>
+            <td><?php echo $ponto->get_logradouro(); ?></td>
+            <td><?php echo $ponto->get_cep(); ?></td>
             <td> <button class="trash-button"><img src="img/trash-icon.svg"></button> </td>
           </tr>
           <tr>

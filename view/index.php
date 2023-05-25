@@ -1,12 +1,77 @@
 <?php
-require_once("../model/PersonalUser.php");
-require_once("../model/BusinessUser.php");
-require_once("../model/UserDAO.php");
+  require_once("../model/PersonalUser.php");
+  require_once("../model/BusinessUser.php");
+  require_once("../model/UserDAO.php");
 
-session_start();
+  session_start();
 
-$logado = isset($_SESSION['usuario']);
+  $logado = isset($_SESSION['usuario']);
 
+
+  // Conecta ao banco de dados
+  $conn = mysqli_connect("localhost", "root", "Ec@305três*", "ecotrash2");
+
+  // Verifica se a conexão foi bem sucedida
+  if (!$conn) {
+    die("Conexão falhou: " .mysqli_connect_error());
+  }
+
+  // Query para recuperar os pontos de coleta
+  $sql = "SELECT ID, DESCRICAO, CEP, NUMERO, TIPOMATERIAIS FROM pontos_coleta";
+
+  // Executa a query
+  $result = mysqli_query($conn, $sql);
+
+  // Cria um array vazio para armazenar os pontos de coleta
+  $points = array();
+
+  function getLatLng($cep, $numero) {
+      $endereco = urlencode($cep . ', ' . $numero);
+      $url = "https://maps.googleapis.com/maps/api/geocode/json?address=$endereco&key=AIzaSyAfPGguvEqU_Wegb0tPyDxD-mUatDKtDVM";
+      $json = file_get_contents($url);
+      $data = json_decode($json);
+      
+      if ($data->status == 'OK') {
+          $lat = $data->results[0]->geometry->location->lat;
+          $lng = $data->results[0]->geometry->location->lng;
+          return array('lat' => $lat, 'lng' => $lng);
+      } else {
+          return null;
+      }
+      
+  }
+
+  // Loop através dos resultados da query
+  while ($row = mysqli_fetch_assoc($result)) {
+
+    $lat = null;
+    $lng = null;
+
+    // Adiciona os dados do ponto de coleta ao array
+    $endereco = getLatLng($row['CEP'], $row['NUMERO']);
+    if ($endereco) {
+      $lat = $endereco['lat'];
+      $lng = $endereco['lng'];
+    }
+    
+    $point = array(
+      'id' => $row['ID'],
+      'descricao' => $row['DESCRICAO'],
+      'latitude' => $lat,
+      'longitude' => $lng,
+      'tipoMateriais' => $row['TIPOMATERIAIS']
+    );
+    array_push($points, $point);
+  }
+
+  // Converte o array em JSON
+  $json = json_encode($points);
+
+  // Fecha a conexão com o banco de dados
+  mysqli_close($conn);
+
+  // Retorna o JSON
+  echo $json;
 ?>
 
 <!DOCTYPE html>
@@ -77,15 +142,101 @@ $logado = isset($_SESSION['usuario']);
   </nav>
 
   <main class="container animate__animated animate__pulse">
-    <section class="section-map">
+
+      <br>
+      <br>
       <h3 class="h3-map">Pesquise o ponto de coleta mais próximo de você</h3>
-      <form action="" method="">
-        <input type="text" placeholder="Digite o tipo de material que deseja descartar..." />
-        <button type="submit" class="search-button"><img src="img/icon-search.svg" /></button>
+      <form>
+        <input type="text" id="search" placeholder="Digite o tipo de material que deseja descartar..." />
+        <button id="btnBusca"><img src="img/icon-search.svg" /></button>
       </form>
-      <!-- <div class="map"></div> -->
-      <img src="img/Mapa.png" class="map" alt="">
-    </section>
+      <br>
+      <br>
+
+      <!-- Mapa -->
+    <div id="map"></div>
+
+    <style>
+      /* Estilo do mapa */
+      #map {
+        height: 100%;
+      }
+    </style>
+
+    <script>
+      // Inicializa o mapa
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: {lat: -23.5505, lng: -46.6333} // São Paulo, Brasil
+        });
+
+        // Recupera os pontos de coleta do JSON gerado pelo PHP
+        var pontosDeColeta = <?php echo $json; ?>;
+
+        // Cria um marcador para cada ponto de coleta
+        var markers = [];
+        for (var i = 0; i < pontosDeColeta.length; i++) {
+          var pontoDeColeta = pontosDeColeta[i];
+          var marker = new google.maps.Marker({
+            position: {lat: parseFloat(pontoDeColeta.latitude), lng: parseFloat(pontoDeColeta.longitude)},
+            map: map,
+            title: pontoDeColeta.descricao,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' // ícone verde escuro
+          });
+          markers.push(marker);
+
+          // Adiciona um listener de clique para exibir a descrição do ponto de coleta
+          marker.addListener('click', function() {
+            var infoWindow = new google.maps.InfoWindow({
+              content: this.title
+            });
+            infoWindow.open(map, this);
+          });
+        }
+
+        // Adiciona um listener de eventos de clique para o botão de busca
+        document.getElementById('btnBusca').addEventListener('click', function() {
+          var filtro = document.getElementById('search').value.toLowerCase();
+          if (filtro !== '') {
+            for (var i = 0; i < markers.length; i++) {
+              var marker = markers[i];
+              if (marker.title.toLowerCase().indexOf(filtro) >= 0) {
+                marker.setVisible(true);
+              } else {
+                marker.setVisible(false);
+              }
+            }
+          }
+        });
+
+        // Adiciona um listener de eventos de digitação para o campo de busca
+        document.getElementById('search').addEventListener('keyup', function() {
+          var filtro = this.value.toLowerCase();
+          for (var i = 0; i < markers.length; i++) {
+            var marker = markers[i];
+            if (marker.title.toLowerCase().indexOf(filtro) >= 0) {
+              marker.setVisible(true);
+            } else {
+              marker.setVisible(false);
+            }
+          }
+        });
+        
+        function atualizarMarcador(descricao) {
+          for (var i = 0; i < markers.length; i++) {
+            var marker = markers[i];
+            if (marker.title.toLowerCase() === descricao.toLowerCase()) {
+              map.setCenter(marker.getPosition());
+              map.setZoom(15);
+              marker.setVisible(true);
+              return;
+            }
+          }
+        }
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPGguvEqU_Wegb0tPyDxD-mUatDKtDVM&callback=initMap"></script>
 
     <h3 id="artigo">Artigos</h3>
     <article id="articles">

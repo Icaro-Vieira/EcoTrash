@@ -69,7 +69,7 @@
         </article>
     
         <article class="form-user-bg">
-            <form action="../controller/ToEditUser.php" method="POST">
+            <form action="../controller/RegistrationCollectionPoint.php" method="POST">
                 <div class="top-buttons-profile">
                     <a href="userProfile.php" class="edit-button border-bottom">Editar Perfil</a>
                     <a href="requestRegister.php" class="edit-button active">Solicitar Cadastro</a>
@@ -83,7 +83,7 @@
                     </label>
     
                     <label for="">
-                        <input type="text" name="cepPontoSc" id="cepSc" placeholder="CEP" autocomplete="off" maxlength="9" required>
+                        <input type="text" name="cepSc" id="cepSc" placeholder="CEP" autocomplete="off" maxlength="9" required>
                     </label>
                     
                     <label for="">
@@ -104,8 +104,8 @@
                             <h2>Selecione os materiais que este ponto coleta:</h2>
                             <div class="options-collect-box">
                                 <div>
-                                    <label for="Bateriasepilhas">
-                                        <input type="checkbox" name="bateriasEpilhas" id="Bateriasepilhas" value="lixo">
+                                    <label for="bateriasEpilhas">
+                                        <input type="checkbox" name="bateriasEpilhas" id="bateriasEpilhas" value="lixo">
                                         Baterias e pilhas
                                     </label>
                                     
