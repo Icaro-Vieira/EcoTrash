@@ -14,9 +14,7 @@
     }
 
     session_start();
-    if($listaSolicitacoesExibir == ""){
-        $_SESSION["listaSolicitacoes"] = "Não há pontos cadastrados!";
-    } else{
+    if($listaSolicitacoesExibir != ""){
         $_SESSION["listaSolicitacoes"] = $listaSolicitacoesExibir;
     }
 

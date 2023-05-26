@@ -1,23 +1,29 @@
 <?php
 
-  require_once("../model/PersonalUser.php");
-  require_once("../model/BusinessUser.php");
-  require_once("../model/UserDAO.php");
-  require_once("../model/Address.php");
-  require_once("../model/AddressDAO.php");
+require_once("../model/PersonalUser.php");
+require_once("../model/BusinessUser.php");
+require_once("../model/UserDAO.php");
+require_once("../model/Address.php");
+require_once("../model/AddressDAO.php");
 
+session_start();
 
-  session_start();
+$logado = isset($_SESSION['usuario']);
+$ErroSolicitacao = isset($_SESSION["erroCadastrarPonto"]);
 
-  $logado = isset($_SESSION['usuario']);
+if (!$logado) {
+  header("Location: login.php");
+} else {
+  $usuario = $_SESSION['usuario'];
+}
 
-  if (!$logado) {
+if ($ErroSolicitacao) {
+  $idSolicitacao = $_SESSION["erroCadastrarPonto"];
 
-    header("Location: login.php");
-    exit();
-  } else {
-    $usuario = $_SESSION['usuario'];
-  }
+  echo '<script> alert("ID: ' . $idSolicitacao . ' não foi encontrado na base de dados!"); </script>';
+
+  exit();
+}
 
 ?>
 
@@ -46,38 +52,55 @@
       <img src="img/icon-business.svg" alt="">
       <h1>
         <?php
-          echo $usuario->get_nome();
+        echo $usuario->get_nome();
         ?>
       </h1>
       <p>
         <?php
-          echo $usuario->get_documento();
+        echo $usuario->get_documento();
         ?>
       </p>
     </article>
 
     <article class="form-business-bg">
-        <table class="table-info">
-          <tr>
-            <th>Nome</th>
-            <th>Logradouro</th>
-            <th>CEP</th>
-            <th>Editar</th>
-          </tr>
-            <td><?php echo "<p>{$_SESSION['listaSolicitacoes']}</p>"; ?></td>
-        <form action="../controller/RegistrationCollectionPoint.php" method="POST"> 
-            <label for="">
-                <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para aprova-la: " required>
-            </label>
-            <button class="trash-button"><img src="img/trash-icon.svg"></button> 
+      <table class="table-info">
+        <tr>
+          <th>Nome</th>
+          <th>Logradouro</th>
+          <th>CEP</th>
+          <th>Editar</th>
+        </tr>
+        <td>
+        <?php 
+        $ErroSolicitacao = isset($_SESSION["erroCadastrarPonto"]);
+
+        if (isset($_SESSION["listaSolicitacoes"])) {
+
+          $lista = $_SESSION['listaSolicitacoes'];
+
+          echo "<p>{$lista}</p>";
+
+        } else {
+          echo "<p>Não há solicitações pendentes.</p>";
+        }
+        ?>
+        </td>
+
+        <form action="../controller/RegistrationCollectionPoint.php" method="POST">
+          <label for="">
+            <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para aprova-la: " required>
+          </label>
+          <button class="trash-button"><img src="img/trash-icon.svg"></button>
         </form>
-        <form action="../controller/deleteRquest.php" method="POST"> 
-            <label for="">
-                <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para reprova-la: " required>
-            </label>
-            <button class="trash-button"><img src="img/trash-icon.svg"></button> 
+
+        <form action="../controller/deleteRquest.php" method="POST">
+          <label for="">
+            <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para reprova-la: " required>
+          </label>
+          <button class="trash-button"><img src="img/trash-icon.svg"></button>
         </form>
-        </table>
+        
+      </table>
     </article>
   </div>
 </body>
