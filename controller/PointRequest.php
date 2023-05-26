@@ -64,10 +64,10 @@
 
             if($usuario->juridico()){
                 header("Location: ../view/registerPoints.php");
-                exit();
+
             } else{
                 header("Location: ../view/requestRegister.php");
-                exit();
+
             }
         }
         else{

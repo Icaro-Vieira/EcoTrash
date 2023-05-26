@@ -34,10 +34,10 @@
 
         public function excluir_solicitacao($idSolicitacao){    
 
-            $delete = $this->banco->prepare("DELETE FROM solicitacao_ponto WHERE ID=?");
-            $solicitacao = array($idSolicitacao);
-
-            if($delete->execute($solicitacao)){
+            $delete = $this->banco->prepare("DELETE FROM solicitacao_ponto WHERE ID = :idSolicitacao");
+            $delete->bindParam(':idSolicitacao', $idSolicitacao);
+            
+            if($delete->execute()){
                 return true;
             }
         

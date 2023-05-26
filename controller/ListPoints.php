@@ -1,5 +1,9 @@
 <?php
 
+    require_once("../model/PersonalUser.php");
+    require_once("../model/BusinessUser.php");
+    require_once("../model/UserDAO.php");
+    require_once("../model/AddressDAO.php");
     require_once("../model/CollectionPoints.php");
     require_once("../model/CollectionPointsDAO.php");
     require_once("../model/PointRequestDAO.php");

@@ -57,12 +57,6 @@
     </article>
 
     <article class="form-business-bg">
-      <form action="../controller/ToEditUser.php" method="POST">
-        <div class="top-buttons-profile">
-          <a href="businessProfile.php" class="edit-button active">Pontos Cadastrados</a>
-          <a href="registerPoints.php" class="edit-button border-bottom">Cadastrar Pontos</a>
-        </div>
-
         <table class="table-info">
           <tr>
             <th>Nome</th>
@@ -73,12 +67,17 @@
             <td><?php echo "<p>{$_SESSION['listaSolicitacoes']}</p>"; ?></td>
         <form action="../controller/RegistrationCollectionPoint.php" method="POST"> 
             <label for="">
-                <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insera o ID da solicitação para aprova-la: " required>
+                <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para aprova-la: " required>
+            </label>
+            <button class="trash-button"><img src="img/trash-icon.svg"></button> 
+        </form>
+        <form action="../controller/deleteRquest.php" method="POST"> 
+            <label for="">
+                <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para reprova-la: " required>
             </label>
             <button class="trash-button"><img src="img/trash-icon.svg"></button> 
         </form>
         </table>
-      </form>
     </article>
   </div>
 </body>

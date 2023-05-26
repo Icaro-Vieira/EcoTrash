@@ -30,10 +30,10 @@
             if($solicitacaoDAO->excluir_solicitacao($idSolicitacao)){
 
                 session_start();
-            
-                $_SESSION["cadastrado"] = "Cadastro de ponto realizado com sucesso!";
 
-                header("Location: ../view/admProfile.php");
+                $_SESSION["usuario"] = $usuario;
+
+                header("Location: RequestList.php");
             }
             else{
                 echo "Ocorreu um erro inesperado na exclusão da solicitação.";

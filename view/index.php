@@ -113,7 +113,7 @@
                   </li>';
           } 
           
-          if (!$usuario->juridico() && ($usuario->get_documento() == "111.111.111-11")) {
+          else if (!$usuario->juridico() && ($usuario->get_documento() == "111.111.111-11")) {
             echo '<li>
                     <a href="../controller/RequestList.php" class="login">
                       <button class="button">
