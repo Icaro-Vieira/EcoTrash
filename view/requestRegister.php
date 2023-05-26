@@ -69,7 +69,7 @@
         </article>
     
         <article class="form-user-bg">
-            <form action="../controller/RegistrationCollectionPoint.php" method="POST">
+            <form action="../controller/PointRequest.php" method="POST">
                 <div class="top-buttons-profile">
                     <a href="userProfile.php" class="edit-button border-bottom">Editar Perfil</a>
                     <a href="requestRegister.php" class="edit-button active">Solicitar Cadastro</a>

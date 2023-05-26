@@ -9,7 +9,7 @@
 
 
   // Conecta ao banco de dados
-  $conn = mysqli_connect("localhost", "root", "Ec@305três*", "ecotrash2");
+  $conn = mysqli_connect("localhost", "root", "", "ecotrash3");
 
   // Verifica se a conexão foi bem sucedida
   if (!$conn) {
@@ -104,14 +104,27 @@
 
           if ($usuario->juridico()) {
             echo '<li>
-                    <a href="businessProfile.php" class="login">
+                    <a href="../controller/ListPoints.php" class="login">
                       <button class="button">
                         <img src="img/icon-business-profile.svg"> 
                         Perfil Empresa
                       </button>
                     </a>
                   </li>';
-          } else {
+          } 
+          
+          if (!$usuario->juridico() && ($usuario->get_documento() == "111.111.111-11")) {
+            echo '<li>
+                    <a href="../controller/RequestList.php" class="login">
+                      <button class="button">
+                        <img src="img/icon-business-profile.svg"> 
+                        ADM
+                      </button>
+                    </a>
+                  </li>';
+          }
+          
+          else {
             echo '<li>
                     <a href="userProfile.php" class="login">
                       <button class="button">
@@ -121,6 +134,7 @@
                     </a>
                   </li>';
           }
+
           echo '<li>
                   <form action="../controller/ExitUser.php" method="post">
                     <button type="submit" class="exit-button">
@@ -129,7 +143,9 @@
                     </button>
                   </form>
                 </li>';
-        } else {
+        } 
+        
+        else {
           echo '<li>
                   <a href="login.php" class="login">
                     <button class="button">Entrar</button>

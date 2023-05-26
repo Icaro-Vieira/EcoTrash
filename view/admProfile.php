@@ -30,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="assets/css/profile.css" />
-  <title>EcoTrash - Perfil Empresa</title>
+  <title>EcoTrash - Perfil ADM</title>
 </head>
 
 <body id="register">
@@ -54,9 +54,6 @@
           echo $usuario->get_documento();
         ?>
       </p>
-      <a class="a-button-del button-del" href="#" onclick="showConfirmationAlert()">
-          Deletar conta
-      </a>
     </article>
 
     <article class="form-business-bg">
@@ -73,32 +70,17 @@
             <th>CEP</th>
             <th>Editar</th>
           </tr>
-          <tr>
-            <td><?php echo "<p>{$_SESSION['listaCadastrosPontos']}</p>"; ?></td>
-            <td> <button class="trash-button"><img src="img/trash-icon.svg"></button> </td>
-          </tr>
+            <td><?php echo "<p>{$_SESSION['listaSolicitacoes']}</p>"; ?></td>
+        <form action="../controller/RegistrationCollectionPoint.php" method="POST"> 
+            <label for="">
+                <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insera o ID da solicitação para aprova-la: " required>
+            </label>
+            <button class="trash-button"><img src="img/trash-icon.svg"></button> 
+        </form>
         </table>
       </form>
     </article>
   </div>
-
-  <script type="module" src="assets/js/script.js"></script>
-  <script src="assets/js/modules/api-cep.js"></script>
-  
-  <script>
-      function showConfirmationAlert() {
-          // Exibir o alerta de confirmação
-          var confirmation = prompt('Digite "DELETAR MINHA CONTA" para confirmar:');
-
-          if (confirmation === 'DELETAR MINHA CONTA') {
-              // Chamar a função DeleteUser.php ou redirecionar
-              window.location.href = '../controller/DeleteUser.php';
-          } else {
-              // Valor incorreto, exibir mensagem de erro
-              alert('Digite corretamente: "DELETAR MINHA CONTA", caso queira deletar sua conta!');
-          }
-      }
-    </script>
 </body>
 
 </html>

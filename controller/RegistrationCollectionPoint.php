@@ -6,67 +6,44 @@
     require_once("../model/AddressDAO.php");
     require_once("../model/CollectionPoints.php");
     require_once("../model/CollectionPointsDAO.php");
+    require_once("../model/PointRequestDAO.php");
 
-    //Informações do ponto de coleta
-    $descricao = $_POST['nomePontoSc']; 
-    $cep = $_POST['cepSc']; 
-    $logradouro = $_POST['logradouroPontoSc']; 
-    $bairro = $_POST['bairroPontoSc']; 
-    $numero = $_POST['numeroPontoSc']; 
-    $tipoMateriais = "";
-
-    if(isset($_POST['bateriasEpilhas'])){
-        $tipoMateriais .= "Baterias e pilhas";
-    }
-
-    if(isset($_POST['celulares'])){
-        $tipoMateriais .= "Celulares";
-    }
-
-    if(isset($_POST['cameras'])){
-        $tipoMateriais .= "Cameras";
-    }
-
-    if(isset($_POST['impressoras'])){
-        $tipoMateriais .= "Impressoras";
-    }
-
-    if(isset($_POST['eletrodomestico'])){
-        $tipoMateriais .= "Eletrodomestico";
-    }
-
-    //Informação do usuário que realizou o cadastro
-    session_start();
-    $usuario = $_SESSION['usuario'];
-    $idUsuario = $usuario->get_id();
+    //Id da solicitação
+    $idSolicitacao = $_POST['idSolicitacao']; 
 
     $pontosDeColetaDAO = new CollectionPointsDAO();
+    $solicitacaoDAO = new PointRequestDAO();
 
-    //Irá verificar se o Ponto já está cadastrado
-    if ($pontosDeColetaDAO->verificarPonto($cep, $numero) > 0) {
-        // Ponto já cadastrado, retorna página de erro
+    $solicitacao = $solicitacaoDAO->consultarSolicitacao($idSolicitacao);
+
+    //Irá verificar se a solicitacao existe
+    if (!$solicitacao) {
         
         session_start();
         
-        $_SESSION["erroPonto"] = $descricao;
-    } 
+        $_SESSION["erroCadastrarPonto"] = $idSolicitacao;
+    }
     else {
-
-        $pontoDeColeta = new CollectionPoints($descricao, $cep, $logradouro, $bairro, $numero, $tipoMateriais, $idUsuario);
-
-        if($pontosDeColetaDAO->cadastrar($pontoDeColeta)){
+        if($pontosDeColetaDAO->cadastrar($solicitacao)){
             // Ponto bem sucedido.
-            session_start();
-        
-            $_SESSION["cadastrado"] = "Solicitação para cadastro realizada com sucesso!";
 
-            header("Location: ../view/registerPoints.php");
+            if($solicitacaoDAO->excluir_solicitacao($idSolicitacao)){
+
+                session_start();
+            
+                $_SESSION["cadastrado"] = "Cadastro de ponto realizado com sucesso!";
+
+                header("Location: ../view/admProfile.php");
+            }
+            else{
+                echo "Ocorreu um erro inesperado na exclusão da solicitação.";
+            }
             exit();
         }
         else{
-            echo "Ocorreu um erro inesperado na solicitação.";
+            echo "Ocorreu um erro inesperado no cadastro.";
         }
     }
 
-    header("Location: ../view/registerPoints.php");
+    header("Location: ../view/admProfile.php");
 ?>

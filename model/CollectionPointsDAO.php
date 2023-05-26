@@ -2,8 +2,8 @@
 
     define('HOSTPONTO', 'localhost');
     define('USERPONTO', 'root');
-    define('PASSWORDPONTO', 'Ec@305três*');
-    define('DB_NAMEPONTO', 'ecotrash2');
+    define('PASSWORDPONTO', '');
+    define('DB_NAMEPONTO', 'ecotrash3');
 
     require_once("CollectionPoints.php");
 
@@ -43,6 +43,26 @@
             $result = $query->fetch(PDO::FETCH_ASSOC);
 
             return $result['count'];
+        }
+
+        public function listaCadastrosPontos($idUsuario){
+            $query = $this->banco->prepare("SELECT * FROM solicitacao_ponto WHERE ID_CADASTRO = :idUsuario");
+            $query->bindParam(":idUsuario", $idUsuario);
+            $query->execute();
+            
+            $linha = $query->fetchAll(PDO::FETCH_OBJ);
+    
+            $listaCadastrosPontos = [];
+    
+            foreach($linha as $ponto){
+                $pontoCadastrado = new CollectionPoints($ponto->DESCRICAO, $ponto->CEP, $ponto->LOGRADOURO, $ponto->BAIRRO, $ponto->NUMERO, $ponto->TIPOMATERIAIS,  $ponto->ID_CADASTRO);
+
+                $pontoCadastrado->set_id($ponto->ID);
+
+                array_push($listaCadastrosPontos, $pontoCadastrado);
+            }
+    
+            return $listaCadastrosPontos;
         }
     }
 
