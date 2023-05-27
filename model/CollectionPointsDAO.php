@@ -32,6 +32,19 @@
             return false;
         }
 
+        public function excluir_ponto($idPonto, $idUsuario){    
+
+            $delete = $this->banco->prepare("DELETE FROM pontos_coleta WHERE ID = :idPonto AND ID_CADASTRO = :idUsuario");
+            $delete->bindParam(':idPonto', $idPonto);
+            $delete->bindParam(':idUsuario', $idUsuario);
+            
+            if($delete->execute()){
+                return true;
+            }
+        
+            return false;
+        }
+
         public function verificarPonto($cep, $numero){
             
             $query = $this->banco->prepare("SELECT COUNT(*) as count FROM pontos_coleta WHERE CEP = :cep AND NUMERO = :numero");
@@ -46,7 +59,7 @@
         }
 
         public function listaCadastrosPontos($idUsuario){
-            $query = $this->banco->prepare("SELECT * FROM solicitacao_ponto WHERE ID_CADASTRO = :idUsuario");
+            $query = $this->banco->prepare("SELECT * FROM pontos_coleta WHERE ID_CADASTRO = :idUsuario");
             $query->bindParam(":idUsuario", $idUsuario);
             $query->execute();
             

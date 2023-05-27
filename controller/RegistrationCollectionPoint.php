@@ -29,10 +29,6 @@
 
             if($solicitacaoDAO->excluir_solicitacao($idSolicitacao)){
 
-                session_start();
-
-                $_SESSION["usuario"] = $usuario;
-
                 header("Location: RequestList.php");
             }
             else{

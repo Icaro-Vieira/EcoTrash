@@ -10,13 +10,11 @@
     $listaSolicitacoesExibir = "";
 
     foreach($listaSolicitacoes as $ponto){
-        $listaSolicitacoesExibir .= $ponto->get_id() . $ponto->get_descricao() . $ponto->get_cep();
+        $listaSolicitacoesExibir .= $ponto->get_id() . " " . $ponto->get_descricao() . " " . $ponto->get_cep() . " <br>";
     }
 
     session_start();
-    if($listaSolicitacoesExibir == ""){
-        $_SESSION["listaSolicitacoes"] = "Não há pontos cadastrados!";
-    } else{
+    if($listaSolicitacoesExibir != ""){
         $_SESSION["listaSolicitacoes"] = $listaSolicitacoesExibir;
     }
 

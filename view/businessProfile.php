@@ -6,18 +6,22 @@
   require_once("../model/Address.php");
   require_once("../model/AddressDAO.php");
 
-
   session_start();
 
   $logado = isset($_SESSION['usuario']);
+  $excluido = isset($_SESSION["excluido"]);
 
   if (!$logado) {
-
     header("Location: login.php");
-    exit();
   } else {
     $usuario = $_SESSION['usuario'];
   }
+
+  if ($excluido) {
+    echo '<script> alert("Ponto de coleta excluído com sucesso!"); </script>';
+  }
+
+  unset($_SESSION['excluido']);
 
 ?>
 
@@ -46,16 +50,16 @@
       <img src="img/icon-business.svg" alt="">
       <h1>
         <?php
-          echo $usuario->get_nome();
+        echo $usuario->get_nome();
         ?>
       </h1>
       <p>
         <?php
-          echo $usuario->get_documento();
+        echo $usuario->get_documento();
         ?>
       </p>
       <a class="a-button-del button-del" href="#" onclick="showConfirmationAlert()">
-          Deletar conta
+        Deletar conta
       </a>
     </article>
 
@@ -65,40 +69,57 @@
           <a href="businessProfile.php" class="edit-button active">Pontos Cadastrados</a>
           <a href="registerPoints.php" class="edit-button border-bottom">Cadastrar Pontos</a>
         </div>
+            <?php
+            if (isset($_SESSION["listaCadastrosPontos"])) {
 
-        <table class="table-info">
-          <tr>
-            <th>Nome</th>
-            <th>Logradouro</th>
-            <th>CEP</th>
-            <th>Editar</th>
-          </tr>
-          <tr>
-            <td><?php echo "<p>{$_SESSION['listaCadastrosPontos']}</p>"; ?></td>
-            <td> <button class="trash-button"><img src="img/trash-icon.svg"></button> </td>
-          </tr>
-        </table>
-      </form>
+              $lista = $_SESSION['listaCadastrosPontos'];
+
+              echo '
+              <table class="table-info">
+              <tr>
+                <th>Nome</th>
+                <th>Logradouro</th>
+                <th>CEP</th>
+                <th>Editar</th>
+              </tr>
+              <tr>';
+
+              echo "<p>{$lista}</p>";
+
+              echo '
+              <form action="../controller/DeletePoint.php" method="POST">
+                  <label for="">
+                    <input type="text" name="idPonto" id="idPonto" placeholder="Insira o ID do ponto para reprova-lo: " required>
+                  </label>
+                  <button class="trash-button"><img src="img/trash-icon.svg"></button>
+                </form>
+                </td>
+              </table>';
+
+            } else {
+              echo "<p>Não há cadastros de pontos de coleta.</p>";
+            }
+            ?>
     </article>
   </div>
 
   <script type="module" src="assets/js/script.js"></script>
   <script src="assets/js/modules/api-cep.js"></script>
-  
-  <script>
-      function showConfirmationAlert() {
-          // Exibir o alerta de confirmação
-          var confirmation = prompt('Digite "DELETAR MINHA CONTA" para confirmar:');
 
-          if (confirmation === 'DELETAR MINHA CONTA') {
-              // Chamar a função DeleteUser.php ou redirecionar
-              window.location.href = '../controller/DeleteUser.php';
-          } else {
-              // Valor incorreto, exibir mensagem de erro
-              alert('Digite corretamente: "DELETAR MINHA CONTA", caso queira deletar sua conta!');
-          }
+  <script>
+    function showConfirmationAlert() {
+      // Exibir o alerta de confirmação
+      var confirmation = prompt('Digite "DELETAR MINHA CONTA" para confirmar:');
+
+      if (confirmation === 'DELETAR MINHA CONTA') {
+        // Chamar a função DeleteUser.php ou redirecionar
+        window.location.href = '../controller/DeleteUser.php';
+      } else {
+        // Valor incorreto, exibir mensagem de erro
+        alert('Digite corretamente: "DELETAR MINHA CONTA", caso queira deletar sua conta!');
       }
-    </script>
+    }
+  </script>
 </body>
 
 </html>
