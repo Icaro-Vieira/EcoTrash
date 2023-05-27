@@ -37,6 +37,8 @@
   }
 
   unset($_SESSION['atualizado']);
+  unset($_SESSION['erroSolicitacao']);
+  unset($_SESSION['SolicitacaoEnviada']);
 ?>
 
 <!DOCTYPE html>

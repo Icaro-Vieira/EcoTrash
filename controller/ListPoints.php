@@ -19,13 +19,11 @@
     $listaCadastrosPontosExibir = "";
 
     foreach($listaCadastrosPontos as $ponto){
-        $listaCadastrosPontosExibir .= $ponto->get_id() . $ponto->get_descricao() . $ponto->get_cep();
+        $listaCadastrosPontosExibir .= $ponto->get_id() . " " . $ponto->get_descricao() . " " . $ponto->get_cep() . " ";
     }
 
     session_start();
-    if($listaCadastrosPontosExibir == ""){
-        $_SESSION["listaCadastrosPontos"] = "Não há pontos cadastrados!";
-    } else{
+    if($listaCadastrosPontosExibir != ""){
         $_SESSION["listaCadastrosPontos"] = $listaCadastrosPontosExibir;
     }
 

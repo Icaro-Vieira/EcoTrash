@@ -11,9 +11,10 @@
 
   $logado = isset($_SESSION['usuario']);
   $atualizado = isset($_SESSION['atualizado']);
+  $erroJaExiste = isset($_SESSION['erroSolicitacao']);
+  $solicitacaoEnviada = isset($_SESSION['SolicitacaoEnviada']);
 
   if(!$logado){
-    
     header("Location: login.php");
     exit();
   }
@@ -27,7 +28,17 @@
     $endereco = $_SESSION['endereco'];
   }
 
+  if($erroJaExiste){
+    echo '<script> alert("Ponto de coleta já cadastrado no EcoTrash!"); </script>';
+  }
+
+  if($solicitacaoEnviada){
+    echo '<script> alert("Ponto de coleta enviado para a equipe de análise EcoTrash!"); </script>';
+  }
+
   unset($_SESSION['atualizado']);
+  unset($_SESSION['erroSolicitacao']);
+  unset($_SESSION['SolicitacaoEnviada']);
 ?>
 
 <!DOCTYPE html>
