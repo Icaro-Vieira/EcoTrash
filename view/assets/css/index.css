@@ -76,11 +76,12 @@ a:hover {
 /* .section-map {
     margin-top: 75px;
 }
+*/
 
 .h3-map {
     color: var(--light-green-color);
     text-align: center;
-} */
+}
 
 form {
     display: flex;

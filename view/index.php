@@ -1,77 +1,77 @@
 <?php
-  require_once("../model/PersonalUser.php");
-  require_once("../model/BusinessUser.php");
-  require_once("../model/UserDAO.php");
+require_once("../model/PersonalUser.php");
+require_once("../model/BusinessUser.php");
+require_once("../model/UserDAO.php");
 
-  session_start();
+session_start();
 
-  $logado = isset($_SESSION['usuario']);
+$logado = isset($_SESSION['usuario']);
 
 
-  // Conecta ao banco de dados
-  $conn = mysqli_connect("localhost", "root", "", "ecotrash3");
+// Conecta ao banco de dados
+$conn = mysqli_connect("localhost", "root", "", "ecotrash3");
 
-  // Verifica se a conexão foi bem sucedida
-  if (!$conn) {
-    die("Conexão falhou: " .mysqli_connect_error());
+// Verifica se a conexão foi bem sucedida
+if (!$conn) {
+  die("Conexão falhou: " . mysqli_connect_error());
+}
+
+// Query para recuperar os pontos de coleta
+$sql = "SELECT ID, DESCRICAO, CEP, NUMERO, TIPOMATERIAIS FROM pontos_coleta";
+
+// Executa a query
+$result = mysqli_query($conn, $sql);
+
+// Cria um array vazio para armazenar os pontos de coleta
+$points = array();
+
+function getLatLng($cep, $numero)
+{
+  $endereco = urlencode($cep . ', ' . $numero);
+  $url = "https://maps.googleapis.com/maps/api/geocode/json?address=$endereco&key=AIzaSyAfPGguvEqU_Wegb0tPyDxD-mUatDKtDVM";
+  $json = file_get_contents($url);
+  $data = json_decode($json);
+
+  if ($data->status == 'OK') {
+    $lat = $data->results[0]->geometry->location->lat;
+    $lng = $data->results[0]->geometry->location->lng;
+    return array('lat' => $lat, 'lng' => $lng);
+  } else {
+    return null;
+  }
+}
+
+// Loop através dos resultados da query
+while ($row = mysqli_fetch_assoc($result)) {
+
+  $lat = null;
+  $lng = null;
+
+  // Adiciona os dados do ponto de coleta ao array
+  $endereco = getLatLng($row['CEP'], $row['NUMERO']);
+  if ($endereco) {
+    $lat = $endereco['lat'];
+    $lng = $endereco['lng'];
   }
 
-  // Query para recuperar os pontos de coleta
-  $sql = "SELECT ID, DESCRICAO, CEP, NUMERO, TIPOMATERIAIS FROM pontos_coleta";
+  $point = array(
+    'id' => $row['ID'],
+    'descricao' => $row['DESCRICAO'],
+    'latitude' => $lat,
+    'longitude' => $lng,
+    'tipoMateriais' => $row['TIPOMATERIAIS']
+  );
+  array_push($points, $point);
+}
 
-  // Executa a query
-  $result = mysqli_query($conn, $sql);
+// Converte o array em JSON
+$json = json_encode($points);
 
-  // Cria um array vazio para armazenar os pontos de coleta
-  $points = array();
+// Fecha a conexão com o banco de dados
+mysqli_close($conn);
 
-  function getLatLng($cep, $numero) {
-      $endereco = urlencode($cep . ', ' . $numero);
-      $url = "https://maps.googleapis.com/maps/api/geocode/json?address=$endereco&key=AIzaSyAfPGguvEqU_Wegb0tPyDxD-mUatDKtDVM";
-      $json = file_get_contents($url);
-      $data = json_decode($json);
-      
-      if ($data->status == 'OK') {
-          $lat = $data->results[0]->geometry->location->lat;
-          $lng = $data->results[0]->geometry->location->lng;
-          return array('lat' => $lat, 'lng' => $lng);
-      } else {
-          return null;
-      }
-      
-  }
-
-  // Loop através dos resultados da query
-  while ($row = mysqli_fetch_assoc($result)) {
-
-    $lat = null;
-    $lng = null;
-
-    // Adiciona os dados do ponto de coleta ao array
-    $endereco = getLatLng($row['CEP'], $row['NUMERO']);
-    if ($endereco) {
-      $lat = $endereco['lat'];
-      $lng = $endereco['lng'];
-    }
-    
-    $point = array(
-      'id' => $row['ID'],
-      'descricao' => $row['DESCRICAO'],
-      'latitude' => $lat,
-      'longitude' => $lng,
-      'tipoMateriais' => $row['TIPOMATERIAIS']
-    );
-    array_push($points, $point);
-  }
-
-  // Converte o array em JSON
-  $json = json_encode($points);
-
-  // Fecha a conexão com o banco de dados
-  mysqli_close($conn);
-
-  // Retorna o JSON
-  echo $json;
+// Retorna o JSON
+echo "<p style='display: none;'>{$json}</p>";
 ?>
 
 <!DOCTYPE html>
@@ -97,13 +97,13 @@
       <li><a href="#articles">Artigos</a></li>
       <li><a href="#faq">Perguntas Frequentes</a></li>
       <?php
-        //Verificando se o usuário está logado
-        if ($logado) {
+      //Verificando se o usuário está logado
+      if ($logado) {
 
-          $usuario = $_SESSION['usuario'];
+        $usuario = $_SESSION['usuario'];
 
-          if ($usuario->juridico()) {
-            echo '<li>
+        if ($usuario->juridico()) {
+          echo '<li>
                     <a href="../controller/ListPoints.php" class="login">
                       <button class="button">
                         <img src="img/icon-business-profile.svg"> 
@@ -111,10 +111,8 @@
                       </button>
                     </a>
                   </li>';
-          } 
-          
-          else if (!$usuario->juridico() && ($usuario->get_documento() == "111.111.111-11")) {
-            echo '<li>
+        } else if (!$usuario->juridico() && ($usuario->get_documento() == "111.111.111-11")) {
+          echo '<li>
                     <a href="../controller/RequestList.php" class="login">
                       <button class="button">
                         <img src="img/icon-business-profile.svg"> 
@@ -122,10 +120,8 @@
                       </button>
                     </a>
                   </li>';
-          }
-          
-          else {
-            echo '<li>
+        } else {
+          echo '<li>
                     <a href="userProfile.php" class="login">
                       <button class="button">
                         <img src="img/icon-user-profile.svg"> 
@@ -133,9 +129,9 @@
                       </button>
                     </a>
                   </li>';
-          }
+        }
 
-          echo '<li>
+        echo '<li>
                   <form action="../controller/ExitUser.php" method="post">
                     <button type="submit" class="exit-button">
                       <img src="img/exit.svg">
@@ -143,15 +139,13 @@
                     </button>
                   </form>
                 </li>';
-        } 
-        
-        else {
-          echo '<li>
+      } else {
+        echo '<li>
                   <a href="login.php" class="login">
                     <button class="button">Entrar</button>
                   </a>
                 </li>';
-        }
+      }
       ?>
     </ul>
 
@@ -159,23 +153,24 @@
 
   <main class="container animate__animated animate__pulse">
 
-      <br>
-      <br>
-      <h3 class="h3-map">Pesquise o ponto de coleta mais próximo de você</h3>
-      <form>
-        <input type="text" id="search" placeholder="Digite o tipo de material que deseja descartar..." />
-        <button id="btnBusca"><img src="img/icon-search.svg" /></button>
-      </form>
-      <br>
-      <br>
+    <br>
+    <br>
+    <h3 class="h3-map">Pesquise o ponto de coleta mais próximo de você</h3>
+    <form>
+      <input type="text" id="search" placeholder="Digite o tipo de material que deseja descartar..." />
+      <button id="btnBusca"><img src="img/icon-search.svg" /></button>
+    </form>
+    <br>
+    <br>
 
-      <!-- Mapa -->
+    <!-- Mapa -->
     <div id="map"></div>
 
     <style>
       /* Estilo do mapa */
       #map {
         height: 100%;
+        border-radius: 16px;
       }
     </style>
 
@@ -184,7 +179,10 @@
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
-          center: {lat: -23.5505, lng: -46.6333} // São Paulo, Brasil
+          center: {
+            lat: -23.5505,
+            lng: -46.6333
+          } // São Paulo, Brasil
         });
 
         // Recupera os pontos de coleta do JSON gerado pelo PHP
@@ -195,10 +193,15 @@
         for (var i = 0; i < pontosDeColeta.length; i++) {
           var pontoDeColeta = pontosDeColeta[i];
           var marker = new google.maps.Marker({
-            position: {lat: parseFloat(pontoDeColeta.latitude), lng: parseFloat(pontoDeColeta.longitude)},
+            position: {
+              lat: parseFloat(pontoDeColeta.latitude),
+              lng: parseFloat(pontoDeColeta.longitude)
+            },
             map: map,
             title: pontoDeColeta.descricao,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' // ícone verde escuro
+            icon: 'https://i.ibb.co/60kw6cH/Pin-Mapa.png' // Ícone EcoTrash
+            // icon maps: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' 
+            // ícone proprio do maps
           });
           markers.push(marker);
 
@@ -238,7 +241,7 @@
             }
           }
         });
-        
+
         function atualizarMarcador(descricao) {
           for (var i = 0; i < markers.length; i++) {
             var marker = markers[i];
