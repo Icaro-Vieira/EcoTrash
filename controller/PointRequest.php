@@ -50,25 +50,25 @@
         
         session_start();
         
-        $_SESSION["erroPontoCadastrado"] = $descricao;
+        $_SESSION["erroSolicitacao"] = true;
     } 
     else {
 
         $pontoDeColeta = new CollectionPoints($descricao, $cep, $logradouro, $bairro, $numero, $tipoMateriais, $idUsuario);
 
         if($solicitacaoDAO->cadastrar($pontoDeColeta)){
-            // Ponto bem sucedido.
+            // Solicitação bem sucedido.
             session_start();
         
-            $_SESSION["cadastrado"] = "Solicitação para cadastro de ponto enviada com sucesso!";
+            $_SESSION["SolicitacaoEnviada"] = true;
 
             if($usuario->juridico()){
                 header("Location: ../view/registerPoints.php");
 
             } else{
                 header("Location: ../view/requestRegister.php");
-
             }
+
         }
         else{
             echo "Ocorreu um erro inesperado na solicitação.";
