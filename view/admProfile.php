@@ -35,7 +35,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="assets/css/profile.css" />
-  <title>EcoTrash - Perfil ADM</title>
+  <title>EcoTrash - Perfil Administrador</title>
 </head>
 
 <body id="register">
@@ -48,15 +48,15 @@
   <div class="bg-nav"></div>
   <div class="profile-divisor">
     <article class="info-user">
-      <img src="img/icon-business.svg" alt="">
+      <img src="img/icon-shield-profile.svg" alt="">
       <h1>
         <?php
-        echo $usuario->get_nome();
+        echo $usuario->get_nome() . " " . $usuario->get_sobrenome();
         ?>
       </h1>
       <p>
         <?php
-        echo $usuario->get_documento();
+        echo $usuario->get_email();
         ?>
       </p>
     </article>
@@ -96,7 +96,11 @@
               </table>';
 
             } else {
-              echo "<p>Não há cadastros de pontos de coleta.</p>";
+              echo "
+                  <div class='div-point'>
+                    <p class='p-point'>Não há cadastros de pontos de coleta 🗑️</p>
+                  </div>
+                ";
             }
             ?>
     </article>

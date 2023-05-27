@@ -97,7 +97,11 @@
               </table>';
 
             } else {
-              echo "<p>Não há cadastros de pontos de coleta.</p>";
+              echo "
+                  <div class='div-point'>
+                    <p class='p-point'>Não há cadastros de pontos de coleta ♻️</p>
+                  </div>
+                ";
             }
             ?>
     </article>

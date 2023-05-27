@@ -509,24 +509,25 @@ tr:nth-child(even) {
   background-color: var(--red-color);
 }
 
-#confirmationModal {
-  display: none;
-  flex-direction: column;
+.div-point {
+  display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
 
-  width: 300px;
-  height: 400px;
-
-  border: 1px solid var(--gray-line-profile);
+  margin-top: 80px;
+  background-color: var(--white-color);
+  width: 565px;
+  border: 2px solid var(--medium-green-color);
+  border-radius: 10px;  
 }
 
-#confirmationModal p {
-  font-size: 20px;
-  color: red;
+
+
+.p-point {
+  font-family: var(--opnsans-font);
+  font-weight: var(--opnsans-weight-bold);
+  color: var(--medium-green-color);
   text-align: center;
-}
-
-#confirmationModal input {
-  
+  font-size: 25px;
 }

@@ -83,6 +83,7 @@ echo "<p style='display: none;'>{$json}</p>";
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="assets/css/index.css" />
   <title>EcoTrash</title>
 </head>
@@ -115,7 +116,7 @@ echo "<p style='display: none;'>{$json}</p>";
           echo '<li>
                     <a href="../controller/RequestList.php" class="login">
                       <button class="button">
-                        <img src="img/icon-business-profile.svg"> 
+                        <img src="img/icon-shield-button.svg"> 
                         ADM
                       </button>
                     </a>
@@ -166,13 +167,13 @@ echo "<p style='display: none;'>{$json}</p>";
     <!-- Mapa -->
     <div id="map"></div>
 
-    <style>
+    <STyle>
       /* Estilo do mapa */
       #map {
         height: 100%;
         border-radius: 16px;
       }
-    </style>
+    </STyle>
 
     <script>
       // Inicializa o mapa
@@ -299,7 +300,48 @@ echo "<p style='display: none;'>{$json}</p>";
         </div>
       </div>
     </article>
-    <section id="faq"></section>
+    
+    <h3 id="faq">Perguntas Frequentes</h3>
+    <section>
+      <div class="faq-question">
+        <div class="question-text">
+          <p>O que é Lixo eletrônico?</p>
+        </div>
+        <div class="toggle-icon"></div>
+      </div>
+
+      <div class="faq-answer">
+        <p>
+          Produtos elétricos e eletrônicos quebrados, danificados ou sem utilidade por algum motivo e pilhas descarregadas que devem ser descartados.
+        </p>
+      </div>
+
+      <div class="faq-question">
+        <div class="question-text">
+          <p>Diferença entre Lixo eletrônico e lixo digital?</p>
+        </div>
+        <div class="toggle-icon"></div>
+      </div>
+      
+      <div class="faq-answer">
+        <p>
+          Quando descartamos lixo eletrônico temos a posibilidade de reaproveitamento através da reciclagem. Já o termo lixo digital se refere aos arquivos desnecessários armazenados em dispositivos eletrônicos Ex: Email, aplicativos, cópias de fotos etc.
+        </p>
+      </div>
+
+      <div class="faq-question">
+        <div class="question-text">
+          <p>O que causa o discarte incorreto?</p>
+        </div>
+        <div class="toggle-icon"></div>
+      </div>
+      
+      <div class="faq-answer">
+        <p>
+          Por serem feitos com alta tecnologia, esses resíduos podem conter substâncias tóxicas e metais pesados, como o chumbo, mercúrio, cromo e cádmio por exemplo, capazes de contaminar o solo, a água e os alimentos – impactando tanto o ambiente quanto a saúde humana.
+        </p>
+      </div>
+    </section>
   </main>
 
   <div class="line-footer"></div>
@@ -308,7 +350,7 @@ echo "<p style='display: none;'>{$json}</p>";
 
     <div class="footer-div">
       <div class="footer-div-buttons">
-        <button>Voltar ao topo</button>
+        <button id="backTop">Voltar ao topo</button>
         <a href="termsofUse.html" target="_blank">
           <button>Termos de uso</button>
         </a>
@@ -316,6 +358,8 @@ echo "<p style='display: none;'>{$json}</p>";
       <p>Copyright © 2023. Todos os direitos reservados</p>
     </div>
   </footer>
+
+  <script src="assets/js/modules/back-to-top.js"></script>
 </body>
 
 </html>
