@@ -82,7 +82,7 @@
         <article class="form-user-bg">
             <form action="../controller/PointRequest.php" method="POST">
                 <div class="top-buttons-profile">
-                    <a href="businessProfile.php" class="edit-button border-bottom">Pontos Cadastrados</a>
+                    <a href="../controller/ListPoints.php" class="edit-button border-bottom">Pontos Cadastrados</a>
                     <a href="requestRegister.php" class="edit-button active">Cadastrar Pontos</a>
                 </div>
                 <header class="">

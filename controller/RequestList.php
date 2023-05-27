@@ -10,7 +10,7 @@
     $listaSolicitacoesExibir = "";
 
     foreach($listaSolicitacoes as $ponto){
-        $listaSolicitacoesExibir .= $ponto->get_id() . " " . $ponto->get_descricao() . " " . $ponto->get_cep() . " ";
+        $listaSolicitacoesExibir .= $ponto->get_id() . " " . $ponto->get_descricao() . " " . $ponto->get_cep() . " <br>";
     }
 
     session_start();

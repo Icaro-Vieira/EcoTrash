@@ -19,10 +19,9 @@
     $listaCadastrosPontosExibir = "";
 
     foreach($listaCadastrosPontos as $ponto){
-        $listaCadastrosPontosExibir .= $ponto->get_id() . " " . $ponto->get_descricao() . " " . $ponto->get_cep() . " ";
+        $listaCadastrosPontosExibir .= $ponto->get_id() . " " . $ponto->get_descricao() . " " . $ponto->get_cep() . " <br>";
     }
 
-    session_start();
     if($listaCadastrosPontosExibir != ""){
         $_SESSION["listaCadastrosPontos"] = $listaCadastrosPontosExibir;
     }

@@ -1,20 +1,27 @@
 <?php
 
-require_once("../model/PersonalUser.php");
-require_once("../model/BusinessUser.php");
-require_once("../model/UserDAO.php");
-require_once("../model/Address.php");
-require_once("../model/AddressDAO.php");
+  require_once("../model/PersonalUser.php");
+  require_once("../model/BusinessUser.php");
+  require_once("../model/UserDAO.php");
+  require_once("../model/Address.php");
+  require_once("../model/AddressDAO.php");
 
-session_start();
+  session_start();
 
-$logado = isset($_SESSION['usuario']);
+  $logado = isset($_SESSION['usuario']);
+  $excluido = isset($_SESSION["excluido"]);
 
-if (!$logado) {
-  header("Location: login.php");
-} else {
-  $usuario = $_SESSION['usuario'];
-}
+  if (!$logado) {
+    header("Location: login.php");
+  } else {
+    $usuario = $_SESSION['usuario'];
+  }
+
+  if ($excluido) {
+    echo '<script> alert("Ponto de coleta excluído com sucesso!"); </script>';
+  }
+
+  unset($_SESSION['excluido']);
 
 ?>
 
@@ -62,30 +69,37 @@ if (!$logado) {
           <a href="businessProfile.php" class="edit-button active">Pontos Cadastrados</a>
           <a href="registerPoints.php" class="edit-button border-bottom">Cadastrar Pontos</a>
         </div>
-
-        <table class="table-info">
-          <tr>
-            <th>Nome</th>
-            <th>Logradouro</th>
-            <th>CEP</th>
-            <th>Editar</th>
-          </tr>
-          <tr>
             <?php
             if (isset($_SESSION["listaCadastrosPontos"])) {
 
               $lista = $_SESSION['listaCadastrosPontos'];
 
+              echo '
+              <table class="table-info">
+              <tr>
+                <th>Nome</th>
+                <th>Logradouro</th>
+                <th>CEP</th>
+                <th>Editar</th>
+              </tr>
+              <tr>';
+
               echo "<p>{$lista}</p>";
+
+              echo '
+              <form action="../controller/DeletePoint.php" method="POST">
+                  <label for="">
+                    <input type="text" name="idPonto" id="idPonto" placeholder="Insira o ID do ponto para reprova-lo: " required>
+                  </label>
+                  <button class="trash-button"><img src="img/trash-icon.svg"></button>
+                </form>
+                </td>
+              </table>';
+
             } else {
               echo "<p>Não há cadastros de pontos de coleta.</p>";
             }
             ?>
-            </td>
-            <td><?php echo "<p>{$_SESSION['listaCadastrosPontos']}</p>"; ?></td>
-            <td> <button class="trash-button"><img src="img/trash-icon.svg"></button> </td>
-        </table>
-      </form>
     </article>
   </div>
 

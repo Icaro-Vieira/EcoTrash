@@ -1,30 +1,29 @@
 <?php
 
-require_once("../model/PersonalUser.php");
-require_once("../model/BusinessUser.php");
-require_once("../model/UserDAO.php");
-require_once("../model/Address.php");
-require_once("../model/AddressDAO.php");
+  require_once("../model/PersonalUser.php");
+  require_once("../model/BusinessUser.php");
+  require_once("../model/UserDAO.php");
+  require_once("../model/Address.php");
+  require_once("../model/AddressDAO.php");
 
-session_start();
+  session_start();
 
-$logado = isset($_SESSION['usuario']);
-$ErroSolicitacao = isset($_SESSION["erroCadastrarPonto"]);
+  $logado = isset($_SESSION['usuario']);
+  $ErroSolicitacao = isset($_SESSION["erroCadastrarPonto"]);
 
-if (!$logado) {
-  header("Location: login.php");
-} else {
-  $usuario = $_SESSION['usuario'];
-}
+  if (!$logado) {
+    header("Location: login.php");
+  } else {
+    $usuario = $_SESSION['usuario'];
+  }
 
-if ($ErroSolicitacao) {
-  $idSolicitacao = $_SESSION["erroCadastrarPonto"];
+  if ($ErroSolicitacao) {
+    $idSolicitacao = $_SESSION["erroCadastrarPonto"];
 
-  echo '<script> alert("ID: ' . $idSolicitacao . ' não foi encontrado na base de dados!"); </script>';
+    echo '<script> alert("ID: ' . $idSolicitacao . ' não foi encontrado na base de dados!"); </script>';
+  }
 
-  exit();
-}
-
+  unset($_SESSION['erroCadastrarPonto']);
 ?>
 
 <!DOCTYPE html>
@@ -63,44 +62,43 @@ if ($ErroSolicitacao) {
     </article>
 
     <article class="form-business-bg">
-      <table class="table-info">
-        <tr>
-          <th>Nome</th>
-          <th>Logradouro</th>
-          <th>CEP</th>
-          <th>Editar</th>
-        </tr>
-        <td>
-        <?php 
-        $ErroSolicitacao = isset($_SESSION["erroCadastrarPonto"]);
+            <?php
+            if (isset($_SESSION["listaSolicitacoes"])) {
 
-        if (isset($_SESSION["listaSolicitacoes"])) {
+              $lista = $_SESSION['listaSolicitacoes'];
 
-          $lista = $_SESSION['listaSolicitacoes'];
+              echo '
+              <table class="table-info">
+              <tr>
+                <th>Nome</th>
+                <th>Logradouro</th>
+                <th>CEP</th>
+                <th>Editar</th>
+              </tr>
+              <tr>';
 
-          echo "<p>{$lista}</p>";
+              echo "<p>{$lista}</p>";
 
-        } else {
-          echo "<p>Não há solicitações pendentes.</p>";
-        }
-        ?>
-        </td>
+              echo '<form action="../controller/RegistrationCollectionPoint.php" method="POST">
+                  <label for="">
+                    <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para aprova-la: " required>
+                  </label>
+                  <button class="trash-button"><img src="img/trash-icon.svg"></button>
+                </form>
 
-        <form action="../controller/RegistrationCollectionPoint.php" method="POST">
-          <label for="">
-            <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para aprova-la: " required>
-          </label>
-          <button class="trash-button"><img src="img/trash-icon.svg"></button>
-        </form>
+                <form action="../controller/DeleteRequest.php" method="POST">
+                  <label for="">
+                    <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para reprova-la: " required>
+                  </label>
+                  <button class="trash-button"><img src="img/trash-icon.svg"></button>
+                </form>
+                </td>
+              </table>';
 
-        <form action="../controller/deleteRquest.php" method="POST">
-          <label for="">
-            <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para reprova-la: " required>
-          </label>
-          <button class="trash-button"><img src="img/trash-icon.svg"></button>
-        </form>
-        
-      </table>
+            } else {
+              echo "<p>Não há cadastros de pontos de coleta.</p>";
+            }
+            ?>
     </article>
   </div>
 </body>
