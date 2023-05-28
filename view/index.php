@@ -59,7 +59,9 @@ while ($row = mysqli_fetch_assoc($result)) {
     'descricao' => $row['DESCRICAO'],
     'latitude' => $lat,
     'longitude' => $lng,
-    'tipoMateriais' => $row['TIPOMATERIAIS']
+    'tipoMateriais' => $row['TIPOMATERIAIS'],
+    'cep' => $row['CEP'],
+    'numero' => $row['NUMERO']
   );
   array_push($points, $point);
 }
@@ -157,23 +159,23 @@ echo "<p style='display: none;'>{$json}</p>";
     <br>
     <br>
     <h3 class="h3-map">Pesquise o ponto de coleta mais próximo de você</h3>
-    <form>
+    <div class="div-search-points">
       <input type="text" id="search" placeholder="Digite o tipo de material que deseja descartar..." />
       <button id="btnBusca"><img src="img/icon-search.svg" /></button>
-    </form>
+    </div>
     <br>
     <br>
 
     <!-- Mapa -->
     <div id="map"></div>
 
-    <STyle>
+    <Style>
       /* Estilo do mapa */
       #map {
         height: 100%;
         border-radius: 16px;
       }
-    </STyle>
+    </Style>
 
     <script>
       // Inicializa o mapa
@@ -181,9 +183,9 @@ echo "<p style='display: none;'>{$json}</p>";
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
           center: {
-            lat: -23.5505,
-            lng: -46.6333
-          } // São Paulo, Brasil
+            lat: -22.3728602,
+            lng: -47.3687816
+          } // FHO Araras- SP, Brasil
         });
 
         // Recupera os pontos de coleta do JSON gerado pelo PHP
@@ -193,13 +195,14 @@ echo "<p style='display: none;'>{$json}</p>";
         var markers = [];
         for (var i = 0; i < pontosDeColeta.length; i++) {
           var pontoDeColeta = pontosDeColeta[i];
+          var desc = pontoDeColeta.descricao + " <br> Materiais Coletados: " + pontoDeColeta.tipoMateriais + " <br> Endereço: CEP " + pontoDeColeta.cep + " Nº " + pontoDeColeta.numero;
           var marker = new google.maps.Marker({
             position: {
               lat: parseFloat(pontoDeColeta.latitude),
               lng: parseFloat(pontoDeColeta.longitude)
             },
             map: map,
-            title: pontoDeColeta.descricao,
+            title: desc,
             icon: 'https://i.ibb.co/60kw6cH/Pin-Mapa.png' // Ícone EcoTrash
             // icon maps: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' 
             // ícone proprio do maps
@@ -231,7 +234,7 @@ echo "<p style='display: none;'>{$json}</p>";
         });
 
         // Adiciona um listener de eventos de digitação para o campo de busca
-        document.getElementById('search').addEventListener('keyup', function() {
+        document.getElementById('search').addEventListener('click', function() {
           var filtro = this.value.toLowerCase();
           for (var i = 0; i < markers.length; i++) {
             var marker = markers[i];

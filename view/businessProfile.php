@@ -10,6 +10,7 @@
 
   $logado = isset($_SESSION['usuario']);
   $excluido = isset($_SESSION["excluido"]);
+  $listaPontos = isset($_SESSION["listaCadastrosPontos"]);
 
   if (!$logado) {
     header("Location: login.php");
@@ -64,25 +65,24 @@
     </article>
 
     <article class="form-business-bg">
-      <form action="../controller/ToEditUser.php" method="POST">
         <div class="top-buttons-profile">
           <a href="businessProfile.php" class="edit-button active">Pontos Cadastrados</a>
           <a href="registerPoints.php" class="edit-button border-bottom">Cadastrar Pontos</a>
         </div>
             <?php
-            if (isset($_SESSION["listaCadastrosPontos"])) {
+            if ($listaPontos) {
 
-              $lista = $_SESSION['listaCadastrosPontos'];
+              $lista = $_SESSION["listaCadastrosPontos"];
 
-              echo '
-              <table class="table-info">
-              <tr>
-                <th>Nome</th>
-                <th>Logradouro</th>
-                <th>CEP</th>
-                <th>Editar</th>
-              </tr>
-              <tr>';
+              // echo '
+              // <table class="table-info">
+              // <tr>
+              //   <th>Nome</th>
+              //   <th>Logradouro</th>
+              //   <th>CEP</th>
+              //   <th>Editar</th>
+              // </tr>
+              // <tr>';
 
               echo "<p>{$lista}</p>";
 
@@ -91,8 +91,9 @@
                   <label for="">
                     <input type="text" name="idPonto" id="idPonto" placeholder="Insira o ID do ponto para reprova-lo: " required>
                   </label>
+                  
                   <button class="trash-button"><img src="img/trash-icon.svg"></button>
-                </form>
+              </form>
                 </td>
               </table>';
 

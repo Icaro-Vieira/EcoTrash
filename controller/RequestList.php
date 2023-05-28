@@ -1,8 +1,16 @@
 <?php
 
+    require_once("../model/PersonalUser.php");
+    require_once("../model/BusinessUser.php");
+    require_once("../model/UserDAO.php");
     require_once("../model/CollectionPoints.php");
     require_once("../model/CollectionPointsDAO.php");
     require_once("../model/PointRequestDAO.php");
+
+    session_start();
+    if(isset($_SESSION['listaSolicitacoes'])){
+        unset($_SESSION['listaSolicitacoes']);
+    }
     
     $solicitacaoPontosDAO = new PointRequestDAO();
 

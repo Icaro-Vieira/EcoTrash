@@ -32,7 +32,7 @@
             return false;
         }
 
-        public function excluir_ponto($idPonto, $idUsuario){    
+        public function excluir_ponto($idPonto, $idUsuario){
 
             $delete = $this->banco->prepare("DELETE FROM pontos_coleta WHERE ID = :idPonto AND ID_CADASTRO = :idUsuario");
             $delete->bindParam(':idPonto', $idPonto);

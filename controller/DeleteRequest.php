@@ -23,7 +23,7 @@
 
     if($solicitacaoDAO->excluir_solicitacao($idSolicitacao)){
 
-        header("Location: ../view/RequestList.php");
+        header("Location: ../controller/RequestList.php");
     }
     else{
         echo "Não foi possível realizar a exclusão da solicitação.";

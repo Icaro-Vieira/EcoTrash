@@ -91,6 +91,13 @@ form {
   gap: 10px;
 }
 
+.div-search-points {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
 input[type="text"] {
   padding: 16px 20px;
   width: 635px;
