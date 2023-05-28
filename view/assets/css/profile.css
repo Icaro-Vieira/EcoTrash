@@ -522,12 +522,41 @@ tr:nth-child(even) {
   border-radius: 10px;  
 }
 
-
-
 .p-point {
   font-family: var(--opnsans-font);
   font-weight: var(--opnsans-weight-bold);
   color: var(--medium-green-color);
   text-align: center;
   font-size: 25px;
+}
+
+.forms-divider-points {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-control {
+  padding: 30px 20px 0 20px;
+  width: inherit;
+  display: flex;
+  gap: 10px;
+  margin: 0;
+}
+
+.form-user-adm {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 780px;
+  height: 540px;
+
+  border-radius: 16px;
+  background-color: var(--white-color);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+  margin: 30px auto auto 25px;
 }

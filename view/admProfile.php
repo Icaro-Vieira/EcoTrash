@@ -1,29 +1,29 @@
 <?php
 
-  require_once("../model/PersonalUser.php");
-  require_once("../model/BusinessUser.php");
-  require_once("../model/UserDAO.php");
-  require_once("../model/Address.php");
-  require_once("../model/AddressDAO.php");
+require_once("../model/PersonalUser.php");
+require_once("../model/BusinessUser.php");
+require_once("../model/UserDAO.php");
+require_once("../model/Address.php");
+require_once("../model/AddressDAO.php");
 
-  session_start();
+session_start();
 
-  $logado = isset($_SESSION['usuario']);
-  $ErroSolicitacao = isset($_SESSION["erroCadastrarPonto"]);
+$logado = isset($_SESSION['usuario']);
+$ErroSolicitacao = isset($_SESSION["erroCadastrarPonto"]);
 
-  if (!$logado) {
-    header("Location: login.php");
-  } else {
-    $usuario = $_SESSION['usuario'];
-  }
+if (!$logado) {
+  header("Location: login.php");
+} else {
+  $usuario = $_SESSION['usuario'];
+}
 
-  if ($ErroSolicitacao) {
-    $idSolicitacao = $_SESSION["erroCadastrarPonto"];
+if ($ErroSolicitacao) {
+  $idSolicitacao = $_SESSION["erroCadastrarPonto"];
 
-    echo '<script> alert("ID: ' . $idSolicitacao . ' não foi encontrado na base de dados!"); </script>';
-  }
+  echo '<script> alert("ID: ' . $idSolicitacao . ' não foi encontrado na base de dados!"); </script>';
+}
 
-  unset($_SESSION['erroCadastrarPonto']);
+unset($_SESSION['erroCadastrarPonto']);
 ?>
 
 <!DOCTYPE html>
@@ -51,58 +51,60 @@
       <img src="img/icon-shield-profile.svg" alt="">
       <h1>
         <?php
-        echo $usuario->get_nome() . " " . $usuario->get_sobrenome();
+          echo $usuario->get_nome() . " " . $usuario->get_sobrenome();
         ?>
       </h1>
       <p>
         <?php
-        echo $usuario->get_email();
+          echo $usuario->get_email();
         ?>
       </p>
     </article>
 
-    <article class="form-business-bg">
-            <?php
-            if (isset($_SESSION["listaSolicitacoes"])) {
+    <article class="form-user-adm">
+      <?php
+      if (isset($_SESSION["listaSolicitacoes"])) {
 
-              $lista = $_SESSION['listaSolicitacoes'];
+        $lista = $_SESSION['listaSolicitacoes'];
 
-              echo '
-              <table class="table-info">
-              <tr>
-                <th>Nome</th>
-                <th>Logradouro</th>
-                <th>CEP</th>
-                <th>Editar</th>
-              </tr>
-              <tr>';
+        // echo '
+        //       <table class="table-info">
+        //       <tr>
+        //         <th>Nome</th>
+        //         <th>Logradouro</th>
+        //         <th>CEP</th>
+        //         <th>Editar</th>
+        //       </tr>
+        //       <tr>';
 
-              echo "<p>{$lista}</p>";
+        echo "<table class='table-info'>{$lista}</table>";
 
-              echo '<form action="../controller/RegistrationCollectionPoint.php" method="POST">
+        echo '
+            <div class="forms-divider-points">
+                <form action="../controller/RegistrationCollectionPoint.php" method="POST" class="form-control">
                   <label for="">
-                    <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para aprova-la: " required>
+                    <input type="number" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para aprova-la: " required>
                   </label>
-                  <button class="trash-button"><img src="img/trash-icon.svg"></button>
+                  <button class="trash-button"><img src="img/add-icon.svg"></button>
                 </form>
 
-                <form action="../controller/DeleteRequest.php" method="POST">
+                <form action="../controller/DeleteRequest.php" method="POST" class="form-control">
                   <label for="">
-                    <input type="text" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para reprova-la: " required>
+                    <input type="number" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para reprova-la: " required>
                   </label>
-                  <button class="trash-button"><img src="img/trash-icon.svg"></button>
+                  <button class="trash-button"><img src="img/remove-icon.svg"></button>
                 </form>
-                </td>
-              </table>';
-
-            } else {
-              echo "
-                  <div class='div-point'>
-                    <p class='p-point'>Não há cadastros de pontos de coleta 🗑️</p>
-                  </div>
-                ";
-            }
-            ?>
+              </table>
+            </div>
+        ';
+      } else {
+        echo "
+            <div class='div-point'>
+              <p class='p-point'>Não há cadastros de pontos de coleta 🗑️</p>
+            </div>
+          ";
+      }
+      ?>
     </article>
   </div>
 </body>

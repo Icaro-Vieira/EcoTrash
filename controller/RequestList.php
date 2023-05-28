@@ -10,8 +10,30 @@
     $listaSolicitacoesExibir = "";
 
     foreach($listaSolicitacoes as $ponto){
-        $listaSolicitacoesExibir .= $ponto->get_id() . " " . $ponto->get_descricao() . " " . $ponto->get_cep() . " <br>";
+        $listaSolicitacoesExibir .= "
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>NOME</td>
+                <td>CEP</td>
+            </tr>
+            <tr>
+                <td>{$ponto->get_id()}</td>
+                <td>{$ponto->get_descricao()}</td>
+                <td>{$ponto->get_cep()}</td>
+            </tr>
+        </table>";
     }
+
+    // echo '
+        //       <table class="table-info">
+        //       <tr>
+        //         <th>Nome</th>
+        //         <th>Logradouro</th>
+        //         <th>CEP</th>
+        //         <th>Editar</th>
+        //       </tr>
+        //       <tr>';
 
     session_start();
     if($listaSolicitacoesExibir != ""){

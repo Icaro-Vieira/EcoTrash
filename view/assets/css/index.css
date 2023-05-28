@@ -81,6 +81,7 @@ a:hover {
 .h3-map {
   color: var(--light-green-color);
   text-align: center;
+  margin-top: 30px;
 }
 
 form {
@@ -284,13 +285,17 @@ footer img {
   background-color: var(--white-color);
   padding: 8px 15px;
   border-radius: 8px;
-  border: 1px solid var(--red-color);
+  border: 1px solid transparent;
   color: var(--red-color);
 
   font-family: var(--opnsans-font);
   font-size: 14px;
   font-weight: var(--opnsans-weight-semibold);
   gap: 5px;
+}
+
+.exit-button:hover {
+  border: 1px solid var(--red-color);
 }
 
 #faq {

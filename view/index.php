@@ -114,22 +114,22 @@ echo "<p style='display: none;'>{$json}</p>";
                   </li>';
         } else if (!$usuario->juridico() && ($usuario->get_documento() == "111.111.111-11")) {
           echo '<li>
-                    <a href="../controller/RequestList.php" class="login">
-                      <button class="button">
-                        <img src="img/icon-shield-button.svg"> 
-                        ADM
-                      </button>
-                    </a>
-                  </li>';
+                  <a href="../controller/RequestList.php" class="login">
+                    <button class="button">
+                      <img src="img/icon-shield-button.svg"> 
+                      ADM
+                    </button>
+                  </a>
+                </li>';
         } else {
           echo '<li>
-                    <a href="userProfile.php" class="login">
-                      <button class="button">
-                        <img src="img/icon-user-profile.svg"> 
-                        Meu Perfil
-                      </button>
-                    </a>
-                  </li>';
+                  <a href="userProfile.php" class="login">
+                    <button class="button">
+                      <img src="img/icon-user-profile.svg"> 
+                      Meu Perfil
+                    </button>
+                  </a>
+                </li>';
         }
 
         echo '<li>
@@ -139,20 +139,20 @@ echo "<p style='display: none;'>{$json}</p>";
                       Sair
                     </button>
                   </form>
-                </li>';
+              </li>';
       } else {
         echo '<li>
-                  <a href="login.php" class="login">
-                    <button class="button">Entrar</button>
-                  </a>
-                </li>';
+                <a href="login.php" class="login">
+                  <button class="button">Entrar</button>
+                </a>
+              </li>';
       }
       ?>
     </ul>
 
   </nav>
 
-  <main class="container animate__animated animate__pulse">
+  <main class="container">
 
     <br>
     <br>
