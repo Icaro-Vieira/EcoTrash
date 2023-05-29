@@ -7,7 +7,7 @@
 <br>
 
 <p align="center">
-  <img alt="Projeto EcoTrash em construção" src=".github/preview.png" width="100%">
+  <img alt="Projeto EcoTrash em construção" src=".github/ecotrash.png" width="100%">
 </p>
 
 <h2 align="center">Branches e suas funções</h2>
