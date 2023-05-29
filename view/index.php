@@ -7,6 +7,73 @@ session_start();
 
 $logado = isset($_SESSION['usuario']);
 
+
+// Conecta ao banco de dados
+$conn = mysqli_connect("localhost", "root", "", "ecotrash3");
+
+// Verifica se a conexão foi bem sucedida
+if (!$conn) {
+  die("Conexão falhou: " . mysqli_connect_error());
+}
+
+// Query para recuperar os pontos de coleta
+$sql = "SELECT ID, DESCRICAO, CEP, NUMERO, TIPOMATERIAIS FROM pontos_coleta";
+
+// Executa a query
+$result = mysqli_query($conn, $sql);
+
+// Cria um array vazio para armazenar os pontos de coleta
+$points = array();
+
+function getLatLng($cep, $numero)
+{
+  $endereco = urlencode($cep . ', ' . $numero);
+  $url = "https://maps.googleapis.com/maps/api/geocode/json?address=$endereco&key=AIzaSyAfPGguvEqU_Wegb0tPyDxD-mUatDKtDVM";
+  $json = file_get_contents($url);
+  $data = json_decode($json);
+
+  if ($data->status == 'OK') {
+    $lat = $data->results[0]->geometry->location->lat;
+    $lng = $data->results[0]->geometry->location->lng;
+    return array('lat' => $lat, 'lng' => $lng);
+  } else {
+    return null;
+  }
+}
+
+// Loop através dos resultados da query
+while ($row = mysqli_fetch_assoc($result)) {
+
+  $lat = null;
+  $lng = null;
+
+  // Adiciona os dados do ponto de coleta ao array
+  $endereco = getLatLng($row['CEP'], $row['NUMERO']);
+  if ($endereco) {
+    $lat = $endereco['lat'];
+    $lng = $endereco['lng'];
+  }
+
+  $point = array(
+    'id' => $row['ID'],
+    'descricao' => $row['DESCRICAO'],
+    'latitude' => $lat,
+    'longitude' => $lng,
+    'tipoMateriais' => $row['TIPOMATERIAIS'],
+    'cep' => $row['CEP'],
+    'numero' => $row['NUMERO']
+  );
+  array_push($points, $point);
+}
+
+// Converte o array em JSON
+$json = json_encode($points);
+
+// Fecha a conexão com o banco de dados
+mysqli_close($conn);
+
+// Retorna o JSON
+echo "<p style='display: none;'>{$json}</p>";
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +85,7 @@ $logado = isset($_SESSION['usuario']);
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="assets/css/index.css" />
   <title>EcoTrash</title>
 </head>
@@ -32,60 +100,166 @@ $logado = isset($_SESSION['usuario']);
       <li><a href="#articles">Artigos</a></li>
       <li><a href="#faq">Perguntas Frequentes</a></li>
       <?php
-        //Verificando se o usuário está logado
-        if ($logado) {
+      //Verificando se o usuário está logado
+      if ($logado) {
 
-          $usuario = $_SESSION['usuario'];
+        $usuario = $_SESSION['usuario'];
 
-          if ($usuario->juridico()) {
-            echo '<li>
-                    <a href="businessProfile.php" class="login">
+        if ($usuario->juridico()) {
+          echo '<li>
+                    <a href="../controller/ListPoints.php" class="login">
                       <button class="button">
                         <img src="img/icon-business-profile.svg"> 
                         Perfil Empresa
                       </button>
                     </a>
                   </li>';
-          } else {
-            echo '<li>
-                    <a href="userProfile.php" class="login">
-                      <button class="button">
-                        <img src="img/icon-user-profile.svg"> 
-                        Meu Perfil
-                      </button>
-                    </a>
-                  </li>';
-          }
+        } else if (!$usuario->juridico() && ($usuario->get_documento() == "111.111.111-11")) {
           echo '<li>
+                  <a href="../controller/RequestList.php" class="login">
+                    <button class="button">
+                      <img src="img/icon-shield-button.svg"> 
+                      ADM
+                    </button>
+                  </a>
+                </li>';
+        } else {
+          echo '<li>
+                  <a href="userProfile.php" class="login">
+                    <button class="button">
+                      <img src="img/icon-user-profile.svg"> 
+                      Meu Perfil
+                    </button>
+                  </a>
+                </li>';
+        }
+
+        echo '<li>
                   <form action="../controller/ExitUser.php" method="post">
                     <button type="submit" class="exit-button">
                       <img src="img/exit.svg">
                       Sair
                     </button>
                   </form>
-                </li>';
-        } else {
-          echo '<li>
-                  <a href="login.php" class="login">
-                    <button class="button">Entrar</button>
-                  </a>
-                </li>';
-        }
+              </li>';
+      } else {
+        echo '<li>
+                <a href="login.php" class="login">
+                  <button class="button">Entrar</button>
+                </a>
+              </li>';
+      }
       ?>
     </ul>
 
   </nav>
 
-  <main class="container animate__animated animate__pulse">
-    <section class="section-map">
-      <h3 class="h3-map">Pesquise o ponto de coleta mais próximo de você</h3>
-      <form action="" method="">
-        <input type="text" placeholder="Digite o tipo de material que deseja descartar..." />
-        <button type="submit" class="search-button"><img src="img/icon-search.svg" /></button>
-      </form>
-      <!-- <div class="map"></div> -->
-      <img src="img/Mapa.png" class="map" alt="">
-    </section>
+  <main class="container">
+
+    <br>
+    <br>
+    <h3 class="h3-map">Pesquise o ponto de coleta mais próximo de você</h3>
+    <div class="div-search-points">
+      <input type="text" id="search" placeholder="Digite o tipo de material que deseja descartar..." />
+      <button id="btnBusca"><img src="img/icon-search.svg" /></button>
+    </div>
+    <br>
+    <br>
+
+    <!-- Mapa -->
+    <div id="map"></div>
+
+    <Style>
+      /* Estilo do mapa */
+      #map {
+        height: 100%;
+        border-radius: 16px;
+      }
+    </Style>
+
+    <script>
+      // Inicializa o mapa
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: {
+            lat: -22.3728602,
+            lng: -47.3687816
+          } // FHO Araras- SP, Brasil
+        });
+
+        // Recupera os pontos de coleta do JSON gerado pelo PHP
+        var pontosDeColeta = <?php echo $json; ?>;
+
+        // Cria um marcador para cada ponto de coleta
+        var markers = [];
+        for (var i = 0; i < pontosDeColeta.length; i++) {
+          var pontoDeColeta = pontosDeColeta[i];
+          var desc = pontoDeColeta.descricao + " <br> Materiais Coletados: " + pontoDeColeta.tipoMateriais + " <br> Endereço: CEP " + pontoDeColeta.cep + " Nº " + pontoDeColeta.numero;
+          var marker = new google.maps.Marker({
+            position: {
+              lat: parseFloat(pontoDeColeta.latitude),
+              lng: parseFloat(pontoDeColeta.longitude)
+            },
+            map: map,
+            title: desc,
+            icon: 'https://i.ibb.co/60kw6cH/Pin-Mapa.png' // Ícone EcoTrash
+            // icon maps: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' 
+            // ícone proprio do maps
+          });
+          markers.push(marker);
+
+          // Adiciona um listener de clique para exibir a descrição do ponto de coleta
+          marker.addListener('click', function() {
+            var infoWindow = new google.maps.InfoWindow({
+              content: this.title
+            });
+            infoWindow.open(map, this);
+          });
+        }
+
+        // Adiciona um listener de eventos de clique para o botão de busca
+        document.getElementById('btnBusca').addEventListener('click', function() {
+          var filtro = document.getElementById('search').value.toLowerCase();
+          if (filtro !== '') {
+            for (var i = 0; i < markers.length; i++) {
+              var marker = markers[i];
+              if (marker.title.toLowerCase().indexOf(filtro) >= 0) {
+                marker.setVisible(true);
+              } else {
+                marker.setVisible(false);
+              }
+            }
+          }
+        });
+
+        // Adiciona um listener de eventos de digitação para o campo de busca
+        document.getElementById('search').addEventListener('click', function() {
+          var filtro = this.value.toLowerCase();
+          for (var i = 0; i < markers.length; i++) {
+            var marker = markers[i];
+            if (marker.title.toLowerCase().indexOf(filtro) >= 0) {
+              marker.setVisible(true);
+            } else {
+              marker.setVisible(false);
+            }
+          }
+        });
+
+        function atualizarMarcador(descricao) {
+          for (var i = 0; i < markers.length; i++) {
+            var marker = markers[i];
+            if (marker.title.toLowerCase() === descricao.toLowerCase()) {
+              map.setCenter(marker.getPosition());
+              map.setZoom(15);
+              marker.setVisible(true);
+              return;
+            }
+          }
+        }
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPGguvEqU_Wegb0tPyDxD-mUatDKtDVM&callback=initMap"></script>
 
     <h3 id="artigo">Artigos</h3>
     <article id="articles">
@@ -129,7 +303,48 @@ $logado = isset($_SESSION['usuario']);
         </div>
       </div>
     </article>
-    <section id="faq"></section>
+    
+    <h3 id="faq">Perguntas Frequentes</h3>
+    <section>
+      <div class="faq-question">
+        <div class="question-text">
+          <p>O que é Lixo eletrônico?</p>
+        </div>
+        <div class="toggle-icon"></div>
+      </div>
+
+      <div class="faq-answer">
+        <p>
+          Produtos elétricos e eletrônicos quebrados, danificados ou sem utilidade por algum motivo e pilhas descarregadas que devem ser descartados.
+        </p>
+      </div>
+
+      <div class="faq-question">
+        <div class="question-text">
+          <p>Diferença entre Lixo eletrônico e lixo digital?</p>
+        </div>
+        <div class="toggle-icon"></div>
+      </div>
+      
+      <div class="faq-answer">
+        <p>
+          Quando descartamos lixo eletrônico temos a posibilidade de reaproveitamento através da reciclagem. Já o termo lixo digital se refere aos arquivos desnecessários armazenados em dispositivos eletrônicos Ex: Email, aplicativos, cópias de fotos etc.
+        </p>
+      </div>
+
+      <div class="faq-question">
+        <div class="question-text">
+          <p>O que causa o discarte incorreto?</p>
+        </div>
+        <div class="toggle-icon"></div>
+      </div>
+      
+      <div class="faq-answer">
+        <p>
+          Por serem feitos com alta tecnologia, esses resíduos podem conter substâncias tóxicas e metais pesados, como o chumbo, mercúrio, cromo e cádmio por exemplo, capazes de contaminar o solo, a água e os alimentos – impactando tanto o ambiente quanto a saúde humana.
+        </p>
+      </div>
+    </section>
   </main>
 
   <div class="line-footer"></div>
@@ -138,7 +353,7 @@ $logado = isset($_SESSION['usuario']);
 
     <div class="footer-div">
       <div class="footer-div-buttons">
-        <button>Voltar ao topo</button>
+        <button id="backTop">Voltar ao topo</button>
         <a href="termsofUse.html" target="_blank">
           <button>Termos de uso</button>
         </a>
@@ -146,6 +361,8 @@ $logado = isset($_SESSION['usuario']);
       <p>Copyright © 2023. Todos os direitos reservados</p>
     </div>
   </footer>
+
+  <script src="assets/js/modules/back-to-top.js"></script>
 </body>
 
 </html>

@@ -3,17 +3,21 @@
     class CollectionPoints{
         protected $id;
         protected $descricao;
-        protected $documento;
-        protected $latitude;
-        protected $longitude;
-        protected $idEndereco;
+        protected $cep;
+        protected $logradouro;
+        protected $bairro;
+        protected $numero;
+        protected $tipoMateriais;
+        protected $idCadastro;
 
-        public function __construct($descricao, $documento, $latitude, $longitude, $idEndereco){
+        public function __construct($descricao, $cep, $logradouro, $bairro, $numero, $tipoMateriais, $idCadastro){
             $this->descricao = $descricao;
-            $this->documento = $documento;
-            $this->latitude = $latitude;
-            $this->longitude = $longitude;
-            $this->idEndereco = $idEndereco;
+            $this->cep = $cep;
+            $this->logradouro = $logradouro;
+            $this->bairro = $bairro;
+            $this->numero = $numero;
+            $this->tipoMateriais = $tipoMateriais;
+            $this->idCadastro = $idCadastro;
         }
 
         public function get_id(){
@@ -28,21 +32,28 @@
             return $this->descricao;
         }
 
-        public function get_documento(){
-            return $this->documento;
+        public function get_cep(){
+            return $this->cep;
         }
 
-        public function get_latitude(){
-            return $this->latitude;
+        public function get_logradouro(){
+            return $this->logradouro;
         }
 
-        public function get_longitude(){
-            return $this->longitude;
+        public function get_bairro(){
+            return $this->bairro;
         }
 
-        public function get_idEndereco(){
-            return $this->idEndereco;
+        public function get_numero(){
+            return $this->numero;
+        }
+
+        public function get_tipoMateriais(){
+            return $this->tipoMateriais;
+        }
+
+        public function get_idCadastro(){
+            return $this->idCadastro;
         }
     }
-    
 ?>

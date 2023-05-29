@@ -3,7 +3,7 @@
     define('HOSTENDERECO', 'localhost');
     define('USERNDERECO', 'root');
     define('PASSWORDNDERECO', '');
-    define('DB_NAMENDERECO', 'ecotrash');
+    define('DB_NAMENDERECO', 'ecotrash3');
 
     require_once("Address.php");
 

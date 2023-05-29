@@ -3,7 +3,7 @@
     define('HOST', 'localhost');
     define('USER', 'root');
     define('PASSWORD', '');
-    define('DB_NAME', 'ecotrash');
+    define('DB_NAME', 'ecotrash3');
 
     require_once("PersonalUser.php");
     require_once("BusinessUser.php");
