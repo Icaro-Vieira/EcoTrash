@@ -2,8 +2,8 @@
 
     define('HOSTPONTO', 'localhost');
     define('USERPONTO', 'root');
-    define('PASSWORDPONTO', 'Ec@305três*');
-    define('DB_NAMEPONTO', 'ecotrash');
+    define('PASSWORDPONTO', '');
+    define('DB_NAMEPONTO', 'ecotrash3');
 
     require_once("CollectionPoints.php");
 
@@ -15,16 +15,16 @@
             $this->banco = new PDO('mysql:host='.HOSTPONTO.'; dbname='.DB_NAMEPONTO,USERPONTO,PASSWORDPONTO);
         }
 
-        public function cadastrar($endereco){
+        public function cadastrar($pontoDeColeta){
             
-            $inserir = $this->banco->prepare("INSERT INTO endereco (LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, ESTADO, CEP) VALUES (?,?,?,?,?,?,?);");
+            $inserir = $this->banco->prepare("INSERT INTO pontos_coleta (DESCRICAO, CEP, LOGRADOURO, BAIRRO, NUMERO, TIPOMATERIAIS, ID_CADASTRO) VALUES (?,?,?,?,?,?,?);");
 
-            $novoEndereco = array($endereco->get_logradouro(), $endereco->get_numero(), $endereco->get_complemento(), $endereco->get_bairro(), $endereco->get_cidade(), $endereco->get_estado(), $endereco->get_cep());
+            $novoPonto = array($pontoDeColeta->get_descricao(), $pontoDeColeta->get_cep(), $pontoDeColeta->get_logradouro(), $pontoDeColeta->get_bairro(), $pontoDeColeta->get_numero(), $pontoDeColeta->get_tipoMateriais(), $pontoDeColeta->get_idCadastro());
         
-            if($inserir->execute($novoEndereco)){
+            if($inserir->execute($novoPonto)){
                 $id = $this->banco->query("SELECT LAST_INSERT_ID()")->fetchColumn();
         
-                $endereco->set_id($id);
+                $pontoDeColeta->set_id($id);
         
                 return true;
             }
@@ -32,21 +32,50 @@
             return false;
         }
 
-        public function consultar_pontoDeColetaPeloID($idEndereco){
+        public function excluir_ponto($idPonto, $idUsuario){
 
-            $consulta = $this->banco->prepare('SELECT * FROM pontos_coleta WHERE ID_ENDERECO = :idEndereco');
-            $consulta->bindParam(':idEndereco', $idEndereco);
-            $consulta->execute();
-
-            $pontoDeColeta = $consulta->fetchObject();
+            $delete = $this->banco->prepare("DELETE FROM pontos_coleta WHERE ID = :idPonto AND ID_CADASTRO = :idUsuario");
+            $delete->bindParam(':idPonto', $idPonto);
+            $delete->bindParam(':idUsuario', $idUsuario);
             
-            if (!$pontoDeColeta){
-                return null;
+            if($delete->execute()){
+                return true;
             }
+        
+            return false;
+        }
 
-            $pontoDeColeta = new CollectionPoints($pontoDeColeta->DESCRICAO, $pontoDeColeta->CNPJ, $pontoDeColeta->LATITUDE, $pontoDeColeta->LONGITUDE, $pontoDeColeta->ID_ENDERECO);
+        public function verificarPonto($cep, $numero){
+            
+            $query = $this->banco->prepare("SELECT COUNT(*) as count FROM pontos_coleta WHERE CEP = :cep AND NUMERO = :numero");
+            $query->bindParam(":cep", $cep);
+            $query->bindParam(":numero", $numero);
 
-            return $pontoDeColeta;
+            $query->execute();
+            
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            return $result['count'];
+        }
+
+        public function listaCadastrosPontos($idUsuario){
+            $query = $this->banco->prepare("SELECT * FROM pontos_coleta WHERE ID_CADASTRO = :idUsuario");
+            $query->bindParam(":idUsuario", $idUsuario);
+            $query->execute();
+            
+            $linha = $query->fetchAll(PDO::FETCH_OBJ);
+    
+            $listaCadastrosPontos = [];
+    
+            foreach($linha as $ponto){
+                $pontoCadastrado = new CollectionPoints($ponto->DESCRICAO, $ponto->CEP, $ponto->LOGRADOURO, $ponto->BAIRRO, $ponto->NUMERO, $ponto->TIPOMATERIAIS,  $ponto->ID_CADASTRO);
+
+                $pontoCadastrado->set_id($ponto->ID);
+
+                array_push($listaCadastrosPontos, $pontoCadastrado);
+            }
+    
+            return $listaCadastrosPontos;
         }
     }
 

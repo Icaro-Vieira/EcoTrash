@@ -1,3 +1,18 @@
+<?php
+
+  session_start();
+
+  $erro = isset($_SESSION['error']);
+
+  $cadastrado = isset($_SESSION['cadastrado']);
+
+  if ($cadastrado) {
+    echo '<script> alert("Cadastro realizado com sucesso!"); </script>';
+  }
+
+  session_destroy();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -13,7 +28,7 @@
 <body id="register">
   <nav class="navigation">
       <ul>
-          <li><a href="index.html">Voltar</a></li>
+        <li><a class="back-button" href="index.php"><img src="img/arow-back.svg" alt="">Voltar</a></li>
       </ul>
   </nav>
   <article class="header-writings">
@@ -34,7 +49,7 @@
               
               <!-- ADD EYE TO SEE PASSWORD and CONFIRM PASSWORD -->
               <label for="" class="icon-pass">
-                <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="8" autocomplete="off" required>
+                <input type="password" name="senha" id="senha" placeholder="Senha" maxlength="8" autocomplete="off" required autocomplete="off">
                 <img class="imagem-icon" src="img/eye-visibility-off.svg" alt="mostrar senha">
               </label>
               
@@ -47,16 +62,9 @@
           </form>
 
           <?php
-            //Verificando se o usuário está logado
-            
-            session_start();
-
-            $erro = isset($_SESSION['error']);
-
+            //Verificando se ocorreu erro no usuário ou senha.
             if ($erro) {
-              echo '<p class="erro"> Senha e/ou Documento da conta incorreto, tente novamente.</p>';
-
-              session_destroy();
+              echo '<p class="erro">Usuário ou Senha incorreto, tente novamente!</p>';
             }
           ?>
         

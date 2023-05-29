@@ -1,3 +1,25 @@
+<?php
+
+  session_start();
+
+  $erroDocumento = isset($_SESSION['erroDocumento']);
+  $erroEmail = isset($_SESSION['erroEmail']);
+
+  if($erroDocumento){
+    $documento = $_SESSION['erroDocumento'];
+
+    echo '<script> alert("Já existe uma conta com o CNPJ ' .  $documento . ', tente novamente!"); </script>';
+    session_destroy();
+  }
+  elseif($erroEmail){
+    $email = $_SESSION['erroEmail'];
+
+    echo '<script> alert("Já existe uma conta com o endereço de e-mail ' .  $email . ', tente novamente!"); </script>';
+    session_destroy();
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -13,7 +35,8 @@
 <body id="register">
     <nav class="navigation">
         <ul>
-            <li><a href="chooseRegistration.html">Voltar</a></li>
+            <li><a class="back-button" href="chooseRegistration.html"><img src="img/arow-back.svg" alt="">Voltar</a></li>
+            <li><a href="index.php"><img src="img/horizontal-white-logo.svg" alt=""></a></li>
         </ul>
     </nav>
     <article class="header-writings">
