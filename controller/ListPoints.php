@@ -22,7 +22,12 @@
     $listaCadastrosPontosExibir = "";
 
     foreach($listaCadastrosPontos as $ponto){
-        $listaCadastrosPontosExibir .= $ponto->get_id() . " " . $ponto->get_descricao() . " " . $ponto->get_cep() . " <br>";
+        $listaCadastrosPontosExibir .= "
+            <tr>
+                <td>{$ponto->get_id()}</td>
+                <td>{$ponto->get_descricao()}</td>
+                <td>{$ponto->get_cep()}</td>
+            </tr>";
     }
 
     if($listaCadastrosPontosExibir != ""){

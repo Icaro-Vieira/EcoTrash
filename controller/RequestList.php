@@ -19,18 +19,11 @@
 
     foreach($listaSolicitacoes as $ponto){
         $listaSolicitacoesExibir .= "
-        <table>
-            <tr>
-                <td>ID</td>
-                <td>NOME</td>
-                <td>CEP</td>
-            </tr>
             <tr>
                 <td>{$ponto->get_id()}</td>
                 <td>{$ponto->get_descricao()}</td>
                 <td>{$ponto->get_cep()}</td>
-            </tr>
-        </table>";
+            </tr>";
     }
 
     // echo '

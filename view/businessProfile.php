@@ -64,46 +64,44 @@
       </a>
     </article>
 
-    <article class="form-business-bg">
-        <div class="top-buttons-profile">
+    <article class="form-business-bg buttons-and-feedback">
+        <div class="top-buttons-profile only-buttons">
           <a href="businessProfile.php" class="edit-button active">Pontos Cadastrados</a>
           <a href="registerPoints.php" class="edit-button border-bottom">Cadastrar Pontos</a>
         </div>
             <?php
-            if ($listaPontos) {
+              if ($listaPontos) {
 
-              $lista = $_SESSION["listaCadastrosPontos"];
+                $lista = $_SESSION["listaCadastrosPontos"];
 
-              // echo '
-              // <table class="table-info">
-              // <tr>
-              //   <th>Nome</th>
-              //   <th>Logradouro</th>
-              //   <th>CEP</th>
-              //   <th>Editar</th>
-              // </tr>
-              // <tr>';
+                echo "
+                  <div class='align-table'>
+                    <table class='table-info'>
+                      <tr>
+                        <td><strong>ID</strong></td>
+                        <td><strong>NOME</strong></td>
+                        <td><strong>CEP</strong></td>
+                      </tr>
+                      {$lista}
+                    </table>
+                  </div>";
 
-              echo "<p>{$lista}</p>";
+                echo '
+                <form class="form-control" action="../controller/DeletePoint.php" method="POST">
+                    <label for="">
+                      <input class="input-point" type="text" name="idPonto" id="idPonto" placeholder="Insira o ID para remover" required>
+                    </label>
+                    
+                    <button class="trash-button"><img src="img/trash-icon.svg"></button>
+                </form>';
 
-              echo '
-              <form action="../controller/DeletePoint.php" method="POST">
-                  <label for="">
-                    <input type="text" name="idPonto" id="idPonto" placeholder="Insira o ID do ponto para reprova-lo: " required>
-                  </label>
-                  
-                  <button class="trash-button"><img src="img/trash-icon.svg"></button>
-              </form>
-                </td>
-              </table>';
-
-            } else {
-              echo "
-                  <div class='div-point'>
-                    <p class='p-point'>Não há cadastros de pontos de coleta ♻️</p>
-                  </div>
-                ";
-            }
+              } else {
+                echo "
+                    <div class='div-point'>
+                      <p class='p-point'>Não há cadastros de pontos de coleta ♻️</p>
+                    </div>
+                  ";
+              }
             ?>
     </article>
   </div>

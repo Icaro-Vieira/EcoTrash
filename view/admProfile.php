@@ -67,40 +67,40 @@ unset($_SESSION['erroCadastrarPonto']);
 
         $lista = $_SESSION['listaSolicitacoes'];
 
-        // echo '
-        //       <table class="table-info">
-        //       <tr>
-        //         <th>Nome</th>
-        //         <th>Logradouro</th>
-        //         <th>CEP</th>
-        //         <th>Editar</th>
-        //       </tr>
-        //       <tr>';
+        echo "<h3 class='h3-points'>Pontos solicitados:</h3>";
 
-        echo "<table class='table-info'>{$lista}</table>";
+        echo "<table class='table-info'>
+                <tr>
+                  <td><strong>ID</strong></td>
+                  <td><strong>NOME</strong></td>
+                  <td><strong>CEP</strong></td>
+                </tr>
+                {$lista}
+              </table>";
 
         echo '
             <div class="forms-divider-points">
+              <div class="div-inputs-points">
                 <form action="../controller/RegistrationCollectionPoint.php" method="POST" class="form-control">
-                  <label for="">
-                    <input type="number" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para aprova-la: " required>
+                  <label  for="">
+                    <input class="input-point" type="number" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID para aprova-la" required>
                   </label>
-                  <button class="trash-button"><img src="img/add-icon.svg"></button>
+                  <button class="button-add-point"><img src="img/add-icon.svg"></button>
                 </form>
 
                 <form action="../controller/DeleteRequest.php" method="POST" class="form-control">
                   <label for="">
-                    <input type="number" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID da solicitação para reprova-la: " required>
+                    <input class="input-point" type="number" name="idSolicitacao" id="idSolicitacao" placeholder="Insira o ID para reprova-la" required>
                   </label>
-                  <button class="trash-button"><img src="img/remove-icon.svg"></button>
+                  <button class="button-remove-point"><img src="img/remove-icon.svg"></button>
                 </form>
-              </table>
+              </div>
             </div>
         ';
       } else {
         echo "
             <div class='div-point'>
-              <p class='p-point'>Não há cadastros de pontos de coleta 🗑️</p>
+              <p class='p-point'>Não há solicitações de pontos de coleta 🗑️</p>
             </div>
           ";
       }
