@@ -29,7 +29,7 @@
 
 Para utilizar o EcoTrash, certifique-se de ter o [Git](https://git-scm.com/downloads) instalado em seu computador. Também será necessário instalar um servidor, recomendamos o [XAMPP](https://www.apachefriends.org/pt_br/download.html). 
 Após realizar essas etapas, basta clonar o repositório para a pasta **"htdocs"** no seu disco local, localizada dentro da pasta do XAMPP. Utilize o seguinte comando para clonar o repositório: ```git clone https://github.com/Icaro-Vieira/EcoTrash.git```. 
-Feito isso, inicie os serviços do **Apache e MySQL**, clicando no botão **"Start"**. Em seguida, clique no segundo botão **"Admin"** ao lado do MySQL, ao abrir o phpMyAdmin importe o banco de dados localizado na pasta database e abra o projeto que você clonou, coloque na url do seu navegador: _http://localhost/_.
+Feito isso, inicie os serviços do **Apache e MySQL**, clicando no botão **"Start"**. Em seguida, clique no segundo botão **"Admin"** ao lado do MySQL, ao abrir o phpMyAdmin importe o banco de dados localizado na pasta **_database_** e abra o projeto que você clonou, coloque na url do seu navegador: _http://localhost/_.
 
 <h3>Observações</h3>
 <p>Para uma experiência melhor de usabilidade do nosso sistema, é recomendado que você utilize um computador ou notebook para executá-lo. Para implementações futuras, faremos a responsividade, tornando-o compatível com aparelhos móveis.</p>
