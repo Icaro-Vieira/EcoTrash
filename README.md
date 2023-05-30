@@ -26,7 +26,8 @@
 - MySQL (phpMyAdmin)
 
 <h3>Como utilizar</h3>
-Para utilizar o EcoTrash, antes certifique-se que você tenha o [https://git-scm.com/downloads](git) instalado em seu computador, também será preciso instalar um servidor, recomendamos o [https://www.apachefriends.org/pt_br/download.html](XAMPP), feito esses passos basta clonar esse repositorio para a pasta htdocs dentro do seu disco local na pasta xampp, utilize esse comando para clonar o repositório: ```git clone https://github.com/Icaro-Vieira/EcoTrash.git```, feito isso, execute (start) as opções Apache e MySQL, clique no segundo botão Admin ao lado de MySQL , basta colocar o projeto que você clonou 
+
+Para utilizar o EcoTrash, certifique-se de ter o [Git](https://git-scm.com/downloads) instalado em seu computador. Também será necessário instalar um servidor, recomendamos o [XAMPP](https://www.apachefriends.org/pt_br/download.html). Após realizar essas etapas, basta clonar o repositório para a pasta **"htdocs"** no seu disco local, localizada dentro da pasta do XAMPP. Utilize o seguinte comando para clonar o repositório: ```git clone https://github.com/Icaro-Vieira/EcoTrash.git```. Feito isso, inicie os serviços do **Apache e MySQL**, clicando no botão **"Start"**. Em seguida, clique no segundo botão **"Admin"** ao lado do MySQL, ao abrir o phpMyAdmin importe o banco de dados localizado na pasta database e abra o projeto que você clonou, coloque na url do seu navegador: _http://localhost/_.
 
 <h3>Observações</h3>
 <p>Para uma experiência melhor de usabilidade do nosso sistema, é recomendado que você utilize um computador ou notebook para executá-lo. Para implementações futuras, faremos a responsividade, tornando-o compatível com aparelhos móveis.</p>
@@ -36,12 +37,14 @@ Para utilizar o EcoTrash, antes certifique-se que você tenha o [https://git-scm
   <img alt="Imagem da página index do projeto EcoTrash" src=".github/ecotrash.png" width="100%">
 </p>
 
-<h3 align="center">Organização do Projeto, branches e suas funções</h3>
+<h3>Organização do Projeto, branches e suas funções</h3>
 
 - ```master```: Branch com o código revisado e finalizado!;
 - ```Development```: Branch responsável pelos códigos que ainda estão sendo desenvolvidos;
 - ```Hotfix```: Branch com códigos para realizar os testes, corrigir eventuais erros e por fim passar para a _master_;
 
+<br/>
+<br/>
 
 <h3 align="center">GitHub dos Integrantes do Projeto</h3>
 <div align="center">
