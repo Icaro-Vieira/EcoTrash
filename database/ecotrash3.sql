@@ -48,7 +48,6 @@ CREATE TABLE `cadastro` (
 
 INSERT INTO `cadastro` (`ID`, `NOME`, `SOBRENOME`, `DOCUMENTO`, `EMAIL`, `TELEFONE`, `SEGMENTO`, `SENHA`, `ID_ENDERECO`, `TIPO_CADASTRO`) VALUES
 (6, 'ADM', ' ', '111.111.111-11', 'adm@ecotrash.com', '19981626988', NULL, '$2y$10$c0cGEnfwx.QiGUGZw7soyuyitLHAsUynykwNJG9W7NcsujHLaiigO', 6, 'F'),
-(7, 'Jéssica', 'Mattos', '464.692.788-84', 'jessicamartins@gmail.com', '19981626988', NULL, '$2y$10$.Ef5woQZxm2XnhEvpHZ0b.GBcfxyFgT5uiCLEhyR/niABWCPHb5aq', 7, 'F'),
 (9, 'DLD SOLUCOES EM LOGISTICA REVERSA, GESTAO E RECICLAGEM LTDA', NULL, '37.540.504/0001-04', 'contato@dldlog.com.br', '33515609', 'Comércio atacadista ', '$2y$10$NgySv5nfjes2tyWmldXLq.tA4Zk3DViJmdBJtsGrjrCFqCzdteqja', 9, 'J'),
 (12, 'GOOGLE BRASIL INTERNET LTDA.', NULL, '06.990.590/0001-23', 'googlebrasil@google.com', '23958400', 'Portais, provedores ', '$2y$10$B9GV7U.SYJ6b22IhtogyGuPoXW65q4ULqN2RbbyLcmA9AIJxRUPUe', 12, 'J');
 
@@ -75,7 +74,6 @@ CREATE TABLE `endereco` (
 
 INSERT INTO `endereco` (`ID`, `LOGRADOURO`, `NUMERO`, `COMPLEMENTO`, `BAIRRO`, `CIDADE`, `ESTADO`, `CEP`) VALUES
 (6, 'Rua Ângelo Donadel', 236, 'Casa', 'Vila Sumaré', 'Leme', 'SP', '13615-070'),
-(7, 'Rua dos Crisântemos', 576, '', 'Jardim Nova Leme', 'Leme', 'SP', '13612-030'),
 (9, 'MELVIN JONES', 2851, '', 'JARDIM TANGARA', 'Araras', 'SP', '13607461'),
 (12, 'BRIG FARIA LIMA', 3477, 'ANDAR 17A20 TSUL 2 17A20', 'ITAIM BIBI', 'São paulo', 'SP', '04538133');
 
@@ -101,9 +99,6 @@ CREATE TABLE `pontos_coleta` (
 --
 
 INSERT INTO `pontos_coleta` (`ID`, `DESCRICAO`, `CEP`, `LOGRADOURO`, `BAIRRO`, `NUMERO`, `TIPOMATERIAIS`, `ID_CADASTRO`) VALUES
-(15, 'Auto Posto Amizade Padre Barnabé', '17380-000', 'Av. Padre Barnabé Giron', 'Centro', '289', 'Baterias e pilhas ', 9),
-(16, 'PONTO ECOTROCA', '13485-020', 'Avenida Laranjeiras', 'Vila Queiroz', '1245', 'Baterias e pilhas ', 9),
-(18, 'Portal Do Eletronico', '13401-138', 'Rua do Rosário', 'Paulista', '2394', 'Baterias e pilhas Celulares ', 9),
 (23, 'Sucatas Tofolo', '13503-300', 'Rua 19', 'Consolação', '19', 'Eletrodomestico ', 12),
 (24, 'Eco Ponto', '13615-070', 'Rua Ângelo Donadel', 'Vila Sumaré', '236', 'Baterias e pilhas ', 12),
 (25, 'DLDLOG REVERSA', '13607-461', 'Avenida Melvin Jones', 'Jardim Tangará', '2851', 'Baterias e pilhas ', 9);
