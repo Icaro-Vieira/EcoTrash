@@ -259,7 +259,7 @@ echo "<p style='display: none;'>{$json}</p>";
         }
       }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfPGguvEqU_Wegb0tPyDxD-mUatDKtDVM&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=ChaveDaAPI&callback=initMap"></script>
 
     <h3 id="artigo">Artigos</h3>
     <article id="articles">
