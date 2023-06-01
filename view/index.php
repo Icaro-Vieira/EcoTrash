@@ -28,7 +28,7 @@ $points = array();
 function getLatLng($cep, $numero)
 {
   $endereco = urlencode($cep . ', ' . $numero);
-  $url = "https://maps.googleapis.com/maps/api/geocode/json?address=$endereco&key=AIzaSyAfPGguvEqU_Wegb0tPyDxD-mUatDKtDVM";
+  $url = "https://maps.googleapis.com/maps/api/geocode/json?address=$endereco&key=ChaveDaAPI";
   $json = file_get_contents($url);
   $data = json_decode($json);
 
